@@ -26,29 +26,41 @@
 
 /* body */
 body {
-    background-color: #ccffcc;
+    background-color: #ccffff;
     color: #000000;
     margin: 0;
 }
 
 /* container */
 #container {
-    background-color: #99ff99;
+    background-color: #efffff;
     width: 800px;
 }
 
  /* header */
 #header {
-    background-color: #00ff00;
-    color: #000000;
+    background-color: #000033;
+    color: #ffffff;
     width: 800px;
     margin: 0;
     text-align: left;
+    box-shadow: -1px 1px 5px #000099;
+}
+
+/* menu_side */
+#menu_side {
+    background-color: #000033;
+    color: #ffffff;
+    width: 200px;
+    margin: 0;
+    text-align: left;
+    float: right;
+    box-shadow: -1px 1px 5px #000099;
 }
 
 /* content */
 #content {
-    background-color: #00ff00;
+    background-color: #efffff;
     color: #000000;
     width: 800px;
     margin: 0;
@@ -57,9 +69,10 @@ body {
 
 /* footer */
 #footer {
-    background-color: #00ff00;
-    color: #000000;
+    background-color: #000033;
+    color: #ffffff;
     width: 800px;
     margin: 0;
     text-align: left;
+    box-shadow: -1px 1px 5px #000099;
 }

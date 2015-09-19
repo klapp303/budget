@@ -1,0 +1,50 @@
+@charset "utf-8";
+/* ヘッダータイトル */
+.head-title {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 5px 5px 5px 50px;
+    margin: 0;
+    text-shadow: 2px 2px 1px #999999;
+}
+
+.head-title a{
+    text-decoration: none;
+}
+
+.head-title a:link,
+.head-title a:visited,
+.head-title a:hover,
+.head-title a:active {
+    color: #ffffff;
+}
+
+/* フッターテキスト */
+.foot-txt {
+    font-size: 15px;
+    padding: 10px 5px 10px 5px;
+    margin: 0;
+    text-align: center;
+}
+
+/* サイドメニュー */
+.menu-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.menu-list li{
+    margin: 10px 0 10px 0;
+    text-align: center;
+}
+
+.menu-list a{
+    text-decoration: none;
+}
+
+.menu-list a:link,
+.menu-list a:visited,
+.menu-list a:hover,
+.menu-list a:active{
+    color: #ffffff;
+}

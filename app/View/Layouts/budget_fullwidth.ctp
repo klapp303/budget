@@ -24,12 +24,15 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo 'タイトル'; ?>
+		<?php echo '収支管理'; ?>
 	</title>
 	<?php
 //		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('common');
+		echo $this->Html->css(array(
+        'common',
+        'detail'
+    ));
 
 //		echo $this->fetch('meta');
 //		echo $this->fetch('css');
@@ -39,7 +42,10 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<?php echo $this->element('header'); ?>
+			<?php echo $this->element('budget_header'); ?>
+		</div>
+		<div id="menu_side">
+			<?php echo $this->element('budget_menu'); ?>
 		</div>
 		<div id="content">
 
@@ -48,7 +54,7 @@
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-      <?php echo $this->element('footer'); ?>
+      <?php echo $this->element('budget_footer'); ?>
 		</div>
 	</div>
 </body>

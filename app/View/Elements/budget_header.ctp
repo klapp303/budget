@@ -1,0 +1,1 @@
+<h1 class="head-title"><a href="/">収支管理</a></h1>

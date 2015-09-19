@@ -47,7 +47,7 @@ class TopController extends AppController {
   
   public function beforeFilter() {
     parent::beforeFilter();
-    $this->layout = 'fullwidth';
+    $this->layout = 'budget_fullwidth';
   }
   
   public function index() {
