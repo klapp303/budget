@@ -35,7 +35,7 @@ class IncomesController extends AppController {
  *
  * @var array
  */
-	public $uses = array('Income'); //使用するModel
+	public $uses = array('Income', 'IncomesGenre'); //使用するModel
 
 /**
  * Displays a view
@@ -52,13 +52,24 @@ class IncomesController extends AppController {
   
   public function index() {
     $income_lists = $this->Income->find('all');
+    $income_counts = count($income_lists);
+    $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
     $this->set('income_lists', $income_lists);
+    $this->set('income_counts', $income_counts);
+    $this->set('income_genres', $income_genres);
   }
 
   public function add() {
     $this->Income->save($this->request->data);
+    print_r($this->request->data); //送信されたデータの表示
     
     $income_lists = $this->Income->find('all');
+    $income_counts = count($income_lists);
     $this->set('income_lists', $income_lists);
+    $this->set('income_counts', $income_counts);
+  }
+
+  public function deleted(){
+    
   }
 }
