@@ -20,11 +20,17 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 /**
- * Here, we are connecting '/' (base path) to controller called 'Pages',
- * its action called 'display', and we pass a param to select the view file
- * to use (in this case, /app/View/Pages/home.ctp)...
+ * Here, we are connecting '/' (base path) to controller called 'Top',
+ * its action called 'index', and we pass a param to select the view file
+ * to use (in this case, /app/View/Top/index.ctp)...
  */
-	Router::connect('/', array('controller' => 'top', 'action' => 'index'));
+	Router::connect('/', array('controller' => 'Top', 'action' => 'index'));
+
+/**
+ * ...and connect the rest of 'Pages' controller's URLs.
+ */
+//	Router::connect('/income/add', array('controller' => 'Income', 'action' => 'income_add'));
+
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */

@@ -28,14 +28,14 @@ App::uses('AppController', 'Controller');
  * @package       app.Controller
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
-class TopController extends AppController {
+class IncomesController extends AppController {
 
 /**
  * This controller does not use a model
  *
  * @var array
  */
-	public $uses = array(); //使用するModel
+	public $uses = array('Income'); //使用するModel
 
 /**
  * Displays a view
@@ -51,7 +51,14 @@ class TopController extends AppController {
   }
   
   public function index() {
-    
+    $income_lists = $this->Income->find('all');
+    $this->set('income_lists', $income_lists);
   }
 
+  public function add() {
+    $this->Income->save($this->request->data);
+    
+    $income_lists = $this->Income->find('all');
+    $this->set('income_lists', $income_lists);
+  }
 }
