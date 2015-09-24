@@ -16,7 +16,7 @@
   <?php echo $this->Form->submit('修正する'); ?>
   <?php echo $this->Form->end(); ?><!-- form end -->
 
-<h3>最近の収入</h3>
+<h3>収入一覧</h3>
 
   <?php echo $this->Paginator->numbers(array(
       'modulus' => 4, //現在ページから左右あわせてインクルードする個数

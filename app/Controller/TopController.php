@@ -35,7 +35,7 @@ class TopController extends AppController {
  *
  * @var array
  */
-	public $uses = array(); //使用するModel
+	public $uses = array('Income', 'Expenditure'); //使用するModel
 
 /**
  * Displays a view
@@ -44,14 +44,13 @@ class TopController extends AppController {
  * @throws NotFoundException When the view file could not be found
  *	or MissingViewException in debug mode.
  */
-  
+
   public function beforeFilter() {
     parent::beforeFilter();
     $this->layout = 'budget_fullwidth';
   }
-  
+
   public function index() {
     
   }
-
 }

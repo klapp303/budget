@@ -15,7 +15,7 @@
   <?php echo $this->Form->submit('登録する'); ?>
   <?php echo $this->Form->end(); ?><!-- form end -->
 
-<h3>最近の支出</h3>
+<h3>支出一覧</h3>
 
   <?php echo $this->Paginator->numbers(array(
       'modulus' => 4, //現在ページから左右あわせてインクルードする個数
