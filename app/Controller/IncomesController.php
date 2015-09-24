@@ -44,14 +44,24 @@ class IncomesController extends AppController {
  * @throws NotFoundException When the view file could not be found
  *	or MissingViewException in debug mode.
  */
-  
+
+  public $components = array('Paginator');
+  public $paginate = array(
+      'limit' => 20,
+      'order' => array('date' => 'desc')
+  );
+
   public function beforeFilter() {
     parent::beforeFilter();
     $this->layout = 'budget_fullwidth';
   }
-  
+
   public function index() {
-    $income_lists = $this->Income->find('all');
+//    $income_lists = $this->Income->find('all', array(
+//        'order' => array('date' => 'desc')
+//    ));
+    $this->Paginator->settings = $this->paginate;
+    $income_lists = $this->Paginator->paginate('Income');
     $income_counts = count($income_lists);
     $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
     $this->set('income_lists', $income_lists);
@@ -61,16 +71,16 @@ class IncomesController extends AppController {
 
   public function add() {
     if ($this->request->is('post')) {
-      $this->Income->set($this->request->data);
-      if ($this->Income->validates()) {
-        $this->Income->save($this->request->data);
+      $this->Income->set($this->request->data); //postデータがあればModelに渡してvalidate
+      if ($this->Income->validates()) { //validate成功の処理
+        $this->Income->save($this->request->data); //validate成功でsave
         if ($this->Income->save($id)) {
           $this->Session->setFlash('登録しました。', 'flashMessage');
         } else {
           $this->Session->setFlash('登録できませんでした。', 'flashMessage');
         }
-      } else {
-        $this->render('index');
+      } else { //validate失敗の処理
+        $this->render('index'); //validate失敗でindexを表示
       }
     }
 
@@ -78,7 +88,11 @@ class IncomesController extends AppController {
   }
 
   public function edit($id = null) {
-    $income_lists = $this->Income->find('all');
+//    $income_lists = $this->Income->find('all', array(
+//        'order' => array('date' => 'desc')
+//    ));
+    $this->Paginator->settings = $this->paginate;
+    $income_lists = $this->Paginator->paginate('Income');
     $income_counts = count($income_lists);
     $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
     $this->set('income_lists', $income_lists);
@@ -89,7 +103,7 @@ class IncomesController extends AppController {
       $this->request->data = $this->Income->findById($id); //postデータがなければ$idからデータを取得
       $this->set('id', $this->request->data['Income']['id']); //viewに渡すために$idをセット
     } else {
-      $this->Income->set($this->request->data); //postデータがあればIncomeModelに渡してvalidate
+      $this->Income->set($this->request->data); //postデータがあればModelに渡してvalidate
       if ($this->Income->validates()) { //validate成功の処理
         $this->Income->save($this->request->data); //validate成功でsave
         if ($this->Income->save($id)) {
