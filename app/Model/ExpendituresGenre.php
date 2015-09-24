@@ -3,10 +3,10 @@
 App::uses('AppModel', 'Model');
 
 /**
- * IncomesGenre Model.
+ * ExpendituresGenre Model.
  */
-class IncomesGenre extends AppModel {
-  public $useTable = 'Incomes_genres';
+class ExpendituresGenre extends AppModel {
+  public $useTable = 'Expenditures_genres';
 //  public $actAs = ['SoftDelete', 'Search.Searchable'];
 
 //  public $filtetArgs = ['' => ['' => '', '' => '']];
