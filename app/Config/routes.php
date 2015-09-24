@@ -29,11 +29,6 @@
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
-//	Router::connect('/income/add', array('controller' => 'Income', 'action' => 'income_add'));
-
-/**
- * ...and connect the rest of 'Pages' controller's URLs.
- */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 /**

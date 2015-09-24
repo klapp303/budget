@@ -77,6 +77,34 @@ class IncomesController extends AppController {
     $this->redirect('/incomes/');
   }
 
+  public function edit($id = null) {
+    $income_lists = $this->Income->find('all');
+    $income_counts = count($income_lists);
+    $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
+    $this->set('income_lists', $income_lists);
+    $this->set('income_counts', $income_counts);
+    $this->set('income_genres', $income_genres);
+
+    if (empty($this->request->data)) {
+      $this->request->data = $this->Income->findById($id); //postデータがなければ$idからデータを取得
+      $this->set('id', $this->request->data['Income']['id']); //viewに渡すために$idをセット
+    } else {
+      $this->Income->set($this->request->data); //postデータがあればIncomeModelに渡してvalidate
+      if ($this->Income->validates()) { //validate成功の処理
+        $this->Income->save($this->request->data); //validate成功でsave
+        if ($this->Income->save($id)) {
+          $this->Session->setFlash('修正しました。', 'flashMessage');
+        } else {
+          $this->Session->setFlash('修正できませんでした。', 'flashMessage');
+        }
+        $this->redirect('/incomes/');
+      } else { //validate失敗の処理
+        $this->set('id', $this->request->data['Income']['id']); //viewに渡すために$idをセット
+//        $this->render('index'); //validate失敗でindexを表示
+      }
+    }
+  }
+
   public function deleted($id = null){
     if (empty($id)) {
       throw new NotFoundException(__('存在しないデータです。'));

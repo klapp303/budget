@@ -16,7 +16,8 @@ class Income extends AppModel {
       ),
       'amount' => array(
           'rule' => 'numeric',
-          'required' => 'true'
+          'required' => 'true',
+          'message' => '金額を正しく入力してください。'
       )
   );
 
