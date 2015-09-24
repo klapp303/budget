@@ -1,5 +1,3 @@
-<p>正常に登録されました！</p>
-
 <h3>収入の登録</h3>
 
   <?php echo $this->Form->create('Income', array( //使用するModel

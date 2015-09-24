@@ -18,12 +18,15 @@
 <h3>最近の収入</h3>
 
   <?php echo '<table><tr><th>日付</th><th>収入名</th><th>金額</th><th>種類</th><th>状態</th><th>action</th></tr>'; ?>
-  <?php for($i = 0; $i < $income_counts; $i++){
-    echo '<tr><td>'.$income_lists[$i]['Income']['date'].'</td>
-              <td>'.$income_lists[$i]['Income']['title'].'</td>
-              <td>'.$income_lists[$i]['Income']['amount'].'</td>
-              <td>'.$income_lists[$i]['Income']['genre_id'].'</td>
-              <td>'.$income_lists[$i]['Income']['status'].'</td>
-              <td>'.'削除'.'</td></tr>';
-  } ?>
+  <?php for($i = 0; $i < $income_counts; $i++){ ?>
+    <tr><td><?php echo $income_lists[$i]['Income']['date']; ?></td>
+        <td><?php echo $income_lists[$i]['Income']['title']; ?></td>
+        <td><?php echo $income_lists[$i]['Income']['amount']; ?></td>
+        <td><?php echo $income_lists[$i]['Income']['genre_id']; ?></td>
+        <td><?php echo $income_lists[$i]['Income']['status']; ?></td>
+        <td><?php echo $this->Form->postLink('削除', array(
+            'action' => 'deleted', $income_lists[$i]['Income']['id'],
+            'class' => 'del-button'
+        )); ?></td></tr>
+  <?php } ?>
   <?php echo '</table>'; ?>

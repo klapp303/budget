@@ -60,16 +60,36 @@ class IncomesController extends AppController {
   }
 
   public function add() {
-    $this->Income->save($this->request->data);
-    print_r($this->request->data); //送信されたデータの表示
-    
-    $income_lists = $this->Income->find('all');
-    $income_counts = count($income_lists);
-    $this->set('income_lists', $income_lists);
-    $this->set('income_counts', $income_counts);
+    if ($this->request->is('post')) {
+      $this->Income->set($this->request->data);
+      if ($this->Income->validates()) {
+        $this->Income->save($this->request->data);
+        if ($this->Income->save($id)) {
+          $this->Session->setFlash('登録しました。', 'flashMessage');
+        } else {
+          $this->Session->setFlash('登録できませんでした。', 'flashMessage');
+        }
+      } else {
+        $this->render('index');
+      }
+    }
+
+    $this->redirect('/incomes/');
   }
 
-  public function deleted(){
+  public function deleted($id = null){
+    if (empty($id)) {
+      throw new NotFoundException(__('存在しないデータです。'));
+    }
     
+    if ($this->request->is('post')) {
+      $this->Income->Behaviors->enable('SoftDelete');
+      if ($this->Income->delete($id)) {
+        $this->Session->setFlash('削除しました。', 'flashMessage');
+      } else {
+        $this->Session->setFlash('削除できませんでした。', 'flashMessage');
+      }
+      $this->redirect('/incomes/');
+    }
   }
 }
