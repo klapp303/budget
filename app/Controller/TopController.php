@@ -51,49 +51,62 @@ class TopController extends AppController {
   }
 
   public function index() {
-    $income_now_lists = $this->Income->find('list', array(
+    //現在の残高
+    $income_past_lists = $this->Income->find('list', array(
         'conditions' => array('Income.date <=' => date('Y-m-d')),
         'fields' => ('Income.amount')
     ));
-    $this->set('income_now_lists', $income_now_lists);
-    $expenditure_now_lists = $this->Expenditure->find('list', array(
+    $this->set('income_past_lists', $income_past_lists);
+    $expenditure_past_lists = $this->Expenditure->find('list', array(
         'conditions' => array('Expenditure.date <=' => date('Y-m-d')),
         'fields' => ('Expenditure.amount')
     ));
-    $this->set('expenditure_now_lists', $expenditure_now_lists);
+    $this->set('expenditure_past_lists', $expenditure_past_lists);
 
+    //次回給料日までの出費
     if(date('d') < 25) { //1日～24日の場合
-      $expenditure_month_lists = $this->Expenditure->find('list', array(
+      $expenditure_recent_lists = $this->Expenditure->find('list', array(
           'conditions' => array(
               'Expenditure.date >' => date('Y-m-d'),
               'Expenditure.date <=' => date('Y-m-25')),
           'fields' => ('Expenditure.amount')
       ));
     } elseif(date('m') == 12) { //12月25日～31日の場合
-      $expenditure_month_lists = $this->Expenditure->find('list', array(
+      $expenditure_recent_lists = $this->Expenditure->find('list', array(
           'conditions' => array(
               'Expenditure.date >' => date('Y-m-d'),
               'Expenditure.date <=' => date('Y-1-25', strtotime('+1 year'))),
           'fields' => ('Expenditure.amount')
       ));
     } else { //25日～31日の場合(12月を除く)
-      $expenditure_month_lists = $this->Expenditure->find('list', array(
+      $expenditure_recent_lists = $this->Expenditure->find('list', array(
           'conditions' => array(
               'Expenditure.date >' => date('Y-m-d'),
               'Expenditure.date <=' => date('Y-m-25', strtotime('+1 month'))),
           'fields' => ('Expenditure.amount')
       ));
     }
-    $this->set('expenditure_month_lists', $expenditure_month_lists);
+    $this->set('expenditure_recent_lists', $expenditure_recent_lists);
 
-    $expenditure_recent_lists = $this->Expenditure->find('all', array(
+    //本日の支出
+    $expenditure_now_lists = $this->Expenditure->find('all', array(
+        'conditions' => array(
+            'Expenditure.date' => date('Y-m-d')),
+        'order' => array('date' => 'asc')
+    ));
+    $expenditure_now_counts = count($expenditure_now_lists);
+    $this->set('expenditure_now_lists', $expenditure_now_lists);
+    $this->set('expenditure_now_counts', $expenditure_now_counts);
+
+    //直近の支出
+    $expenditure_month_lists = $this->Expenditure->find('all', array(
         'conditions' => array(
             'Expenditure.date >' => date('Y-m-d'),
             'Expenditure.date <=' => date('Y-m-d', strtotime('+1 month'))),
         'order' => array('date' => 'asc')
     ));
-    $expenditure_recent_counts = count($expenditure_recent_lists);
-    $this->set('expenditure_recent_lists', $expenditure_recent_lists);
-    $this->set('expenditure_recent_counts', $expenditure_recent_counts);
+    $expenditure_month_counts = count($expenditure_month_lists);
+    $this->set('expenditure_month_lists', $expenditure_month_lists);
+    $this->set('expenditure_month_counts', $expenditure_month_counts);
   }
 }
