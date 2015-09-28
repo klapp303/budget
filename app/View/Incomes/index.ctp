@@ -31,8 +31,8 @@
         <td><?php echo $income_lists[$i]['Income']['title']; ?></td>
         <td><?php echo $income_lists[$i]['Income']['amount']; ?></td>
         <td><?php echo $income_lists[$i]['IncomesGenre']['title']; ?></td>
-        <td><?php if($income_lists[$i]['Income']['status'] == 0) {echo '未定';}
-              elseif($income_lists[$i]['Income']['status'] == 1) {echo '確定';} ?></td>
+        <td><?php if ($income_lists[$i]['Income']['status'] == 0) {echo '未定';}
+              elseif ($income_lists[$i]['Income']['status'] == 1) {echo '確定';} ?></td>
         <td><?php echo $this->Form->postLink('修正', array('action' => 'edit', $income_lists[$i]['Income']['id'])); ?>
             <?php echo $this->Form->postLink('削除', array('action' => 'deleted', $income_lists[$i]['Income']['id'])); ?></td></tr>
     <?php } ?>

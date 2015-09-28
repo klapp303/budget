@@ -41,8 +41,8 @@
         <td><?php echo $expenditure_lists[$i]['Expenditure']['title']; ?></td>
         <td><?php echo $expenditure_lists[$i]['Expenditure']['amount']; ?></td>
         <td><?php echo $expenditure_lists[$i]['ExpendituresGenre']['title']; ?></td>
-        <td><?php if($expenditure_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
-              elseif($expenditure_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td>
+        <td><?php if ($expenditure_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
+              elseif ($expenditure_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td>
         <td><?php echo $this->Form->postLink('修正', array('action' => 'edit', $expenditure_lists[$i]['Expenditure']['id'])); ?>
             <?php echo $this->Form->postLink('削除', array('action' => 'deleted', $expenditure_lists[$i]['Expenditure']['id'])); ?></td></tr>
     <?php } ?>

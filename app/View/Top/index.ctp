@@ -17,8 +17,8 @@
           <td><?php echo $expenditure_now_lists[$i]['Expenditure']['title']; ?></td>
           <td><?php echo $expenditure_now_lists[$i]['Expenditure']['amount']; ?></td>
           <td><?php echo $expenditure_now_lists[$i]['ExpendituresGenre']['title']; ?></td>
-          <td><?php if($expenditure_now_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
-                elseif($expenditure_now_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td></tr>
+          <td><?php if ($expenditure_now_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
+                elseif ($expenditure_now_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td></tr>
       <?php } ?>
     </table>
   <?php } else { ?>
@@ -34,7 +34,7 @@
         <td><?php echo $expenditure_month_lists[$i]['Expenditure']['title']; ?></td>
         <td><?php echo $expenditure_month_lists[$i]['Expenditure']['amount']; ?></td>
         <td><?php echo $expenditure_month_lists[$i]['ExpendituresGenre']['title']; ?></td>
-        <td><?php if($expenditure_month_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
-              elseif($expenditure_month_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td></tr>
+        <td><?php if ($expenditure_month_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
+              elseif ($expenditure_month_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td></tr>
     <?php } ?>
   </table>
