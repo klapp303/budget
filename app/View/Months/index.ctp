@@ -1,10 +1,13 @@
-<h3><?php echo date('Y年m月'); ?>の収支</h3>
+<h3><?php echo $year_id.'年'.$month_id.'月'; ?>の収支</h3>
 
   <table>
     <tr><th></th><th>金額</th><th>前月比</th></tr>
     <tr><td>収入</td><td><?php echo array_sum($income_month_lists); ?></td></tr>
     <tr><td>支出</td><td><?php echo array_sum($expenditure_month_lists); ?></td></tr>
   </table>
+
+  <?php echo $this->html->link('先月', '/months/'.$year_pre_id.'/'.$month_pre_id); ?>
+  <?php echo $this->html->link('来月', '/months/'.$year_post_id.'/'.$month_post_id); ?>
 
 <h3>支出内訳</h3>
 
@@ -35,8 +38,8 @@
         <td><?php echo $expenditure_lists[$i]['Expenditure']['title']; ?></td>
         <td><?php echo $expenditure_lists[$i]['Expenditure']['amount']; ?></td>
         <td><?php echo $expenditure_lists[$i]['ExpendituresGenre']['title']; ?></td>
-        <td><?php if($expenditure_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
-              elseif($expenditure_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td>
+        <td><?php if ($expenditure_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
+              elseif ($expenditure_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td>
         <td><?php echo $this->Form->postLink('修正', array('action' => 'edit', $expenditure_lists[$i]['Expenditure']['id'])); ?>
             <?php echo $this->Form->postLink('削除', array('action' => 'deleted', $expenditure_lists[$i]['Expenditure']['id'])); ?></td></tr>
     <?php } ?>

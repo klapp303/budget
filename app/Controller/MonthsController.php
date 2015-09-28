@@ -57,18 +57,48 @@ class MonthsController extends AppController {
   }
 
   public function index() {
+    if (empty($this->request->params['year_id'])) { //パラメータがない場合は今月の値を取得
+      $year_id = date('Y');
+      $month_id = date('m');
+    } elseif ($this->request->params['year_id'] < 2015) { //2014年までのパラメータの場合
+      $this->Session->setFlash('存在しないデータです。', 'flashMessage');
+      $this->redirect('/months/');
+    } elseif ($this->request->params['year_id'] == 2015 and $this->request->params['month_id'] < 9) { //2015年8月までのパラメータの場合
+      $this->Session->setFlash('存在しないデータです。', 'flashMessage');
+      $this->redirect('/months/');
+    } elseif ($this->request->params['year_id'] and $this->request->params['month_id']) {
+      $year_id = $this->request->params['year_id'];
+      $month_id = $this->request->params['month_id'];
+    }
+    if ($month_id == 1) { //先月と来月の日時情報を定義しておく
+    $year_pre_id = $year_id - 1; $month_pre_id = 12;
+    $year_post_id = $year_id; $month_post_id = 2;
+    } elseif ($month_id == 12) {
+    $year_pre_id = $year_id; $month_pre_id = 11;
+    $year_post_id = $year_id + 1; $month_post_id = 1;
+   } else {
+    $year_pre_id = $year_id; $month_pre_id = $month_id - 1;
+    $year_post_id = $year_id; $month_post_id = $month_id + 1;
+    }
+    $this->set('year_id', $year_id); //パラメータをviewにも渡しておく
+    $this->set('month_id', $month_id);
+    $this->set('year_pre_id', $year_pre_id);
+    $this->set('month_pre_id', $month_pre_id);
+    $this->set('year_post_id', $year_post_id);
+    $this->set('month_post_id', $month_post_id);
+
     //今月の収支
     $income_month_lists = $this->Income->find('list', array(
         'conditions' => array(
-            'Income.date >=' => date('Y-m-01'),
-            'Income.date <=' => date('Y-m-31')),
+            'Income.date >=' => date($year_id.'-'.$month_id.'-01'),
+            'Income.date <=' => date($year_id.'-'.$month_id.'-31')),
         'fields' => ('Income.amount')
     ));
     $this->set('income_month_lists', $income_month_lists);
     $expenditure_month_lists = $this->Expenditure->find('list', array(
         'conditions' => array(
-            'Expenditure.date >=' => date('Y-m-01'),
-            'Expenditure.date <=' => date('Y-m-31')),
+            'Expenditure.date >=' => date($year_id.'-'.$month_id.'-01'),
+            'Expenditure.date <=' => date($year_id.'-'.$month_id.'-31')),
         'fields' => ('Expenditure.amount')
     ));
     $this->set('expenditure_month_lists', $expenditure_month_lists);
@@ -81,8 +111,8 @@ class MonthsController extends AppController {
     for($i = 1; $i <= $genres_e_counts; $i++) {
       $expenditure_month_g_lists = $this->Expenditure->find('list', array(
           'conditions' => array(
-              'Expenditure.date >=' => date('Y-m-01'),
-              'Expenditure.date <=' => date('Y-m-31'),
+              'Expenditure.date >=' => date($year_id.'-'.$month_id.'-01'),
+              'Expenditure.date <=' => date($year_id.'-'.$month_id.'-31'),
               'genre_id' => $i),
           'fields' => ('Expenditure.amount')
       ));
@@ -96,8 +126,8 @@ class MonthsController extends AppController {
 //    ));
     $this->Paginator->settings = array(
         'conditions' => array(
-            'Expenditure.date >=' => date('Y-m-01'),
-            'Expenditure.date <=' => date('Y-m-31')),
+            'Expenditure.date >=' => date($year_id.'-'.$month_id.'-01'),
+            'Expenditure.date <=' => date($year_id.'-'.$month_id.'-31')),
         'order' => array('date' => 'asc')
     );
     $expenditure_lists = $this->Paginator->paginate('Expenditure');
