@@ -70,6 +70,7 @@ class MonthsController extends AppController {
       $year_id = $this->request->params['year_id'];
       $month_id = $this->request->params['month_id'];
     }
+    
     if ($month_id == 1) { //先月と来月の日時情報を定義しておく
     $year_pre_id = $year_id - 1; $month_pre_id = 12;
     $year_post_id = $year_id; $month_post_id = 2;
@@ -80,6 +81,7 @@ class MonthsController extends AppController {
     $year_pre_id = $year_id; $month_pre_id = $month_id - 1;
     $year_post_id = $year_id; $month_post_id = $month_id + 1;
     }
+    
     $this->set('year_id', $year_id); //パラメータをviewにも渡しておく
     $this->set('month_id', $month_id);
     $this->set('year_pre_id', $year_pre_id);
@@ -102,6 +104,21 @@ class MonthsController extends AppController {
         'fields' => ('Expenditure.amount')
     ));
     $this->set('expenditure_month_lists', $expenditure_month_lists);
+    
+      $income_month_pre_lists = $this->Income->find('list', array( //先月の収支を比較のために取得する
+          'conditions' => array(
+              'Income.date >=' => date($year_pre_id.'-'.$month_pre_id.'-01'),
+              'Income.date <=' => date($year_pre_id.'-'.$month_pre_id.'-31')),
+          'fields' => ('Income.amount')
+      ));
+      $this->set('income_month_pre_lists', $income_month_pre_lists);
+      $expenditure_month_pre_lists = $this->Expenditure->find('list', array(
+          'conditions' => array(
+              'Expenditure.date >=' => date($year_pre_id.'-'.$month_pre_id.'-01'),
+              'Expenditure.date <=' => date($year_pre_id.'-'.$month_pre_id.'-31')),
+          'fields' => ('Expenditure.amount')
+      ));
+      $this->set('expenditure_month_pre_lists', $expenditure_month_pre_lists);
 
     //支出内訳
     $genres_e_lists = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
@@ -119,6 +136,18 @@ class MonthsController extends AppController {
       ${'expenditure_month_g'.$i.'_sum'} = array_sum($expenditure_month_g_lists); //ジャンル毎の支出を加算
       $this->set('expenditure_month_g'.$i.'_sum', ${'expenditure_month_g'.$i.'_sum'});
     }
+    
+      for($i = 1; $i <= $genres_e_counts; $i++) { //先月の支出内訳を比較のために取得する
+        $expenditure_month_g_pre_lists = $this->Expenditure->find('list', array(
+            'conditions' => array(
+                'Expenditure.date >=' => date($year_pre_id.'-'.$month_pre_id.'-01'),
+                'Expenditure.date <=' => date($year_pre_id.'-'.$month_pre_id.'-31'),
+                'genre_id' => $i),
+            'fields' => ('Expenditure.amount')
+        ));
+        ${'expenditure_month_g'.$i.'_pre_sum'} = array_sum($expenditure_month_g_pre_lists); //ジャンル毎の支出を加算
+        $this->set('expenditure_month_g'.$i.'_pre_sum', ${'expenditure_month_g'.$i.'_pre_sum'});
+      }
 
     //支出一覧
 //    $expenditure_lists = $this->Expenditure->find('all', array(

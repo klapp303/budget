@@ -2,8 +2,22 @@
 
   <table>
     <tr><th></th><th>金額</th><th>前月比</th></tr>
-    <tr><td>収入</td><td><?php echo array_sum($income_month_lists); ?></td></tr>
-    <tr><td>支出</td><td><?php echo array_sum($expenditure_month_lists); ?></td></tr>
+    <tr><td>収入</td>
+        <td><?php echo array_sum($income_month_lists); ?></td>
+        <td><?php if (array_sum($income_month_pre_lists) == 0) {
+              echo 'データなし';
+            } else {
+              $income_month_comparison = round(array_sum($income_month_lists)/array_sum($income_month_pre_lists), 3)*100;
+              echo $income_month_comparison.'%';
+            } ?></td></tr>
+    <tr><td>支出</td>
+        <td><?php echo array_sum($expenditure_month_lists); ?></td>
+        <td><?php if (array_sum($expenditure_month_pre_lists) == 0) {
+              echo 'データなし';
+            } else {
+              $expenditure_month_comparison = round(array_sum($expenditure_month_lists)/array_sum($expenditure_month_pre_lists), 3)*100;
+              echo $expenditure_month_comparison.'%';
+            } ?></td></tr>
   </table>
 
   <?php if ($year_id == 2015 and $month_id == 9) { ?>
@@ -20,9 +34,18 @@
     <?php for($i = 1; $i <= $genres_e_counts; $i++) { ?>
     <tr><td><?php echo $genres_e_lists[$i]; ?></td>
         <td><?php echo ${'expenditure_month_g'.$i.'_sum'}; ?></td>
-        <td><?php $expenditure_g_percentage = round(${'expenditure_month_g'.$i.'_sum'}/array_sum($expenditure_month_lists), 3)*100;
-            echo $expenditure_g_percentage; ?>%</td>
-        <td></td></tr>
+        <td><?php if (array_sum($expenditure_month_lists) == 0) {
+              echo 'データなし';
+            } else {
+              $expenditure_g_percentage = round(${'expenditure_month_g'.$i.'_sum'}/array_sum($expenditure_month_lists), 3)*100;
+              echo $expenditure_g_percentage.'%';
+            } ?></td>
+        <td><?php if (${'expenditure_month_g'.$i.'_pre_sum'} == 0) {
+              echo 'データなし';
+            } else {
+              $expenditure_g_comparison = round(${'expenditure_month_g'.$i.'_sum'}/${'expenditure_month_g'.$i.'_pre_sum'}, 3)*100;
+              echo $expenditure_g_comparison.'%';
+            } ?></td></tr>
     <?php } ?>
   </table>
 
