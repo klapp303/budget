@@ -53,12 +53,12 @@ class TopController extends AppController {
   public function index() {
     //現在の残高
     $income_past_lists = $this->Income->find('list', array(
-        'conditions' => array('Income.date <=' => date('Y-m-d')),
+        'conditions' => array('Income.date <=' => date('Y-m-d'), 'status' => 1),
         'fields' => ('Income.amount')
     ));
     $this->set('income_past_lists', $income_past_lists);
     $expenditure_past_lists = $this->Expenditure->find('list', array(
-        'conditions' => array('Expenditure.date <=' => date('Y-m-d')),
+        'conditions' => array('Expenditure.date <=' => date('Y-m-d'), 'status' => 1),
         'fields' => ('Expenditure.amount')
     ));
     $this->set('expenditure_past_lists', $expenditure_past_lists);
