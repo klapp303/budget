@@ -134,4 +134,71 @@ class ExpendituresController extends AppController {
       $this->redirect('/expenditures/');
     }
   }
+
+  public function fix() {
+    $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
+        'conditions' => array(
+          'status' => 0,
+          'date <=' => date('Y-m-d')
+        ),
+        'order' => array('date' => 'asc')
+    ));
+//    $this->Paginator->settings = $this->paginate;
+//    $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
+    $expenditure_unfixed_counts = count($expenditure_unfixed_lists);
+    $this->set('expenditure_unfixed_lists', $expenditure_unfixed_lists);
+    $this->set('expenditure_unfixed_counts', $expenditure_unfixed_counts);
+  }
+
+  public function fix_edit($id = null) {
+    $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
+        'conditions' => array(
+          'status' => 0,
+          'date <=' => date('Y-m-d')
+        ),
+        'order' => array('date' => 'asc')
+    ));
+//    $this->Paginator->settings = $this->paginate;
+//    $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
+    $expenditure_unfixed_counts = count($expenditure_unfixed_lists);
+    $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
+    $this->set('expenditure_unfixed_lists', $expenditure_unfixed_lists);
+    $this->set('expenditure_unfixed_counts', $expenditure_unfixed_counts);
+    $this->set('expenditure_genres', $expenditure_genres);
+
+    if (empty($this->request->data)) {
+      $this->request->data = $this->Expenditure->findById($id); //postデータがなければ$idからデータを取得
+      $this->set('id', $this->request->data['Expenditure']['id']); //viewに渡すために$idをセット
+    } else {
+      $this->Expenditure->set($this->request->data); //postデータがあればModelに渡してvalidate
+      if ($this->Expenditure->validates()) { //validate成功の処理
+        $this->Expenditure->save($this->request->data); //validate成功でsave
+        if ($this->Expenditure->save($id)) {
+          $this->Session->setFlash('修正しました。', 'flashMessage');
+        } else {
+          $this->Session->setFlash('修正できませんでした。', 'flashMessage');
+        }
+        $this->redirect('/expenditures/fix/');
+      } else { //validate失敗の処理
+        $this->set('id', $this->request->data['Expenditure']['id']); //viewに渡すために$idをセット
+//        $this->render('index'); //validate失敗でindexを表示
+      }
+    }
+  }
+
+  public function fix_deleted($id = null){
+    if (empty($id)) {
+      throw new NotFoundException(__('存在しないデータです。'));
+    }
+    
+    if ($this->request->is('post')) {
+      $this->Expenditure->Behaviors->enable('SoftDelete');
+      if ($this->Expenditure->delete($id)) {
+        $this->Session->setFlash('削除しました。', 'flashMessage');
+      } else {
+        $this->Session->setFlash('削除できませんでした。', 'flashMessage');
+      }
+      $this->redirect('/expenditures/fix/');
+    }
+  }
 }

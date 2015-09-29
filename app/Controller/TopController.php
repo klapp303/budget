@@ -88,6 +88,34 @@ class TopController extends AppController {
     }
     $this->set('expenditure_recent_lists', $expenditure_recent_lists);
 
+    //確定待ちの収入
+    $income_unfixed_lists = $this->Income->find('all', array(
+        'conditions' => array(
+          'status' => 0,
+          'date <=' => date('Y-m-d')
+        ),
+        'order' => array('date' => 'asc')
+    ));
+//    $this->Paginator->settings = $this->paginate;
+//    $income_unfixed_lists = $this->Paginator->paginate('Income');
+    $income_unfixed_counts = count($income_unfixed_lists);
+//    $this->set('income_unfixed_lists', $income_unfixed_lists);
+    $this->set('income_unfixed_counts', $income_unfixed_counts);
+
+    //確定待ちの支出
+    $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
+        'conditions' => array(
+          'status' => 0,
+          'date <=' => date('Y-m-d')
+        ),
+        'order' => array('date' => 'asc')
+    ));
+//    $this->Paginator->settings = $this->paginate;
+//    $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
+    $expenditure_unfixed_counts = count($expenditure_unfixed_lists);
+//    $this->set('expenditure_unfixed_lists', $expenditure_unfixed_lists);
+    $this->set('expenditure_unfixed_counts', $expenditure_unfixed_counts);
+
     //本日の支出
     $expenditure_now_lists = $this->Expenditure->find('all', array(
         'conditions' => array(

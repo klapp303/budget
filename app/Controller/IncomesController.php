@@ -134,4 +134,71 @@ class IncomesController extends AppController {
       $this->redirect('/incomes/');
     }
   }
+
+  public function fix() {
+    $income_unfixed_lists = $this->Income->find('all', array(
+        'conditions' => array(
+          'status' => 0,
+          'date <=' => date('Y-m-d')
+        ),
+        'order' => array('date' => 'asc')
+    ));
+//    $this->Paginator->settings = $this->paginate;
+//    $income_unfixed_lists = $this->Paginator->paginate('Income');
+    $income_unfixed_counts = count($income_unfixed_lists);
+    $this->set('income_unfixed_lists', $income_unfixed_lists);
+    $this->set('income_unfixed_counts', $income_unfixed_counts);
+  }
+
+  public function fix_edit($id = null) {
+    $income_unfixed_lists = $this->Income->find('all', array(
+        'conditions' => array(
+          'status' => 0,
+          'date <=' => date('Y-m-d')
+        ),
+        'order' => array('date' => 'asc')
+    ));
+//    $this->Paginator->settings = $this->paginate;
+//    $income_unfixed_lists = $this->Paginator->paginate('Income');
+    $income_unfixed_counts = count($income_unfixed_lists);
+    $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
+    $this->set('income_unfixed_lists', $income_unfixed_lists);
+    $this->set('income_unfixed_counts', $income_unfixed_counts);
+    $this->set('income_genres', $income_genres);
+
+    if (empty($this->request->data)) {
+      $this->request->data = $this->Income->findById($id); //postデータがなければ$idからデータを取得
+      $this->set('id', $this->request->data['Income']['id']); //viewに渡すために$idをセット
+    } else {
+      $this->Income->set($this->request->data); //postデータがあればModelに渡してvalidate
+      if ($this->Income->validates()) { //validate成功の処理
+        $this->Income->save($this->request->data); //validate成功でsave
+        if ($this->Income->save($id)) {
+          $this->Session->setFlash('修正しました。', 'flashMessage');
+        } else {
+          $this->Session->setFlash('修正できませんでした。', 'flashMessage');
+        }
+        $this->redirect('/incomes/fix/');
+      } else { //validate失敗の処理
+        $this->set('id', $this->request->data['Income']['id']); //viewに渡すために$idをセット
+//        $this->render('index'); //validate失敗でindexを表示
+      }
+    }
+  }
+
+  public function fix_deleted($id = null){
+    if (empty($id)) {
+      throw new NotFoundException(__('存在しないデータです。'));
+    }
+    
+    if ($this->request->is('post')) {
+      $this->Income->Behaviors->enable('SoftDelete');
+      if ($this->Income->delete($id)) {
+        $this->Session->setFlash('削除しました。', 'flashMessage');
+      } else {
+        $this->Session->setFlash('削除できませんでした。', 'flashMessage');
+      }
+      $this->redirect('/incomes/fix/');
+    }
+  }
 }
