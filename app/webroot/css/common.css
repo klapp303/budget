@@ -81,3 +81,9 @@ body {
     margin-left: 20px;
     margin-bottom: 20px;
 }
+
+#content >table >tbody >tr >th, #content >table >tbody >tr >td,
+#content >table >tr >th, #content >table >tr >td{
+    padding-left: 5px;
+    padding-right: 5px;
+}
