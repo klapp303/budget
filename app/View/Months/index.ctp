@@ -3,7 +3,7 @@
   <table>
     <tr><th></th><th class="tbl-num">金額</th><th class="tbl-num">前月比</th></tr>
     <tr><td>収入</td>
-      <td class="tbl-num"><?php echo array_sum($income_month_lists); ?></td>
+      <td class="tbl-num"><?php echo array_sum($income_month_lists); ?>円</td>
       <td class="tbl-num"><?php if (array_sum($income_month_pre_lists) == 0) {
               echo 'データなし';
             } else {
@@ -11,7 +11,7 @@
               echo $income_month_comparison.'%';
             } ?></td></tr>
     <tr><td>支出</td>
-      <td class="tbl-num"><?php echo array_sum($expenditure_month_lists); ?></td>
+      <td class="tbl-num"><?php echo array_sum($expenditure_month_lists); ?>円</td>
       <td class="tbl-num"><?php if (array_sum($expenditure_month_pre_lists) == 0) {
               echo 'データなし';
             } else {
@@ -33,7 +33,7 @@
     <tr><th>種類</th><th class="tbl-num">金額</th><th class="tbl-num">割合</th><th class="tbl-num">前月比</th></tr>
     <?php for($i = 1; $i <= $genres_e_counts; $i++) { ?>
     <tr><td><?php echo $genres_e_lists[$i]; ?></td>
-      <td class="tbl-num"><?php echo ${'expenditure_month_g'.$i.'_sum'}; ?></td>
+      <td class="tbl-num"><?php echo ${'expenditure_month_g'.$i.'_sum'}; ?>円</td>
       <td class="tbl-num"><?php if (array_sum($expenditure_month_lists) == 0) {
               echo 'データなし';
             } else {
@@ -63,7 +63,7 @@
     <?php for($i = 0; $i < $expenditure_counts; $i++){ ?>
     <tr><td><?php echo $expenditure_lists[$i]['Expenditure']['date']; ?></td>
         <td><?php echo $expenditure_lists[$i]['Expenditure']['title']; ?></td>
-        <td class="tbl-num"><?php echo $expenditure_lists[$i]['Expenditure']['amount']; ?></td>
+        <td class="tbl-num"><?php echo $expenditure_lists[$i]['Expenditure']['amount']; ?>円</td>
         <td><?php echo $expenditure_lists[$i]['ExpendituresGenre']['title']; ?></td>
         <td><?php if ($expenditure_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
               elseif ($expenditure_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td>

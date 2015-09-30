@@ -11,6 +11,14 @@
     text-align: center;
 }
 
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
 .cf {
     display: inline-block;
 }
@@ -73,7 +81,7 @@ body {
     background-color: #efffff;
     color: #000000;
     width: 760px;
-    margin: 10px 20px 10px 20px;
+    margin: 30px 20px 10px 20px;
     text-align: left;
 }
 

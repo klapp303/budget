@@ -8,7 +8,7 @@
       <?php for($i = 0; $i < $expenditure_unfixed_counts; $i++){ ?>
       <tr><td><?php echo $expenditure_unfixed_lists[$i]['Expenditure']['date']; ?></td>
           <td><?php echo $expenditure_unfixed_lists[$i]['Expenditure']['title']; ?></td>
-          <td><?php echo $expenditure_unfixed_lists[$i]['Expenditure']['amount']; ?></td>
+          <td><?php echo $expenditure_unfixed_lists[$i]['Expenditure']['amount']; ?>円</td>
           <td><?php echo $expenditure_unfixed_lists[$i]['ExpendituresGenre']['title']; ?></td>
           <td><?php if ($expenditure_unfixed_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
                 elseif ($expenditure_unfixed_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td>

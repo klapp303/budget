@@ -9,8 +9,8 @@
   <?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $id)); ?>
   <?php echo $this->Form->input('title', array('type' => 'text', 'label' => '収入名')); ?><br>
   <?php echo $this->Form->input('date', array('type' => 'date', 'label' => '日付', 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?><br>
-  <?php echo $this->Form->input('amount', array('type' => 'text', 'label' => '金額')); ?><br>
-  <?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => '種類', 'options' => $income_genres)); ?><br>
+  <?php echo $this->Form->input('amount', array('type' => 'text', 'label' => '金額')); ?>円<br>
+  <?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => '種類', 'options' => $income_genres)); ?>
   <?php echo $this->Form->input('status', array('type' => 'select', 'label' => '状態', 'options' => array(0 => '未定', 1 => '確定'))); ?><br>
   
   <?php echo $this->Form->submit('修正する'); ?>
@@ -30,7 +30,7 @@
     <?php for($i = 0; $i < $income_counts; $i++){ ?>
     <tr><td><?php echo $income_lists[$i]['Income']['date']; ?></td>
         <td><?php echo $income_lists[$i]['Income']['title']; ?></td>
-        <td class="tbl-num"><?php echo $income_lists[$i]['Income']['amount']; ?></td>
+        <td class="tbl-num"><?php echo $income_lists[$i]['Income']['amount']; ?>円</td>
         <td><?php echo $income_lists[$i]['IncomesGenre']['title']; ?></td>
         <td><?php if ($income_lists[$i]['Income']['status'] == 0) {echo '未定';}
               elseif ($income_lists[$i]['Income']['status'] == 1) {echo '確定';} ?></td>

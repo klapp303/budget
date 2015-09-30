@@ -2,13 +2,15 @@
 
   <?php $past_income = array_sum($income_past_lists);
         $past_expenditure = array_sum($expenditure_past_lists); ?>
-  <table>
-    <tr><td>現在の残高</td><td class="tbl-num"><?php echo $past_income - $past_expenditure; ?></td></tr>
-    <tr><td>次回給料日までの出費</td><td class="tbl-num"><?php echo array_sum($expenditure_recent_lists); ?></td></tr>
+<table class="fl cf">
+    <tr><td>現在の残高</td><td class="tbl-num"><?php echo $past_income - $past_expenditure; ?>円</td></tr>
+    <tr><td>次回給料日までの出費</td><td class="tbl-num"><?php echo array_sum($expenditure_recent_lists); ?>円</td></tr>
   </table>
 
-  確定待ちの収入<?php echo $this->Html->link($income_unfixed_counts.'件', '/incomes/fix/'); ?>
-  確定待ちの支出<?php echo $this->Html->link($expenditure_unfixed_counts.'件', '/expenditures/fix/'); ?>
+  <table>
+    <tr><td>確定待ちの収入</td><td><?php echo $this->Html->link($income_unfixed_counts.'件', '/incomes/fix/'); ?></td></tr>
+    <tr><td>確定待ちの支出</td><td><?php echo $this->Html->link($expenditure_unfixed_counts.'件', '/expenditures/fix/'); ?></td></tr>
+  </table>
 
 <h3>本日の支出</h3>
 
@@ -18,7 +20,7 @@
       <?php for($i = 0; $i < $expenditure_now_counts; $i++){ ?>
       <tr><td><?php echo $expenditure_now_lists[$i]['Expenditure']['date']; ?></td>
           <td><?php echo $expenditure_now_lists[$i]['Expenditure']['title']; ?></td>
-          <td class="tbl-num"><?php echo $expenditure_now_lists[$i]['Expenditure']['amount']; ?></td>
+          <td class="tbl-num"><?php echo $expenditure_now_lists[$i]['Expenditure']['amount']; ?>円</td>
           <td><?php echo $expenditure_now_lists[$i]['ExpendituresGenre']['title']; ?></td>
           <td><?php if ($expenditure_now_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
                 elseif ($expenditure_now_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td></tr>
@@ -35,7 +37,7 @@
     <?php for($i = 0; $i < $expenditure_month_counts; $i++){ ?>
     <tr><td><?php echo $expenditure_month_lists[$i]['Expenditure']['date']; ?></td>
         <td><?php echo $expenditure_month_lists[$i]['Expenditure']['title']; ?></td>
-        <td class="tbl-num"><?php echo $expenditure_month_lists[$i]['Expenditure']['amount']; ?></td>
+        <td class="tbl-num"><?php echo $expenditure_month_lists[$i]['Expenditure']['amount']; ?>円</td>
         <td><?php echo $expenditure_month_lists[$i]['ExpendituresGenre']['title']; ?></td>
         <td><?php if ($expenditure_month_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
               elseif ($expenditure_month_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td></tr>

@@ -8,7 +8,7 @@
       <?php for($i = 0; $i < $income_unfixed_counts; $i++){ ?>
       <tr><td><?php echo $income_unfixed_lists[$i]['Income']['date']; ?></td>
           <td><?php echo $income_unfixed_lists[$i]['Income']['title']; ?></td>
-          <td><?php echo $income_unfixed_lists[$i]['Income']['amount']; ?></td>
+          <td><?php echo $income_unfixed_lists[$i]['Income']['amount']; ?>円</td>
           <td><?php echo $income_unfixed_lists[$i]['IncomesGenre']['title']; ?></td>
           <td><?php if ($income_unfixed_lists[$i]['Income']['status'] == 0) {echo '未定';}
                 elseif ($income_unfixed_lists[$i]['Income']['status'] == 1) {echo '確定';} ?></td>
