@@ -25,12 +25,12 @@
       'last' => '＞' //最終ページへのリンク
   )); ?>
 
-  <table>
-    <tr><th>日付</th><th>収入名</th><th>金額</th><th>種類</th><th>状態</th><th>action</th></tr>
+<table class="detail-list">
+  <tr><th>日付</th><th>収入名</th><th class="tbl-num">金額</th><th>種類</th><th>状態</th><th>action</th></tr>
     <?php for($i = 0; $i < $income_counts; $i++){ ?>
     <tr><td><?php echo $income_lists[$i]['Income']['date']; ?></td>
         <td><?php echo $income_lists[$i]['Income']['title']; ?></td>
-        <td><?php echo $income_lists[$i]['Income']['amount']; ?></td>
+        <td class="tbl-num"><?php echo $income_lists[$i]['Income']['amount']; ?></td>
         <td><?php echo $income_lists[$i]['IncomesGenre']['title']; ?></td>
         <td><?php if ($income_lists[$i]['Income']['status'] == 0) {echo '未定';}
               elseif ($income_lists[$i]['Income']['status'] == 1) {echo '確定';} ?></td>

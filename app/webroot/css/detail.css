@@ -48,3 +48,12 @@
 .menu-list a:active{
     color: #ffffff;
 }
+
+/* コンテンツ */
+.detail-list {
+    width: 100%;
+}
+
+.tbl-num {
+    text-align: right;
+}
