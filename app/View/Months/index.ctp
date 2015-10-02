@@ -21,10 +21,14 @@
   </table>
 
   <?php if ($year_id == 2015 and $month_id == 9) { ?>
-    <?php echo $this->html->link('来月', '/months/'.$year_post_id.'/'.$month_post_id); ?>
+    <div class="pager_months_start">
+      <?php echo $this->html->link('来月', '/months/'.$year_post_id.'/'.$month_post_id); ?>
+    </div>
   <?php } else { ?>
-    <?php echo $this->html->link('先月', '/months/'.$year_pre_id.'/'.$month_pre_id); ?>
-    <?php echo $this->html->link('来月', '/months/'.$year_post_id.'/'.$month_post_id); ?>
+    <div class="pager_months">
+      <?php echo $this->html->link('先月', '/months/'.$year_pre_id.'/'.$month_pre_id); ?>
+      <?php echo $this->html->link('来月', '/months/'.$year_post_id.'/'.$month_post_id); ?>
+    </div>
   <?php } ?>
 
 <h3>支出内訳</h3>

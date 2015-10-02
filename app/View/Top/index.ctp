@@ -7,12 +7,12 @@
     <tr><td>次回給料日までの出費</td><td class="tbl-num"><?php echo array_sum($expenditure_recent_lists); ?>円</td></tr>
   </table>
 
-  <table>
+  <table class="tbl-budget_top">
     <tr><td>確定待ちの収入</td><td><?php echo $this->Html->link($income_unfixed_counts.'件', '/incomes/fix/'); ?></td></tr>
     <tr><td>確定待ちの支出</td><td><?php echo $this->Html->link($expenditure_unfixed_counts.'件', '/expenditures/fix/'); ?></td></tr>
   </table>
 
-<h3>本日の支出</h3>
+<h3 class="title-ex-now_top">本日の支出</h3>
 
   <?php if($expenditure_now_counts > 0) { ?>
     <table class="detail-list">
