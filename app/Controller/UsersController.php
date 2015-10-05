@@ -49,7 +49,7 @@ class UsersController extends AppController {
     parent::beforeFilter();
     $this->layout = 'budget_login';
     // ユーザ自身による登録とログアウトを許可する
-    $this->Auth->allow('add', 'logout');
+    $this->Auth->allow(/*'add', */'logout');
   }
 
   public function login() {
