@@ -4,6 +4,7 @@
 
 
 /app/Config/database.php
+/app/Config/database_sakura.php
 
 /app/tmp
 
