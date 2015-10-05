@@ -22,12 +22,12 @@
 
   <?php if ($year_id == 2015 and $month_id == 9) { ?>
     <div class="pager_months_start">
-      <?php echo $this->html->link('来月', '/months/'.$year_post_id.'/'.$month_post_id); ?>
+      <?php echo $this->Html->link('来月', '/months/'.$year_post_id.'/'.$month_post_id); ?>
     </div>
   <?php } else { ?>
     <div class="pager_months">
-      <?php echo $this->html->link('先月', '/months/'.$year_pre_id.'/'.$month_pre_id); ?>
-      <?php echo $this->html->link('来月', '/months/'.$year_post_id.'/'.$month_post_id); ?>
+      <?php echo $this->Html->link('先月', '/months/'.$year_pre_id.'/'.$month_pre_id); ?>
+      <?php echo $this->Html->link('来月', '/months/'.$year_post_id.'/'.$month_post_id); ?>
     </div>
   <?php } ?>
 

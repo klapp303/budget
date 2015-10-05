@@ -12,4 +12,4 @@
   <?php echo $this->Form->submit('登録'); ?>
   <?php echo $this->Form->end(); ?><!-- form end -->
 
-<p><a href="/users/login/">ログインはこちら</a></p>
+<p><?php echo $this->Html->link('ログインはこちら', '/users/login/'); ?></p>

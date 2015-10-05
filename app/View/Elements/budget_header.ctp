@@ -1,1 +1,1 @@
-<h1 class="head-title"><a href="/">収支管理</a></h1>
+<h1 class="head-title"><?php echo $this->Html->link('収支管理', '/'); ?></h1>
