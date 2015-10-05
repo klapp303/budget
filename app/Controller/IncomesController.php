@@ -74,7 +74,7 @@ class IncomesController extends AppController {
       $this->Income->set($this->request->data); //postデータがあればModelに渡してvalidate
       if ($this->Income->validates()) { //validate成功の処理
         $this->Income->save($this->request->data); //validate成功でsave
-        if ($this->Income->save($id)) {
+        if ($this->Income->save($this->request->data)) {
           $this->Session->setFlash('登録しました。', 'flashMessage');
         } else {
           $this->Session->setFlash('登録できませんでした。', 'flashMessage');
