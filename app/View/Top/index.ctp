@@ -39,7 +39,7 @@
         <td><?php echo $expenditure_month_lists[$i]['Expenditure']['title']; ?></td>
         <td class="tbl-num"><?php echo $expenditure_month_lists[$i]['Expenditure']['amount']; ?>円</td>
         <td><?php echo $expenditure_month_lists[$i]['ExpendituresGenre']['title']; ?></td>
-        <td><?php if ($expenditure_month_lists[$i]['Expenditure']['status'] == 0) {echo '未定';}
-              elseif ($expenditure_month_lists[$i]['Expenditure']['status'] == 1) {echo '確定';} ?></td></tr>
+        <td><?php if ($expenditure_month_lists[$i]['Expenditure']['status'] == 0) {echo '<span class="icon-false">未定</span>';}
+              elseif ($expenditure_month_lists[$i]['Expenditure']['status'] == 1) {echo '<span class="icon-true">確定</span>';} ?></td></tr>
     <?php } ?>
   </table>

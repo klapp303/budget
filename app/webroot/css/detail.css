@@ -57,3 +57,23 @@
 .tbl-num {
     text-align: right;
 }
+
+.icon-true {
+    font-size: 12px;
+    background: #77D124;
+    border: solid 2px #000000;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    padding: 0 10px;
+}
+
+.icon-false {
+    font-size: 12px;
+    background: #999999;
+    border: solid 2px #000000;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    padding: 0 10px;
+}
