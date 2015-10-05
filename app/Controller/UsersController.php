@@ -67,7 +67,7 @@ class UsersController extends AppController {
   }
 
   public function index() {
-      
+      $this->redirect('/users/login/');
   }
 
   public function add() {
