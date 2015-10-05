@@ -75,7 +75,7 @@ class UsersController extends AppController {
       $this->User->set($this->request->data); //postデータがあればModelに渡してvalidate
       if ($this->User->validates()) { //validate成功の処理
         $this->User->save($this->request->data); //validate成功でsave
-        if ($this->User->save($id)) {
+        if ($this->User->save($this->request->data)) {
           $this->Session->setFlash('登録しました。', 'flashMessage');
         } else {
           $this->Session->setFlash('登録できませんでした。', 'flashMessage');
