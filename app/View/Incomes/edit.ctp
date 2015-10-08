@@ -26,14 +26,14 @@
   )); ?>
 
 <table class="detail-list">
-  <tr><th>日付</th><th>収入名</th><th class="tbl-num">金額</th><th>種類</th><th>状態</th><th>action</th></tr>
+  <tr><th>日付</th><th>収入名</th><th class="tbl-num">金額</th><th class="tbl-ico">種類</th><th class="tbl-ico">状態</th><th>action</th></tr>
     <?php for($i = 0; $i < $income_counts; $i++){ ?>
     <tr><td><?php echo $income_lists[$i]['Income']['date']; ?></td>
         <td><?php echo $income_lists[$i]['Income']['title']; ?></td>
         <td class="tbl-num"><?php echo $income_lists[$i]['Income']['amount']; ?>円</td>
-        <td><?php echo $income_lists[$i]['IncomesGenre']['title']; ?></td>
-        <td><?php if ($income_lists[$i]['Income']['status'] == 0) {echo '未定';}
-              elseif ($income_lists[$i]['Income']['status'] == 1) {echo '確定';} ?></td>
+        <td class="tbl-ico"><span class="icon-genre col-i_<?php echo $income_lists[$i]['Income']['genre_id']; ?>"><?php echo $income_lists[$i]['IncomesGenre']['title']; ?></span></td>
+        <td class="tbl-ico"><?php if ($income_lists[$i]['Income']['status'] == 0) {echo '<span class="icon-false">未定</span>';}
+                              elseif ($income_lists[$i]['Income']['status'] == 1) {echo '<span class="icon-true">確定</span>';} ?></td>
         <td><?php echo $this->Form->postLink('修正', array('action' => 'edit', $income_lists[$i]['Income']['id'])); ?>
             <?php echo $this->Form->postLink('削除', array('action' => 'deleted', $income_lists[$i]['Income']['id'])); ?></td></tr>
     <?php } ?>

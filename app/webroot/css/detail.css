@@ -58,9 +58,14 @@
     text-align: right;
 }
 
+.tbl-ico {
+    text-align: center;
+}
+
+/* アイコン */
 .icon-true {
     font-size: 12px;
-    background: #77D124;
+    background: #01DFA5;
     border: solid 2px #000000;
     border-radius: 8px;
     -moz-border-radius: 8px;
@@ -70,10 +75,64 @@
 
 .icon-false {
     font-size: 12px;
-    background: #999999;
+    background: #D8D8D8;
     border: solid 2px #000000;
     border-radius: 8px;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     padding: 0 10px;
+}
+
+.icon-genre {
+    font-size: 12px;
+    border: solid 2px #000000;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    padding: 0 10px;
+}
+
+.col-i_1 { /* 給与 */
+    background: #819FF7;
+}
+
+.col-i_2 { /* 買取 */
+    background: #FE2E64;
+}
+
+.col-e_1 { /* 趣味費 */
+    background: #FE2E64;
+}
+
+.col-e_2 { /* イベント */
+    background: #FE2E9A;
+}
+
+.col-e_3 { /* 交通費 */
+    background: #F5A9E1;
+}
+
+.col-e_4 { /* 交際費 */
+    background: #FAAC58;
+}
+
+.col-e_5 { /* 食費 */
+    background: #FFFF00;
+}
+
+.col-e_6 { /* 家賃 */
+    background: #819FF7;
+}
+
+.col-e_7 { /* 公共料金 */
+    background: #58ACFA;
+}
+
+.col-e_8 { /* 生活費 */
+    background: #58D3F7;
+}
+
+.col-i_3,
+.col-e_9 { /* その他 */
+    background: #D8D8D8;
 }

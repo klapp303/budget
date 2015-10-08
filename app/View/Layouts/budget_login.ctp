@@ -31,10 +31,7 @@
 
 		echo $this->Html->css(array(
         'common',
-        'detail',
-        'top',
-        'months',
-        'fix'
+        'detail'
     ));
 
 //		echo $this->fetch('meta');

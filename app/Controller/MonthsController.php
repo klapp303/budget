@@ -89,18 +89,20 @@ class MonthsController extends AppController {
     $this->set('year_post_id', $year_post_id);
     $this->set('month_post_id', $month_post_id);
 
-    //今月の収支
+    //n月の確定収支
     $income_month_lists = $this->Income->find('list', array(
         'conditions' => array(
             'Income.date >=' => date($year_id.'-'.$month_id.'-01'),
-            'Income.date <=' => date($year_id.'-'.$month_id.'-31')),
+            'Income.date <=' => date($year_id.'-'.$month_id.'-31'),
+            'Income.status' => 1),
         'fields' => ('Income.amount')
     ));
     $this->set('income_month_lists', $income_month_lists);
     $expenditure_month_lists = $this->Expenditure->find('list', array(
         'conditions' => array(
             'Expenditure.date >=' => date($year_id.'-'.$month_id.'-01'),
-            'Expenditure.date <=' => date($year_id.'-'.$month_id.'-31')),
+            'Expenditure.date <=' => date($year_id.'-'.$month_id.'-31'),
+            'Expenditure.status' => 1),
         'fields' => ('Expenditure.amount')
     ));
     $this->set('expenditure_month_lists', $expenditure_month_lists);
@@ -108,14 +110,16 @@ class MonthsController extends AppController {
       $income_month_pre_lists = $this->Income->find('list', array( //先月の収支を比較のために取得する
           'conditions' => array(
               'Income.date >=' => date($year_pre_id.'-'.$month_pre_id.'-01'),
-              'Income.date <=' => date($year_pre_id.'-'.$month_pre_id.'-31')),
+              'Income.date <=' => date($year_pre_id.'-'.$month_pre_id.'-31'),
+              'Income.status' => 1),
           'fields' => ('Income.amount')
       ));
       $this->set('income_month_pre_lists', $income_month_pre_lists);
       $expenditure_month_pre_lists = $this->Expenditure->find('list', array(
           'conditions' => array(
               'Expenditure.date >=' => date($year_pre_id.'-'.$month_pre_id.'-01'),
-              'Expenditure.date <=' => date($year_pre_id.'-'.$month_pre_id.'-31')),
+              'Expenditure.date <=' => date($year_pre_id.'-'.$month_pre_id.'-31'),
+              'Expenditure.status' => 1),
           'fields' => ('Expenditure.amount')
       ));
       $this->set('expenditure_month_pre_lists', $expenditure_month_pre_lists);
@@ -163,59 +167,5 @@ class MonthsController extends AppController {
     $expenditure_counts = count($expenditure_lists);
     $this->set('expenditure_lists', $expenditure_lists);
     $this->set('expenditure_counts', $expenditure_counts);
-  }
-
-  public function edit($id = null) {
-    //支出一覧
-//    $expenditure_lists = $this->Expenditure->find('all', array(
-//        'order' => array('date' => 'desc')
-//    ));
-    $this->Paginator->settings = array(
-        'conditions' => array(
-            'Expenditure.date >=' => date('Y-m-01'),
-            'Expenditure.date <=' => date('Y-m-31')),
-        'order' => array('date' => 'asc')
-    );
-    $expenditure_lists = $this->Paginator->paginate('Expenditure');
-    $expenditure_counts = count($expenditure_lists);
-    $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
-    $this->set('expenditure_lists', $expenditure_lists);
-    $this->set('expenditure_counts', $expenditure_counts);
-    $this->set('expenditure_genres', $expenditure_genres);
-
-    if (empty($this->request->data)) {
-      $this->request->data = $this->Expenditure->findById($id); //postデータがなければ$idからデータを取得
-      $this->set('id', $this->request->data['Expenditure']['id']); //viewに渡すために$idをセット
-    } else {
-      $this->Expenditure->set($this->request->data); //postデータがあればModelに渡してvalidate
-      if ($this->Expenditure->validates()) { //validate成功の処理
-        $this->Expenditure->save($this->request->data); //validate成功でsave
-        if ($this->Expenditure->save($id)) {
-          $this->Session->setFlash('修正しました。', 'flashMessage');
-        } else {
-          $this->Session->setFlash('修正できませんでした。', 'flashMessage');
-        }
-        $this->redirect('/months/');
-      } else { //validate失敗の処理
-        $this->set('id', $this->request->data['Expenditure']['id']); //viewに渡すために$idをセット
-//        $this->render('index'); //validate失敗でindexを表示
-      }
-    }
-  }
-
-  public function deleted($id = null){
-    if (empty($id)) {
-      throw new NotFoundException(__('存在しないデータです。'));
-    }
-    
-    if ($this->request->is('post')) {
-      $this->Expenditure->Behaviors->enable('SoftDelete');
-      if ($this->Expenditure->delete($id)) {
-        $this->Session->setFlash('削除しました。', 'flashMessage');
-      } else {
-        $this->Session->setFlash('削除できませんでした。', 'flashMessage');
-      }
-      $this->redirect('/months/');
-    }
   }
 }
