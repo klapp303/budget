@@ -54,12 +54,13 @@
   </table>
 
 <h3>支出一覧</h3>
-
+<?php $aaa = '/'; ?>
   <?php echo $this->Paginator->numbers(array(
       'modulus' => 4, //現在ページから左右あわせてインクルードする個数
       'separator' => '|', //デフォルト値のセパレーター
       'first' => '＜', //先頭ページへのリンク
-      'last' => '＞' //最終ページへのリンク
+      'last' => '＞', //最終ページへのリンク
+      'url' => array($year_id, $month_id) //'/'はエスケープするので配列で記述
   )); ?>
 
 <table class="detail-list">
