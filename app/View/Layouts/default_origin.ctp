@@ -14,35 +14,31 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-/**
- * 変数の定義があれば記述
- */
-
+$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
-<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo '収支管理'; ?>
+		<?php echo $cakeDescription ?>:
+		<?php echo $this->fetch('title'); ?>
 	</title>
 	<?php
-//		echo $this->Html->meta('icon');
+		echo $this->Html->meta('icon');
 
-		echo $this->Html->css(array(
-        'common',
-        'detail'
-    ));
+		echo $this->Html->css('cake.generic');
 
-//		echo $this->fetch('meta');
-//		echo $this->fetch('css');
-//		echo $this->fetch('script');
+		echo $this->fetch('meta');
+		echo $this->fetch('css');
+		echo $this->fetch('script');
 	?>
 </head>
 <body>
 	<div id="container">
 		<div id="header">
-			<?php echo $this->element('budget_header'); ?>
+			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
 		</div>
 		<div id="content">
 
@@ -51,7 +47,15 @@
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-      <?php echo $this->element('budget_footer'); ?>
+			<?php echo $this->Html->link(
+					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
+					'http://www.cakephp.org/',
+					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
+				);
+			?>
+			<p>
+				<?php echo $cakeVersion; ?>
+			</p>
 		</div>
 	</div>
 </body>

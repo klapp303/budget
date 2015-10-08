@@ -136,3 +136,15 @@
 .col-e_9 { /* その他 */
     background: #D8D8D8;
 }
+
+/* フラッシュメッセージ */
+.flash-msg {
+//    width: 516px;
+    margin-right: 200px;
+    padding: 10px 20px;
+    background: #CEF6F5;
+    border: solid 2px #000000;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
