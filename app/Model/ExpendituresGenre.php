@@ -7,7 +7,7 @@ App::uses('AppModel', 'Model');
  */
 class ExpendituresGenre extends AppModel {
   public $useTable = 'Expenditures_genres';
-//  public $actAs = ['SoftDelete', 'Search.Searchable'];
+//  public $actsAs = ['SoftDelete', 'Search.Searchable'];
 
 //  public $filtetArgs = ['' => ['' => '', '' => '']];
 }

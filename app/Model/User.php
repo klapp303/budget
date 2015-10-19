@@ -8,7 +8,7 @@ App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth'); //パスワー
  */
 class User extends AppModel {
   public $useTable = 'Users';
-  public $actAs = ['SoftDelete'/*, 'Search.Searchable'*/];
+  public $actsAs = ['SoftDelete'/*, 'Search.Searchable'*/];
 
   public $validate = array(
       'username' => array(

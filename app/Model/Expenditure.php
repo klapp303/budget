@@ -7,7 +7,7 @@ App::uses('AppModel', 'Model');
  */
 class Expenditure extends AppModel {
   public $useTable = 'Expenditures';
-  public $actAs = ['SoftDelete'/*, 'Search.Searchable'*/];
+  public $actsAs = ['SoftDelete'/*, 'Search.Searchable'*/];
 
   public $belongsTo = array(
       'ExpendituresGenre' => array(
