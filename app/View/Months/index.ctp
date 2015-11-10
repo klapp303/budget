@@ -41,7 +41,7 @@
         <td class="tbl-num"><?php if (array_sum($expenditure_month_lists) == 0) {
               echo 'データなし';
             } else {
-              $expenditure_g_percentage = round(${'expenditure_month_g'.$i.'_sum'}/array_sum($expenditure_month_lists), 3)*100;
+              $expenditure_g_percentage = round(${'expenditure_month_g'.$i.'_sum'}/array_sum($expenditure_month_all_lists), 3)*100;
               echo $expenditure_g_percentage.'%';
             } ?></td>
         <td class="tbl-num"><?php if (${'expenditure_month_g'.$i.'_pre_sum'} == 0) {

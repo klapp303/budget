@@ -106,6 +106,13 @@ class MonthsController extends AppController {
         'fields' => ('Expenditure.amount')
     ));
     $this->set('expenditure_month_lists', $expenditure_month_lists);
+    $expenditure_month_all_lists = $this->Expenditure->find('list', array( //支出割合を出すために取得する
+        'conditions' => array(
+            'Expenditure.date >=' => date($year_id.'-'.$month_id.'-01'),
+            'Expenditure.date <=' => date($year_id.'-'.$month_id.'-31'),),
+        'fields' => ('Expenditure.amount')
+    ));
+    $this->set('expenditure_month_all_lists', $expenditure_month_all_lists);
     
       $income_month_pre_lists = $this->Income->find('list', array( //先月の収支を比較のために取得する
           'conditions' => array(
