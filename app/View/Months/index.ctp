@@ -54,7 +54,6 @@
   </table>
 
 <h3>支出一覧</h3>
-<?php $aaa = '/'; ?>
   <?php echo $this->Paginator->numbers(array(
       'modulus' => 4, //現在ページから左右あわせてインクルードする個数
       'separator' => '|', //デフォルト値のセパレーター
@@ -63,7 +62,7 @@
       'url' => array($year_id, $month_id) //'/'はエスケープするので配列で記述
   )); ?>
 
-<table class="detail-list">
+  <table class="detail-list">
   <tr><th>日付</th><th>支出名</th><th class="tbl-num">金額</th><th class="tbl-ico">種類</th><th class="tbl-ico">状態</th></tr>
   <?php for($i = 0; $i < $expenditure_counts; $i++){ ?>
   <tr><td><?php echo $expenditure_lists[$i]['Expenditure']['date']; ?></td>
