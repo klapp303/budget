@@ -9,7 +9,7 @@
 }
 
 .UserAddForm >tbody >tr >td >input,
-.UserEditForm >tbody >tr >td >input, .UserEditForm >tbody >tr >td >select,
+.UserEditForm >tbody >tr >td >input,
 .UserLoginForm >tbody >tr >td >input {
     margin-bottom: 10px;
 }
