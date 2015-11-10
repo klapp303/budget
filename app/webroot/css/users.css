@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* ユーザ登録フォーム用 */
+.UserAddForm >tbody >tr >td >label,
+.UserEditForm >tbody >tr >td >label,
+.UserLoginForm >tbody >tr >td >label {
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.UserAddForm >tbody >tr >td >input,
+.UserEditForm >tbody >tr >td >input, .UserEditForm >tbody >tr >td >select,
+.UserLoginForm >tbody >tr >td >input {
+    margin-bottom: 10px;
+}
+
+.UserAddForm >tbody >tr >td >.submit,
+.UserEditForm >tbody >tr >td >.submit {
+    margin-top: 10px;
+    margin-left: 131px;
+}
+
+.UserLoginForm >tbody >tr >td >.submit {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 113px;
+}
+
+/* ページリンク用 */
+.link-page_users {
+    margin-left: 50px;
+    margin-bottom: 20px;
+}

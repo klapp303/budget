@@ -33,19 +33,19 @@
     padding-left: 0;
 }
 
-.menu-list li{
+.menu-list li {
     margin: 10px 0 10px 0;
     text-align: center;
 }
 
-.menu-list a{
+.menu-list a {
     text-decoration: none;
 }
 
 .menu-list a:link,
 .menu-list a:visited,
 .menu-list a:hover,
-.menu-list a:active{
+.menu-list a:active {
     color: #ffffff;
 }
 
@@ -62,6 +62,72 @@
     text-align: center;
 }
 
+/* ページリンク */
+.link-page a {
+    font-size: 15px;
+    padding: 5px 10px;
+    text-decoration: none;
+    -webkit-transition: 0.8s;
+    -moz-transition: 0.8s;
+    -o-transition: 0.8s;
+    -ms-transition: 0.8s;
+    transition: 0.8s;
+}
+
+.link-page a:hover {
+    background: #A9BCF5;
+}
+
+.link-page a:link,
+.link-page a:visited,
+.link-page a:hover,
+.link-page a:active {
+    color: #000000;
+}
+
+/* ボタンアイコン */
+.icon-button {
+    font-size: 12px;
+    background: #D8D8D8;
+    border: solid 2px #000000;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    padding: 0 10px;
+}
+
+.icon-button a {
+    text-decoration: none;
+}
+
+.icon-button a:link,
+.icon-button a:visited,
+.icon-button a:hover,
+.icon-button a:active {
+    color: #000000;
+}
+
+.icon-button-min {
+    font-size: 10px;
+    background: #D8D8D8;
+    border: solid 2px #000000;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    padding: 0 3px;
+}
+
+.icon-button-min a {
+    text-decoration: none;
+}
+
+.icon-button-min a:link,
+.icon-button-min a:visited,
+.icon-button-min a:hover,
+.icon-button-min a:active {
+    color: #000000;
+}
+
 /* アイコン */
 .icon-true {
     font-size: 12px;
@@ -76,6 +142,26 @@
 .icon-false {
     font-size: 12px;
     background: #D8D8D8;
+    border: solid 2px #000000;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    padding: 0 10px;
+}
+
+.icon-like {
+    font-size: 12px;
+    background: #58ACFA;
+    border: solid 2px #000000;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    padding: 0 10px;
+}
+
+.icon-alt {
+    font-size: 12px;
+    background: #FE2E64;
     border: solid 2px #000000;
     border-radius: 8px;
     -moz-border-radius: 8px;
@@ -139,7 +225,6 @@
 
 /* フラッシュメッセージ */
 .flash-msg {
-//    width: 516px;
     margin-right: 200px;
     padding: 10px 20px;
     background: #CEF6F5;

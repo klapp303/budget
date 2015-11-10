@@ -3,6 +3,14 @@
     font-weight: bold;
 }
 
+.txt-n {
+    font-weight: normal;
+}
+
+.txt-min {
+    font-size: 12px;
+}
+
 .txt-alt {
     color: #ff0000;
 }
