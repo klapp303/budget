@@ -175,4 +175,41 @@ class MonthsController extends AppController {
     $this->set('expenditure_lists', $expenditure_lists);
     $this->set('expenditure_counts', $expenditure_counts);
   }
+
+  public function genre() {
+    $this->layout = 'budget_sub_pop';
+    
+    $genres_e_lists = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
+    $genres_e_counts = count($genres_e_lists);
+    $this->set('genres_e_lists', $genres_e_lists); //ジャンル一覧をviewに渡しておく
+    
+    if (empty($this->request->params['year_id'])) { //パラメータがない場合は今月の値を取得
+      $this->Session->setFlash('存在しないデータです。', 'flashMessage');
+    } elseif ($this->request->params['year_id'] < 2015) { //2014年までのパラメータの場合
+      $this->Session->setFlash('存在しないデータです。', 'flashMessage');
+    } elseif ($this->request->params['year_id'] == 2015 and $this->request->params['month_id'] < 9) { //2015年8月までのパラメータの場合
+      $this->Session->setFlash('存在しないデータです。', 'flashMessage');
+    } elseif ($this->request->params['genre_id'] > $genres_e_counts) {
+      $this->Session->setFlash('存在しないデータです。', 'flashMessage');
+    } elseif ($this->request->params['year_id'] and $this->request->params['month_id']) {
+      $year_id = $this->request->params['year_id'];
+      $month_id = $this->request->params['month_id'];
+      $genre_id = $this->request->params['genre_id'];
+      $this->set('year_id', $year_id); //パラメータをviewにも渡しておく
+      $this->set('month_id', $month_id);
+      $this->set('genre_id', $genre_id);
+    }
+
+  //支出一覧
+    $expenditure_lists = $this->Expenditure->find('all', array(
+        'conditions' => array(
+            'Expenditure.date >=' => date($year_id.'-'.$month_id.'-01'),
+            'Expenditure.date <=' => date($year_id.'-'.$month_id.'-31'),
+            'Expenditure.genre_id' => $genre_id),
+        'order' => array('date' => 'asc')
+    ));
+    $expenditure_counts = count($expenditure_lists);
+    $this->set('expenditure_lists', $expenditure_lists);
+    $this->set('expenditure_counts', $expenditure_counts);
+  }
 }

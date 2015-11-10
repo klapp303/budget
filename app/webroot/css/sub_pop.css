@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* container */
+#container {
+    width: 480px; /* 20pxはスクロールバーのため */
+}
+
+/* content */
+#content {
+    width: 460px;
+    margin: 10px;
+}
+
+#content >table, #content >form {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+/* ジャンル別支出一覧用 */
+.pop-list {
+    width: 450px;
+}

@@ -42,6 +42,10 @@
   Router::connect('/Months/index/:year_id/:month_id/*', //index/:idの場合
           array('controller' => 'Months', 'action' => 'index', 'method' => 'GET'),
           array('year_id' => '[0-9]+', 'month_id' => '[0-9]+')); //:idを数字のみに制約
+  /* ジャンル別詳細のための記述 */
+  Router::connect('/months/genre/:genre_id/:year_id/:month_id',
+          array('controller' => 'Months', 'action' => 'genre', 'method' => 'GET'),
+          array('genre_id' => '[0-9]+', 'year_id' => '[0-9]+', 'month_id' => '[0-9]+')); //:idを数字のみに制約
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

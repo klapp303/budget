@@ -1,3 +1,4 @@
+<?php echo $this->Html->script('sub_pop', array('inline' => FALSE)); ?>
 <h3><?php echo $year_id.'年'.$month_id.'月'; ?>の確定収支</h3>
 
   <table>
@@ -34,7 +35,7 @@
 <h3>支出内訳</h3>
 
   <table>
-    <tr><th class="tbl-ico">種類</th><th class="tbl-num">金額</th><th class="tbl-num">割合</th><th class="tbl-num">前月比</th></tr>
+    <tr><th class="tbl-ico">種類</th><th class="tbl-num">金額</th><th class="tbl-num">割合</th><th class="tbl-num">前月比</th><th>action</th></tr>
     <?php for($i = 1; $i <= $genres_e_counts; $i++) { ?>
     <tr><td class="tbl-ico"><span class="icon-genre col-e_<?php echo $i; ?>"><?php echo $genres_e_lists[$i]; ?></span></td>
         <td class="tbl-num"><?php echo ${'expenditure_month_g'.$i.'_sum'}; ?>円</td>
@@ -49,7 +50,8 @@
             } else {
               $expenditure_g_comparison = round(${'expenditure_month_g'.$i.'_sum'}/${'expenditure_month_g'.$i.'_pre_sum'}, 3)*100;
               echo $expenditure_g_comparison.'%';
-            } ?></td></tr>
+            } ?></td>
+        <td class="tbl-ico"><span class="icon-button"><?php echo $this->Html->link('詳細', '/months/genre/'.$i.'/'.$year_id.'/'.$month_id, array('target' => 'sub_pop', 'onClick' => 'disp("/months/genre/${i}/${year_id}/${month_id}")')); ?></span></td></tr>
     <?php } ?>
   </table>
 
