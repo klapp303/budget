@@ -63,10 +63,8 @@ class IncomesController extends AppController {
 //    ));
     $this->Paginator->settings = $this->paginate;
     $income_lists = $this->Paginator->paginate('Income');
-    $income_counts = count($income_lists);
     $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
     $this->set('income_lists', $income_lists);
-    $this->set('income_counts', $income_counts);
     $this->set('income_genres', $income_genres);
   }
 
@@ -94,10 +92,8 @@ class IncomesController extends AppController {
 //    ));
     $this->Paginator->settings = $this->paginate;
     $income_lists = $this->Paginator->paginate('Income');
-    $income_counts = count($income_lists);
     $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
     $this->set('income_lists', $income_lists);
-    $this->set('income_counts', $income_counts);
     $this->set('income_genres', $income_genres);
 
     if (empty($this->request->data)) {

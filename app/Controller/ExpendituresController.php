@@ -63,10 +63,8 @@ class ExpendituresController extends AppController {
 //    ));
     $this->Paginator->settings = $this->paginate;
     $expenditure_lists = $this->Paginator->paginate('Expenditure');
-    $expenditure_counts = count($expenditure_lists);
     $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
     $this->set('expenditure_lists', $expenditure_lists);
-    $this->set('expenditure_counts', $expenditure_counts);
     $this->set('expenditure_genres', $expenditure_genres);
   }
 
@@ -94,10 +92,8 @@ class ExpendituresController extends AppController {
 //    ));
     $this->Paginator->settings = $this->paginate;
     $expenditure_lists = $this->Paginator->paginate('Expenditure');
-    $expenditure_counts = count($expenditure_lists);
     $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
     $this->set('expenditure_lists', $expenditure_lists);
-    $this->set('expenditure_counts', $expenditure_counts);
     $this->set('expenditure_genres', $expenditure_genres);
 
     if (empty($this->request->data)) {
