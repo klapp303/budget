@@ -1,3 +1,23 @@
+<?php if (preg_match('#/incomes/fix_edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
+<h3>支出の修正</h3>
+
+  <?php echo $this->Form->create('Expenditure', array( //使用するModel
+      'type' => 'put', //変更はput
+      'action' => 'fix_edit', //Controllerのactionを指定
+      'inputDefaults' => array('div' => '')
+      )
+  ); ?><!-- form start -->
+  <?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $id)); ?>
+  <?php echo $this->Form->input('title', array('type' => 'text', 'label' => '支出名')); ?><br>
+  <?php echo $this->Form->input('date', array('type' => 'date', 'label' => '日付', 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?><br>
+  <?php echo $this->Form->input('amount', array('type' => 'text', 'label' => '金額')); ?>円<br>
+  <?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => '種類', 'options' => $expenditure_genres)); ?>
+  <?php echo $this->Form->input('status', array('type' => 'select', 'label' => '状態', 'options' => array(0 => '未定', 1 => '確定'))); ?><br>
+  
+  <?php echo $this->Form->submit('修正する'); ?>
+  <?php echo $this->Form->end(); ?><!-- form end -->
+<?php } ?>
+
 <h3>確定待ち支出一覧</h3>
 
   <?php if ($expenditure_unfixed_counts == 0) { ?>

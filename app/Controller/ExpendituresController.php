@@ -118,6 +118,8 @@ class ExpendituresController extends AppController {
 //        $this->render('index'); //validate失敗でindexを表示
       }
     }
+    
+    $this->render('index');
   }
 
   public function deleted($id = null){
@@ -185,6 +187,8 @@ class ExpendituresController extends AppController {
 //        $this->render('index'); //validate失敗でindexを表示
       }
     }
+    
+    $this->render('fix');
   }
 
   public function fix_deleted($id = null){

@@ -1,18 +1,33 @@
 <h3>収入の登録</h3>
 
-  <?php echo $this->Form->create('Income', array( //使用するModel
-      'type' => 'post', //デフォルトはpost送信
-      'action' => 'add', //Controllerのactionを指定
-      'inputDefaults' => array('div' => '')
-      )
-  ); ?><!-- form start -->
+  <?php if (preg_match('#/incomes/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
+    <?php echo $this->Form->create('Income', array( //使用するModel
+        'type' => 'put', //変更はput
+        'action' => 'edit', //Controllerのactionを指定
+        'inputDefaults' => array('div' => '')
+        )
+    ); ?>
+    <?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $id)); ?>
+  <?php } else { //登録用 ?>
+    <?php echo $this->Form->create('Income', array( //使用するModel
+        'type' => 'post', //デフォルトはpost送信
+        'action' => 'add', //Controllerのactionを指定
+        'inputDefaults' => array('div' => '')
+        )
+    ); ?>
+  <?php } ?><!-- form start -->
+  
   <?php echo $this->Form->input('title', array('type' => 'text', 'label' => '収入名')); ?><br>
   <?php echo $this->Form->input('date', array('type' => 'date', 'label' => '日付', 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?><br>
   <?php echo $this->Form->input('amount', array('type' => 'text', 'label' => '金額')); ?>円<br>
   <?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => '種類', 'options' => $income_genres)); ?>
   <?php echo $this->Form->input('status', array('type' => 'select', 'label' => '状態', 'options' => array(0 => '未定', 1 => '確定'))); ?><br>
   
-  <?php echo $this->Form->submit('登録する'); ?>
+  <?php if (preg_match('#/incomes/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
+    <?php echo $this->Form->submit('修正する'); ?>
+  <?php } else { //登録用 ?>
+    <?php echo $this->Form->submit('登録する'); ?>
+  <?php } ?>
   <?php echo $this->Form->end(); ?><!-- form end -->
 
 <h3>収入一覧</h3>
