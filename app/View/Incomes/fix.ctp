@@ -26,14 +26,18 @@
     </div>
   <?php } else { ?>
     <table class="tbl_fix">
-      <tr><th>日付</th><th>収入名</th><th class="tbl-num">金額</th><th class="tbl-ico">種類</th><th>action</th></tr>
-      <?php for($i = 0; $i < $income_unfixed_counts; $i++){ ?>
-      <tr><td><?php echo $income_unfixed_lists[$i]['Income']['date']; ?></td>
-          <td><?php echo $income_unfixed_lists[$i]['Income']['title']; ?></td>
-          <td class="tbl-num"><?php echo $income_unfixed_lists[$i]['Income']['amount']; ?>円</td>
-          <td class="tbl-ico"><span class="icon-genre col-i_<?php echo $income_unfixed_lists[$i]['Income']['genre_id']; ?>"><?php echo $income_unfixed_lists[$i]['IncomesGenre']['title']; ?></span></td>
-          <td><?php echo $this->Form->postLink('修正', array('action' => 'fix_edit', $income_unfixed_lists[$i]['Income']['id'])); ?>
-              <?php echo $this->Form->postLink('削除', array('action' => 'fix_deleted', $income_unfixed_lists[$i]['Income']['id'])); ?></td></tr>
+      <tr><th>日付<?php echo $this->Paginator->sort('Income.date', '▼'); ?></th>
+          <th>収入名<?php echo $this->Paginator->sort('Income.title', '▼'); ?></th>
+          <th class="tbl-num">金額<?php echo $this->Paginator->sort('Income.amount', '▼'); ?></th>
+          <th class="tbl-ico">種類<?php echo $this->Paginator->sort('Income.genre_id', '▼'); ?></th>
+          <th>action</th></tr>
+      <?php foreach($income_unfixed_lists AS $income_unfixed_list){ ?>
+      <tr><td><?php echo $income_unfixed_list['Income']['date']; ?></td>
+          <td><?php echo $income_unfixed_list['Income']['title']; ?></td>
+          <td class="tbl-num"><?php echo $income_unfixed_list['Income']['amount']; ?>円</td>
+          <td class="tbl-ico"><span class="icon-genre col-i_<?php echo $income_unfixed_list['Income']['genre_id']; ?>"><?php echo $income_unfixed_list['IncomesGenre']['title']; ?></span></td>
+          <td><?php echo $this->Html->link('修正', array('action' => 'fix_edit', $income_unfixed_list['Income']['id'])); ?>
+              <?php echo $this->Form->postLink('削除', array('action' => 'fix_deleted', $income_unfixed_list['Income']['id']), null, $income_unfixed_list['Income']['title'].'を削除しますか'); ?></td></tr>
       <?php } ?>
     </table>
   <?php } ?>

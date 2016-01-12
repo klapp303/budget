@@ -171,9 +171,7 @@ class MonthsController extends AppController {
         'order' => array('date' => 'asc')
     );
     $expenditure_lists = $this->Paginator->paginate('Expenditure');
-    $expenditure_counts = count($expenditure_lists);
     $this->set('expenditure_lists', $expenditure_lists);
-    $this->set('expenditure_counts', $expenditure_counts);
   }
 
   public function genre() {
@@ -200,7 +198,7 @@ class MonthsController extends AppController {
       $this->set('genre_id', $genre_id);
     }
 
-  //支出一覧
+    //支出一覧
     $expenditure_lists = $this->Expenditure->find('all', array(
         'conditions' => array(
             'Expenditure.date >=' => date($year_id.'-'.$month_id.'-01'),
@@ -208,8 +206,6 @@ class MonthsController extends AppController {
             'Expenditure.genre_id' => $genre_id),
         'order' => array('date' => 'asc')
     ));
-    $expenditure_counts = count($expenditure_lists);
     $this->set('expenditure_lists', $expenditure_lists);
-    $this->set('expenditure_counts', $expenditure_counts);
   }
 }
