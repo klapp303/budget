@@ -30,6 +30,6 @@ class Income extends AppModel {
   );
 
   public $filterArgs = array(
-      'title' => array('type' => 'like', 'field' => 'Income.title')
+      'search' => array('type' => 'like', 'field' => 'Income.title')
   );
 }

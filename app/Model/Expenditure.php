@@ -30,6 +30,6 @@ class Expenditure extends AppModel {
   );
 
   public $filterArgs = array(
-      'title' => array('type' => 'like', 'field' => 'Expenditure.title')
+      'search' => array('type' => 'like', 'field' => 'Expenditure.title')
   );
 }

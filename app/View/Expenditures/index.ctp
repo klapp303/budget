@@ -56,3 +56,19 @@
             <?php echo $this->Form->postLink('削除', array('action' => 'deleted', $expenditure_list['Expenditure']['id']), null, $expenditure_list['Expenditure']['title'].'を削除しますか'); ?></td></tr>
     <?php } ?>
   </table>
+
+<div>
+  <?php echo $this->Form->create('Expenditure', array( //使用するModel
+      'type' => 'post', //デフォルトはpost送信
+      'url' => array('controller' => 'expenditures', 'action' => 'search'), //Controllerのactionを指定
+      'inputDefaults' => array('div' => '')
+      )
+  ); ?>
+  <table>
+    <tr>
+      <td><?php echo $this->Form->input('search', array('type' => 'text', 'label' => '支出の検索')); ?></td>
+      <td><?php echo $this->Form->submit('検索する'); ?></td>
+    </tr>
+  </table>
+  <?php echo $this->Form->end(); ?>
+</div>
