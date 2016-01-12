@@ -1,3 +1,4 @@
+<!-- 未使用 -->
 <div>
   <?php echo $this->Form->create('Sample', array( //使用するModel
       'type' => 'post', //デフォルトはpost送信
