@@ -45,7 +45,15 @@ class ExpendituresController extends AppController {
  *	or MissingViewException in debug mode.
  */
 
-  public $components = array('Paginator');
+  public $components = array(
+      'Paginator',
+      'Search.Prg' => array(
+          'commonProcess' => array(
+              'paramType' => 'querystring',
+              'filterEmpty' => true
+          )
+      )
+  );
   public $paginate = array(
       'limit' => 20,
       'order' => array('date' => 'desc')
@@ -201,5 +209,30 @@ class ExpendituresController extends AppController {
       }
       $this->redirect('/expenditures/fix/');
     }
+  }
+
+  public function search() {
+    $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
+    $this->set('expenditure_genres', $expenditure_genres);
+    
+    $this->Expenditure->recursive = 0;
+    $this->Prg->commonProcess('Expenditure');
+    //$this->Prg->parsedParams();
+    $this->Paginator->settings = array(
+        'limit' => 20,
+        'conditions' => array(
+            $this->Expenditure->parseCriteria($this->passedArgs)
+        ),
+        'order' => array('Expenditure.id' => 'desc')
+    );
+    $expenditure_lists = $this->Paginator->paginate('Expenditure');
+    if (!empty($expenditure_lists)) { //データが存在する場合
+      $this->set('expenditure_lists', $expenditure_lists);
+    } else { //データが存在しない場合
+      $this->Session->setFlash('データが見つかりませんでした。', 'flashMessage');
+      $this->redirect('/expenditures/');
+    }
+      
+    $this->render('index');  
   }
 }

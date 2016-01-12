@@ -7,7 +7,7 @@ App::uses('AppModel', 'Model');
  */
 class Income extends AppModel {
   public $useTable = 'incomes';
-  public $actsAs = ['SoftDelete'/*, 'Search.Searchable'*/];
+  public $actsAs = array('SoftDelete', 'Search.Searchable');
 
   public $belongsTo = array(
       'IncomesGenre' => array(
@@ -29,5 +29,7 @@ class Income extends AppModel {
       )
   );
 
-//  public $filtetArgs = ['' => ['' => '', '' => '']];
+  public $filterArgs = array(
+      'title' => array('type' => 'like', 'field' => 'Income.title')
+  );
 }

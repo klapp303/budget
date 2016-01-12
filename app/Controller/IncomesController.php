@@ -45,7 +45,15 @@ class IncomesController extends AppController {
  *	or MissingViewException in debug mode.
  */
 
-  public $components = array('Paginator');
+  public $components = array(
+      'Paginator',
+      'Search.Prg' => array(
+          'commonProcess' => array(
+              'paramType' => 'querystring',
+              'filterEmpty' => true
+          )
+      )
+  );
   public $paginate = array(
       'limit' => 20,
       'order' => array('date' => 'desc')
@@ -201,5 +209,30 @@ class IncomesController extends AppController {
       }
       $this->redirect('/incomes/fix/');
     }
+  }
+
+  public function search() {
+    $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
+    $this->set('income_genres', $income_genres);
+    
+    $this->Income->recursive = 0;
+    $this->Prg->commonProcess('Income');
+    //$this->Prg->parsedParams();
+    $this->Paginator->settings = array(
+        'limit' => 20,
+        'conditions' => array(
+            $this->Income->parseCriteria($this->passedArgs)
+        ),
+        'order' => array('Income.id' => 'desc')
+    );
+    $income_lists = $this->Paginator->paginate('Income');
+    if (!empty($income_lists)) { //データが存在する場合
+      $this->set('income_lists', $income_lists);
+    } else { //データが存在しない場合
+      $this->Session->setFlash('データが見つかりませんでした。', 'flashMessage');
+      $this->redirect('/incomes/');
+    }
+      
+    $this->render('index');  
   }
 }
