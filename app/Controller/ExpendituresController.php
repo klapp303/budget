@@ -63,17 +63,24 @@ class ExpendituresController extends AppController {
     parent::beforeFilter();
     $this->layout = 'budget_fullwidth';
     //$this->Expenditure->Behaviors->disable('SoftDelete'); //SoftDeleteのデータも取得する
+    $this->admin_id = 1;
   }
 
   public function index() {
 //    $expenditure_lists = $this->Expenditure->find('all', array(
 //        'order' => array('date' => 'desc')
 //    ));
-    $this->Paginator->settings = $this->paginate;
+    if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
+      $this->Paginator->settings = $this->paginate;
+    } else {
+      $this->Paginator->settings = array(
+          'conditions' => array('Expenditure.user_id' => $this->Auth->user('id'))
+      );
+    }
     $expenditure_lists = $this->Paginator->paginate('Expenditure');
     $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
-    $this->set('expenditure_lists', $expenditure_lists);
-    $this->set('expenditure_genres', $expenditure_genres);
+    $login_id = $this->Auth->user('id');
+    $this->set(compact('expenditure_lists', 'expenditure_genres', 'login_id'));
   }
 
   public function add() {
@@ -98,14 +105,26 @@ class ExpendituresController extends AppController {
 //    $expenditure_lists = $this->Expenditure->find('all', array(
 //        'order' => array('date' => 'desc')
 //    ));
-    $this->Paginator->settings = $this->paginate;
+    if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
+      $this->Paginator->settings = $this->paginate;
+    } else {
+      $this->Paginator->settings = array(
+          'conditions' => array('Expenditure.user_id' => $this->Auth->user('id'))
+      );
+    }
     $expenditure_lists = $this->Paginator->paginate('Expenditure');
     $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
-    $this->set('expenditure_lists', $expenditure_lists);
-    $this->set('expenditure_genres', $expenditure_genres);
+    $login_id = $this->Auth->user('id');
+    $this->set(compact('expenditure_lists', 'expenditure_genres', 'login_id'));
 
     if (empty($this->request->data)) {
       $this->request->data = $this->Expenditure->findById($id); //postデータがなければ$idからデータを取得
+      /* user_idによる処理ここから */
+      if ($this->request->data['Expenditure']['user_id'] != $this->Auth->user('id') && $this->Auth->user('id') != $this->admin_id) {
+        $this->Session->setFlash('データが見つかりませんでした。', 'flashMessage');
+        $this->redirect('/expenditures/');
+      }
+      /* user_idによる処理ここまで */
       $this->set('id', $this->request->data['Expenditure']['id']); //viewに渡すために$idをセット
     } else {
       $this->Expenditure->set($this->request->data); //postデータがあればModelに渡してvalidate
@@ -143,38 +162,64 @@ class ExpendituresController extends AppController {
   }
 
   public function fix() {
-    $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
-        'conditions' => array(
-          'status' => 0,
-          'date <=' => date('Y-m-d')
-        ),
-        'order' => array('date' => 'asc')
-    ));
+    if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
+      $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
+          'conditions' => array(
+            'status' => 0,
+            'date <=' => date('Y-m-d')
+          ),
+          'order' => array('date' => 'asc')
+      ));
+    } else {
+      $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
+          'conditions' => array(
+            'status' => 0,
+            'date <=' => date('Y-m-d'),
+            'user_id' => $this->Auth->user('id')
+          ),
+          'order' => array('date' => 'asc')
+      ));
+    }
 //    $this->Paginator->settings = $this->paginate;
 //    $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
     $expenditure_unfixed_counts = count($expenditure_unfixed_lists);
-    $this->set('expenditure_unfixed_lists', $expenditure_unfixed_lists);
-    $this->set('expenditure_unfixed_counts', $expenditure_unfixed_counts);
+    $this->set(compact('expenditure_unfixed_lists', 'expenditure_unfixed_counts'));
   }
 
   public function fix_edit($id = null) {
-    $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
-        'conditions' => array(
-          'status' => 0,
-          'date <=' => date('Y-m-d')
-        ),
-        'order' => array('date' => 'asc')
-    ));
+    if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
+      $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
+          'conditions' => array(
+            'status' => 0,
+            'date <=' => date('Y-m-d')
+          ),
+          'order' => array('date' => 'asc')
+      ));
+    } else {
+      $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
+          'conditions' => array(
+            'status' => 0,
+            'date <=' => date('Y-m-d'),
+            'user_id' => $this->Auth->user('id')
+          ),
+          'order' => array('date' => 'asc')
+      ));
+    }
 //    $this->Paginator->settings = $this->paginate;
 //    $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
     $expenditure_unfixed_counts = count($expenditure_unfixed_lists);
     $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
-    $this->set('expenditure_unfixed_lists', $expenditure_unfixed_lists);
-    $this->set('expenditure_unfixed_counts', $expenditure_unfixed_counts);
-    $this->set('expenditure_genres', $expenditure_genres);
+    $login_id = $this->Auth->user('id');
+    $this->set(compact('expenditure_unfixed_lists', 'expenditure_unfixed_counts', 'expenditure_genres', 'login_id'));
 
     if (empty($this->request->data)) {
       $this->request->data = $this->Expenditure->findById($id); //postデータがなければ$idからデータを取得
+      /* user_idによる処理ここから */
+      if ($this->request->data['Expenditure']['user_id'] != $this->Auth->user('id') && $this->Auth->user('id') != $this->admin_id) {
+        $this->Session->setFlash('データが見つかりませんでした。', 'flashMessage');
+        $this->redirect('/expenditures/fix/');
+      }
+      /* user_idによる処理ここまで */
       $this->set('id', $this->request->data['Expenditure']['id']); //viewに渡すために$idをセット
     } else {
       $this->Expenditure->set($this->request->data); //postデータがあればModelに渡してvalidate
@@ -218,13 +263,24 @@ class ExpendituresController extends AppController {
     $this->Expenditure->recursive = 0;
     $this->Prg->commonProcess('Expenditure');
     //$this->Prg->parsedParams();
-    $this->Paginator->settings = array(
-        'limit' => 20,
-        'conditions' => array(
-            $this->Expenditure->parseCriteria($this->passedArgs)
-        ),
-        'order' => array('Expenditure.id' => 'desc')
-    );
+    if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
+      $this->Paginator->settings = array(
+          'limit' => 20,
+          'conditions' => array(
+              $this->Expenditure->parseCriteria($this->passedArgs)
+          ),
+          'order' => array('Expenditure.id' => 'desc')
+      );
+    } else {
+      $this->Paginator->settings = array(
+          'limit' => 20,
+          'conditions' => array(
+              $this->Expenditure->parseCriteria($this->passedArgs),
+              'user_id' => $this->Auth->user('id')
+          ),
+          'order' => array('Expenditure.id' => 'desc')
+      );
+    }
     $expenditure_lists = $this->Paginator->paginate('Expenditure');
     if (!empty($expenditure_lists)) { //データが存在する場合
       $this->set('expenditure_lists', $expenditure_lists);

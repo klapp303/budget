@@ -17,6 +17,7 @@
     ); ?>
   <?php } ?><!-- form start -->
   
+  <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $login_id)); ?>
   <?php echo $this->Form->input('title', array('type' => 'text', 'label' => '収入名')); ?><br>
   <?php echo $this->Form->input('date', array('type' => 'date', 'label' => '日付', 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?><br>
   <?php echo $this->Form->input('amount', array('type' => 'text', 'label' => '金額')); ?>円<br>

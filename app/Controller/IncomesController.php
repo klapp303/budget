@@ -63,17 +63,24 @@ class IncomesController extends AppController {
     parent::beforeFilter();
     $this->layout = 'budget_fullwidth';
     //$this->Income->Behaviors->disable('SoftDelete'); //SoftDeleteのデータも取得する
+    $this->admin_id = 1;
   }
 
   public function index() {
 //    $income_lists = $this->Income->find('all', array(
 //        'order' => array('date' => 'desc')
 //    ));
-    $this->Paginator->settings = $this->paginate;
+    if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
+      $this->Paginator->settings = $this->paginate;
+    } else {
+      $this->Paginator->settings = array(
+          'conditions' => array('Income.user_id' => $this->Auth->user('id'))
+      );
+    }
     $income_lists = $this->Paginator->paginate('Income');
     $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
-    $this->set('income_lists', $income_lists);
-    $this->set('income_genres', $income_genres);
+    $login_id = $this->Auth->user('id');
+    $this->set(compact('income_lists', 'income_genres', 'login_id'));
   }
 
   public function add() {
@@ -98,14 +105,26 @@ class IncomesController extends AppController {
 //    $income_lists = $this->Income->find('all', array(
 //        'order' => array('date' => 'desc')
 //    ));
-    $this->Paginator->settings = $this->paginate;
+    if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
+      $this->Paginator->settings = $this->paginate;
+    } else {
+      $this->Paginator->settings = array(
+          'conditions' => array('Income.user_id' => $this->Auth->user('id'))
+      );
+    }
     $income_lists = $this->Paginator->paginate('Income');
     $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
-    $this->set('income_lists', $income_lists);
-    $this->set('income_genres', $income_genres);
+    $login_id = $this->Auth->user('id');
+    $this->set(compact('income_lists', 'income_genres', 'login_id'));
 
     if (empty($this->request->data)) {
       $this->request->data = $this->Income->findById($id); //postデータがなければ$idからデータを取得
+      /* user_idによる処理ここから */
+      if ($this->request->data['Income']['user_id'] != $this->Auth->user('id') && $this->Auth->user('id') != $this->admin_id) {
+        $this->Session->setFlash('データが見つかりませんでした。', 'flashMessage');
+        $this->redirect('/incomes/');
+      }
+      /* user_idによる処理ここまで */
       $this->set('id', $this->request->data['Income']['id']); //viewに渡すために$idをセット
     } else {
       $this->Income->set($this->request->data); //postデータがあればModelに渡してvalidate
@@ -143,38 +162,64 @@ class IncomesController extends AppController {
   }
 
   public function fix() {
-    $income_unfixed_lists = $this->Income->find('all', array(
-        'conditions' => array(
-          'status' => 0,
-          'date <=' => date('Y-m-d')
-        ),
-        'order' => array('date' => 'asc')
-    ));
+    if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
+      $income_unfixed_lists = $this->Income->find('all', array(
+          'conditions' => array(
+            'status' => 0,
+            'date <=' => date('Y-m-d')
+          ),
+          'order' => array('date' => 'asc')
+      ));
+    } else {
+      $income_unfixed_lists = $this->Income->find('all', array(
+          'conditions' => array(
+            'status' => 0,
+            'date <=' => date('Y-m-d'),
+            'user_id' => $this->Auth->user('id')
+          ),
+          'order' => array('date' => 'asc')
+      ));
+    }
 //    $this->Paginator->settings = $this->paginate;
 //    $income_unfixed_lists = $this->Paginator->paginate('Income');
     $income_unfixed_counts = count($income_unfixed_lists);
-    $this->set('income_unfixed_lists', $income_unfixed_lists);
-    $this->set('income_unfixed_counts', $income_unfixed_counts);
+    $this->set(compact('income_unfixed_lists', 'income_unfixed_counts'));
   }
 
   public function fix_edit($id = null) {
-    $income_unfixed_lists = $this->Income->find('all', array(
-        'conditions' => array(
-          'status' => 0,
-          'date <=' => date('Y-m-d')
-        ),
-        'order' => array('date' => 'asc')
-    ));
+    if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
+      $income_unfixed_lists = $this->Income->find('all', array(
+          'conditions' => array(
+            'status' => 0,
+            'date <=' => date('Y-m-d')
+          ),
+          'order' => array('date' => 'asc')
+      ));
+    } else {
+      $income_unfixed_lists = $this->Income->find('all', array(
+          'conditions' => array(
+            'status' => 0,
+            'date <=' => date('Y-m-d'),
+            'user_id' => $this->Auth->user('id')
+          ),
+          'order' => array('date' => 'asc')
+      ));
+    }
 //    $this->Paginator->settings = $this->paginate;
 //    $income_unfixed_lists = $this->Paginator->paginate('Income');
     $income_unfixed_counts = count($income_unfixed_lists);
     $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
-    $this->set('income_unfixed_lists', $income_unfixed_lists);
-    $this->set('income_unfixed_counts', $income_unfixed_counts);
-    $this->set('income_genres', $income_genres);
+    $login_id = $this->Auth->user('id');
+    $this->set(compact('income_unfixed_lists', 'income_unfixed_counts', 'income_genres', 'login_id'));
 
     if (empty($this->request->data)) {
       $this->request->data = $this->Income->findById($id); //postデータがなければ$idからデータを取得
+      /* user_idによる処理ここから */
+      if ($this->request->data['Income']['user_id'] != $this->Auth->user('id') && $this->Auth->user('id') != $this->admin_id) {
+        $this->Session->setFlash('データが見つかりませんでした。', 'flashMessage');
+        $this->redirect('/incomes/fix/');
+      }
+      /* user_idによる処理ここまで */
       $this->set('id', $this->request->data['Income']['id']); //viewに渡すために$idをセット
     } else {
       $this->Income->set($this->request->data); //postデータがあればModelに渡してvalidate
@@ -218,13 +263,24 @@ class IncomesController extends AppController {
     $this->Income->recursive = 0;
     $this->Prg->commonProcess('Income');
     //$this->Prg->parsedParams();
-    $this->Paginator->settings = array(
-        'limit' => 20,
-        'conditions' => array(
-            $this->Income->parseCriteria($this->passedArgs)
-        ),
-        'order' => array('Income.id' => 'desc')
-    );
+    if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
+      $this->Paginator->settings = array(
+          'limit' => 20,
+          'conditions' => array(
+              $this->Income->parseCriteria($this->passedArgs)
+          ),
+          'order' => array('Income.id' => 'desc')
+      );
+    } else {
+      $this->Paginator->settings = array(
+          'limit' => 20,
+          'conditions' => array(
+              $this->Income->parseCriteria($this->passedArgs),
+              'user_id' => $this->Auth->user('id')
+          ),
+          'order' => array('Income.id' => 'desc')
+      );
+    }
     $income_lists = $this->Paginator->paginate('Income');
     if (!empty($income_lists)) { //データが存在する場合
       $this->set('income_lists', $income_lists);
