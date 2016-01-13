@@ -74,7 +74,8 @@ class ExpendituresController extends AppController {
       $this->Paginator->settings = $this->paginate;
     } else {
       $this->Paginator->settings = array(
-          'conditions' => array('Expenditure.user_id' => $this->Auth->user('id'))
+          'conditions' => array('Expenditure.user_id' => $this->Auth->user('id')),
+          'order' => array('Expenditure.date' => 'desc')
       );
     }
     $expenditure_lists = $this->Paginator->paginate('Expenditure');
@@ -109,7 +110,8 @@ class ExpendituresController extends AppController {
       $this->Paginator->settings = $this->paginate;
     } else {
       $this->Paginator->settings = array(
-          'conditions' => array('Expenditure.user_id' => $this->Auth->user('id'))
+          'conditions' => array('Expenditure.user_id' => $this->Auth->user('id')),
+          'order' => array('Expenditure.date' => 'desc')
       );
     }
     $expenditure_lists = $this->Paginator->paginate('Expenditure');
@@ -165,19 +167,19 @@ class ExpendituresController extends AppController {
     if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
       $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
           'conditions' => array(
-            'status' => 0,
-            'date <=' => date('Y-m-d')
+            'Expenditure.status' => 0,
+            'Expenditure.date <=' => date('Y-m-d')
           ),
-          'order' => array('date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc')
       ));
     } else {
       $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
           'conditions' => array(
-            'status' => 0,
-            'date <=' => date('Y-m-d'),
-            'user_id' => $this->Auth->user('id')
+            'Expenditure.status' => 0,
+            'Expenditure.date <=' => date('Y-m-d'),
+            'Expenditure.user_id' => $this->Auth->user('id')
           ),
-          'order' => array('date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc')
       ));
     }
 //    $this->Paginator->settings = $this->paginate;
@@ -190,19 +192,19 @@ class ExpendituresController extends AppController {
     if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
       $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
           'conditions' => array(
-            'status' => 0,
-            'date <=' => date('Y-m-d')
+            'Expenditure.status' => 0,
+            'Expenditure.date <=' => date('Y-m-d')
           ),
-          'order' => array('date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc')
       ));
     } else {
       $expenditure_unfixed_lists = $this->Expenditure->find('all', array(
           'conditions' => array(
-            'status' => 0,
-            'date <=' => date('Y-m-d'),
-            'user_id' => $this->Auth->user('id')
+            'Expenditure.status' => 0,
+            'Expenditure.date <=' => date('Y-m-d'),
+            'Expenditure.user_id' => $this->Auth->user('id')
           ),
-          'order' => array('date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc')
       ));
     }
 //    $this->Paginator->settings = $this->paginate;
@@ -276,7 +278,7 @@ class ExpendituresController extends AppController {
           'limit' => 20,
           'conditions' => array(
               $this->Expenditure->parseCriteria($this->passedArgs),
-              'user_id' => $this->Auth->user('id')
+              'Expenditure.user_id' => $this->Auth->user('id')
           ),
           'order' => array('Expenditure.id' => 'desc')
       );

@@ -74,7 +74,8 @@ class IncomesController extends AppController {
       $this->Paginator->settings = $this->paginate;
     } else {
       $this->Paginator->settings = array(
-          'conditions' => array('Income.user_id' => $this->Auth->user('id'))
+          'conditions' => array('Income.user_id' => $this->Auth->user('id')),
+          'order' => array('Income.date' => 'desc')
       );
     }
     $income_lists = $this->Paginator->paginate('Income');
@@ -109,7 +110,8 @@ class IncomesController extends AppController {
       $this->Paginator->settings = $this->paginate;
     } else {
       $this->Paginator->settings = array(
-          'conditions' => array('Income.user_id' => $this->Auth->user('id'))
+          'conditions' => array('Income.user_id' => $this->Auth->user('id')),
+          'order' => array('Income.date' => 'desc')
       );
     }
     $income_lists = $this->Paginator->paginate('Income');
@@ -165,19 +167,19 @@ class IncomesController extends AppController {
     if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
       $income_unfixed_lists = $this->Income->find('all', array(
           'conditions' => array(
-            'status' => 0,
-            'date <=' => date('Y-m-d')
+            'Income.status' => 0,
+            'Income.date <=' => date('Y-m-d')
           ),
-          'order' => array('date' => 'asc')
+          'order' => array('Income.date' => 'asc')
       ));
     } else {
       $income_unfixed_lists = $this->Income->find('all', array(
           'conditions' => array(
-            'status' => 0,
-            'date <=' => date('Y-m-d'),
-            'user_id' => $this->Auth->user('id')
+            'Income.status' => 0,
+            'Income.date <=' => date('Y-m-d'),
+            'Income.user_id' => $this->Auth->user('id')
           ),
-          'order' => array('date' => 'asc')
+          'order' => array('Income.date' => 'asc')
       ));
     }
 //    $this->Paginator->settings = $this->paginate;
@@ -190,19 +192,19 @@ class IncomesController extends AppController {
     if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
       $income_unfixed_lists = $this->Income->find('all', array(
           'conditions' => array(
-            'status' => 0,
-            'date <=' => date('Y-m-d')
+            'Income.status' => 0,
+            'Income.date <=' => date('Y-m-d')
           ),
-          'order' => array('date' => 'asc')
+          'order' => array('Income.date' => 'asc')
       ));
     } else {
       $income_unfixed_lists = $this->Income->find('all', array(
           'conditions' => array(
-            'status' => 0,
-            'date <=' => date('Y-m-d'),
-            'user_id' => $this->Auth->user('id')
+            'Income.status' => 0,
+            'Income.date <=' => date('Y-m-d'),
+            'Income.user_id' => $this->Auth->user('id')
           ),
-          'order' => array('date' => 'asc')
+          'order' => array('Income.date' => 'asc')
       ));
     }
 //    $this->Paginator->settings = $this->paginate;
@@ -276,7 +278,7 @@ class IncomesController extends AppController {
           'limit' => 20,
           'conditions' => array(
               $this->Income->parseCriteria($this->passedArgs),
-              'user_id' => $this->Auth->user('id')
+              'Income.user_id' => $this->Auth->user('id')
           ),
           'order' => array('Income.id' => 'desc')
       );
