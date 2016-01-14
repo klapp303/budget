@@ -51,7 +51,7 @@
     <?php } ?>
   </table>
 
-<?php if ($login_user['id'] != $admin_id) { //管理者アカウントの場合 ?>
+<?php if ($login_user['id'] == $admin_id) { //管理者アカウントの場合 ?>
 <h3>ユーザ一覧</h3>
 
   <table class="detail-list">
