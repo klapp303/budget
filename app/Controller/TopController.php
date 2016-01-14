@@ -35,7 +35,7 @@ class TopController extends AppController {
  *
  * @var array
  */
-	public $uses = array('Income', 'Expenditure'); //使用するModel
+	public $uses = array('Income', 'Expenditure', 'User'); //使用するModel
 
 /**
  * Displays a view
@@ -169,5 +169,11 @@ class TopController extends AppController {
       ));
     }
     $this->set('expenditure_month_lists', $expenditure_month_lists);
+
+    //ユーザ一覧
+    $user_lists = $this->User->find('all', array(
+        'order' => array('User.id' => 'asc')
+    ));
+    $this->set('user_lists', $user_lists);
   }
 }

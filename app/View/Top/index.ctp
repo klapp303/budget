@@ -50,3 +50,21 @@
                               elseif ($expenditure_month_list['Expenditure']['status'] == 1) {echo '<span class="icon-true">確定</span>';} ?></td></tr>
     <?php } ?>
   </table>
+
+<?php if ($login_user['id'] != $admin_id) { //管理者アカウントの場合 ?>
+<h3>ユーザ一覧</h3>
+
+  <table class="detail-list">
+    <tr><th class="tbl-num">ユーザID</th><th>ユーザ名</th><th>登録日時</th><th>権限</th></tr>
+    <?php foreach($user_lists AS $user_list) { ?>
+    <tr><td class="tbl-num"><?php echo $user_list['User']['id']; ?></td>
+        <td><?php echo $user_list['User']['username']; ?></td>
+        <td><?php echo $user_list['User']['created']; ?></td>
+        <td><?php echo ($user_list['User']['id'] == $admin_id)? '管理者': 'ユーザ'; ?></td></tr>
+    <?php } ?>
+  </table>
+
+<div class="link-page_top">
+  <span class="link-page"><?php echo $this->Html->link('⇨ ユーザの新規登録はこちら', '/users/add/'); ?></span>
+</div>
+<?php } ?>
