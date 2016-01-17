@@ -260,7 +260,8 @@ class ExpendituresController extends AppController {
 
   public function search() {
     $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
-    $this->set('expenditure_genres', $expenditure_genres);
+    $login_id = $this->Auth->user('id');
+    $this->set(compact('expenditure_genres', 'login_id'));
     
     $this->Expenditure->recursive = 0;
     $this->Prg->commonProcess('Expenditure');

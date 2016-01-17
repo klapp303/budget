@@ -260,7 +260,8 @@ class IncomesController extends AppController {
 
   public function search() {
     $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
-    $this->set('income_genres', $income_genres);
+    $login_id = $this->Auth->user('id');
+    $this->set(compact('income_genres', 'login_id'));
     
     $this->Income->recursive = 0;
     $this->Prg->commonProcess('Income');
