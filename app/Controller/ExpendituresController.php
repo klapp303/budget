@@ -24,7 +24,6 @@ class ExpendituresController extends AppController {
     parent::beforeFilter();
     $this->layout = 'budget_fullwidth';
     //$this->Expenditure->Behaviors->disable('SoftDelete'); //SoftDeleteのデータも取得する
-    $this->admin_id = 1;
   }
 
   public function index() {

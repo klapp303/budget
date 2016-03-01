@@ -15,7 +15,6 @@ class MonthsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
     $this->layout = 'budget_fullwidth';
-    $this->admin_id = 1;
   }
 
   public function index() {

@@ -24,7 +24,6 @@ class IncomesController extends AppController {
     parent::beforeFilter();
     $this->layout = 'budget_fullwidth';
     //$this->Income->Behaviors->disable('SoftDelete'); //SoftDeleteのデータも取得する
-    $this->admin_id = 1;
   }
 
   public function index() {
