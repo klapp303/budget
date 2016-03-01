@@ -1,49 +1,10 @@
 <?php
-/**
- * Static content controller.
- *
- * This file will render views from views/pages/
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.Controller
- * @since         CakePHP(tm) v 0.2.9
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
 
 App::uses('AppController', 'Controller');
 
-/**
- * Static content controller
- *
- * Override this controller by placing a copy in controllers directory of an application
- *
- * @package       app.Controller
- * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
- */
 class MonthsController extends AppController {
 
-/**
- * This controller does not use a model
- *
- * @var array
- */
 	public $uses = array('Income', 'Expenditure', 'ExpendituresGenre'); //使用するModel
-
-/**
- * Displays a view
- *
- * @return void
- * @throws NotFoundException When the view file could not be found
- *	or MissingViewException in debug mode.
- */
 
   public $components = array('Paginator');
   public $paginate = array(
@@ -83,7 +44,7 @@ class MonthsController extends AppController {
     $year_post_id = $year_id; $month_post_id = $month_id + 1;
     }
     $this->set(compact('year_id', 'month_id', 'year_pre_id', 'month_pre_id', 'year_post_id', 'month_post_id'));
-
+  
     //n月の確定収支
     if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
       $array_option = array(
@@ -171,7 +132,7 @@ class MonthsController extends AppController {
     }
     $this->set('expenditure_month_pre_lists', $this->Expenditure->find('list', $array_option));
     /* 比較用に先月の収支を取得ここまで */
-
+  
     //支出内訳
     $genres_e_lists = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
     $genres_e_counts = count($genres_e_lists);
@@ -249,7 +210,7 @@ class MonthsController extends AppController {
       $this->set('expenditure_month_g'.$i.'_pre_sum', ${'expenditure_month_g'.$i.'_pre_sum'});
     }
     /* 比較用に先月の支出内訳を取得ここまで */
-
+  
     //支出一覧
 //    $expenditure_lists = $this->Expenditure->find('all', array(
 //        'order' => array('date' => 'desc')
@@ -296,7 +257,7 @@ class MonthsController extends AppController {
       $genre_id = $this->request->params['genre_id'];
       $this->set(compact('year_id', 'month_id', 'genre_id'));
     }
-
+  
     //ジャンル別の支出一覧
     if ($this->Auth->user('id') == $this->admin_id) { //管理者アカウントの場合
       $array_option = array(
