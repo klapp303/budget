@@ -13,23 +13,23 @@
   <?php } ?>
 
   <table class="tbl-budget_top">
-    <tr><td>確定待ちの収入</td><td><?php echo $this->Html->link($income_unfixed_counts.'件', '/incomes/fix/'); ?></td></tr>
-    <tr><td>確定待ちの支出</td><td><?php echo $this->Html->link($expenditure_unfixed_counts.'件', '/expenditures/fix/'); ?></td></tr>
+    <tr><td>確定待ちの収入</td><td><?php echo $this->Html->link($income_unfixed_count.'件', '/incomes/fix/'); ?></td></tr>
+    <tr><td>確定待ちの支出</td><td><?php echo $this->Html->link($expenditure_unfixed_count.'件', '/expenditures/fix/'); ?></td></tr>
   </table>
 
 <?php if ($login_user['id'] != $admin_id) { //管理者アカウント以外の場合 ?>
 <h3 class="title-ex-now_top">本日の支出</h3>
 
-  <?php if ($expenditure_now_counts > 0) { ?>
+  <?php if ($expenditure_now_lists) { ?>
     <table class="detail-list">
       <tr><th>日付</th><th>支出名</th><th class="tbl-num">金額</th><th class="tbl-ico">種類</th><th class="tbl-ico">状態</th></tr>
-      <?php for($i = 0; $i < $expenditure_now_counts; $i++){ ?>
-      <tr><td><?php echo $expenditure_now_lists[$i]['Expenditure']['date']; ?></td>
-          <td><?php echo $expenditure_now_lists[$i]['Expenditure']['title']; ?></td>
-          <td class="tbl-num"><?php echo $expenditure_now_lists[$i]['Expenditure']['amount']; ?>円</td>
-          <td class="tbl-ico"><span class="icon-genre col-e_<?php echo $expenditure_now_lists[$i]['Expenditure']['genre_id']; ?>"><?php echo $expenditure_now_lists[$i]['ExpendituresGenre']['title']; ?></span></td>
-          <td class="tbl-ico"><?php if ($expenditure_now_lists[$i]['Expenditure']['status'] == 0) {echo '<span class="icon-false">未定</span>';}
-                                elseif ($expenditure_now_lists[$i]['Expenditure']['status'] == 1) {echo '<span class="icon-true">確定</span>';} ?></td></tr>
+      <?php foreach ($expenditure_now_lists AS $expenditure_now_list){ ?>
+      <tr><td><?php echo $expenditure_now_list['Expenditure']['date']; ?></td>
+          <td><?php echo $expenditure_now_list['Expenditure']['title']; ?></td>
+          <td class="tbl-num"><?php echo $expenditure_now_list['Expenditure']['amount']; ?>円</td>
+          <td class="tbl-ico"><span class="icon-genre col-e_<?php echo $expenditure_now_list['Expenditure']['genre_id']; ?>"><?php echo $expenditure_now_list['ExpendituresGenre']['title']; ?></span></td>
+          <td class="tbl-ico"><?php if ($expenditure_now_list['Expenditure']['status'] == 0) {echo '<span class="icon-false">未定</span>';}
+                                elseif ($expenditure_now_list['Expenditure']['status'] == 1) {echo '<span class="icon-true">確定</span>';} ?></td></tr>
       <?php } ?>
     </table>
   <?php } else { ?>

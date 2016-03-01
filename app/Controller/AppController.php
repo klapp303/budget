@@ -23,7 +23,9 @@ class AppController extends Controller {
       'DebugKit.Toolbar' //ページ右上の開発用デバッグツール
   );
 
-  /*public function beforeFilter() {
-      $this->Auth->allow('index'); //認証なしのページを設定
-  }*/
+  public function beforeFilter() {
+      //$this->Auth->allow('index'); //認証なしのページを設定
+  
+      $this->admin_id = 1;
+  }
 }
