@@ -36,10 +36,10 @@
           array('controller' => 'Months', 'action' => 'index', 'method' => 'GET'),
           array('year_id' => '[0-9]+', 'month_id' => '[0-9]+')); //:idを数字のみに制約
   /* paginatorのための記述 */
-  Router::connect('/Months/:year_id/:month_id/*',
+  Router::connect('/months/:year_id/:month_id/*',
           array('controller' => 'Months', 'action' => 'index', 'method' => 'GET'),
           array('year_id' => '[0-9]+', 'month_id' => '[0-9]+')); //:idを数字のみに制約
-  Router::connect('/Months/index/:year_id/:month_id/*', //index/:idの場合
+  Router::connect('/months/index/:year_id/:month_id/*', //index/:idの場合
           array('controller' => 'Months', 'action' => 'index', 'method' => 'GET'),
           array('year_id' => '[0-9]+', 'month_id' => '[0-9]+')); //:idを数字のみに制約
   /* ジャンル別詳細のための記述 */
