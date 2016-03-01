@@ -19,15 +19,11 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-/**
- * Here, we are connecting '/' (base path) to controller called 'Top',
- * its action called 'index', and we pass a param to select the view file
- * to use (in this case, /app/View/Top/index.ctp)...
- */
+
 	Router::connect('/', array('controller' => 'Top', 'action' => 'index'));
 
 /**
- * ...and connect the rest of 'Months' controller's URLs.
+ * 'Months' controller's URLs.
  */
 	Router::connect('/months/:year_id/:month_id',
           array('controller' => 'Months', 'action' => 'index', 'method' => 'GET'),
@@ -46,6 +42,23 @@
   Router::connect('/months/genre/:genre_id/:year_id/:month_id',
           array('controller' => 'Months', 'action' => 'genre', 'method' => 'GET'),
           array('genre_id' => '[0-9]+', 'year_id' => '[0-9]+', 'month_id' => '[0-9]+')); //:idを数字のみに制約
+
+/**
+ * 'Years' controller's URLs.
+ */
+  Router::connect('/years/:year_id',
+          array('controller' => 'Years', 'action' => 'index', 'method' => 'GET'),
+          array('year_id' => '[0-9]+')); //:idを数字のみに制約
+  Router::connect('/years/index/:year_id', //index/:idの場合
+          array('controller' => 'Years', 'action' => 'index', 'method' => 'GET'),
+          array('year_id' => '[0-9]+')); //:idを数字のみに制約
+  /* paginatorのための記述 */
+  /*Router::connect('/years/:year_id/*',
+          array('controller' => 'Years', 'action' => 'index', 'method' => 'GET'),
+          array('year_id' => '[0-9]+')); //:idを数字のみに制約
+  Router::connect('/years/index/:year_id/*', //index/:idの場合
+          array('controller' => 'Years', 'action' => 'index', 'method' => 'GET'),
+          array('year_id' => '[0-9]+')); //:idを数字のみに制約*/
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
