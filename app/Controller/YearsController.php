@@ -80,6 +80,22 @@ class YearsController extends AppController {
     /* 比較用に昨年の収支を取得ここまで */
   
     //グラフ
-    
+    $graph_hoge_data_lists = array(
+        1 => 5000,
+        2 => 3700,
+        3 => 5600,
+        4 => 6200,
+        5 => 4700,
+        6 => 5300
+    );
+    $graph_fuga_data_lists = array(
+        1 => 4500,
+        2 => 5600,
+        3 => 5300,
+        4 => 3900,
+        5 => 5500,
+        6 => 5700
+    );
+    $this->set(compact('graph_hoge_data_lists', 'graph_fuga_data_lists'));
   }
 }

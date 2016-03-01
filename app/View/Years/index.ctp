@@ -40,7 +40,10 @@
 <script>
   (function basic(container) {
       var d1 = [
-          [1, 70],
+          <?php foreach ($graph_hoge_data_lists AS $key => $value) {
+            echo '['.$key.', '.$value.'],';
+          } ?>
+          /*[1, 70],
           [2, 68],
           [3, 65],
           [4, 67],
@@ -51,10 +54,13 @@
           [9, 68],
           [10, 67],
           [11, 70],
-          [12, 72]
+          [12, 72]*/
       ],
           d2 = [
-          [1, 70],
+          <?php foreach ($graph_fuga_data_lists AS $key => $value) {
+            echo '['.$key.', '.$value.'],';
+          } ?>
+          /*[1, 70],
           [2, 69],
           [3, 70],
           [4, 71],
@@ -65,7 +71,7 @@
           [9, 69],
           [10, 70],
           [11, 73],
-          [12, 75]
+          [12, 75]*/
       ],
       data = [{
           data: d1,
