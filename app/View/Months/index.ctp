@@ -63,7 +63,8 @@
       'modulus' => 4, //現在ページから左右あわせてインクルードする個数
       'separator' => '|', //デフォルト値のセパレーター
       'first' => '＜', //先頭ページへのリンク
-      'last' => '＞' //最終ページへのリンク
+      'last' => '＞', //最終ページへのリンク
+      'url' => array('controller' => 'months', $year_id, $month_id)
   )); ?>
 
   <table class="detail-list">
