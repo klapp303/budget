@@ -27,5 +27,6 @@ class AppController extends Controller {
       //$this->Auth->allow('index'); //認証なしのページを設定
   
       $this->admin_id = 1;
+      $this->set('userData', $this->Auth->user());
   }
 }

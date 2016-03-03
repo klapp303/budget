@@ -19,6 +19,32 @@
     color: #ffffff;
 }
 
+.head-msg {
+    height: 38px;
+    margin-right: 20px;
+}
+
+.head-welcome {
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.head-handlename {
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.head-handlename a {
+    text-decoration: none;
+}
+
+.head-handlename a:link,
+.head-handlename a:visited,
+.head-handlename a:hover,
+.head-handlename a:active {
+    color: #ffffff;
+}
+
 /* フッターテキスト */
 .foot-txt {
     font-size: 15px;

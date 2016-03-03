@@ -63,6 +63,12 @@ body {
     box-shadow: -1px 1px 5px #000099;
 }
 
+#header >h1 {
+    height: 38px;
+    margin: 0;
+    padding: 5px;
+}
+
 /* footer */
 #footer {
     background-color: #000033;
