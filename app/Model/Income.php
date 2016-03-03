@@ -2,10 +2,8 @@
 
 App::uses('AppModel', 'Model');
 
-/**
- * Income Model.
- */
 class Income extends AppModel {
+
   public $useTable = 'incomes';
   public $actsAs = array('SoftDelete', 'Search.Searchable');
 

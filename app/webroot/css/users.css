@@ -7,19 +7,16 @@
     margin-right: 10px;
     margin-bottom: 10px;
 }
-
 .UserAddForm >tbody >tr >td >input,
 .UserEditForm >tbody >tr >td >input,
 .UserLoginForm >tbody >tr >td >input {
     margin-bottom: 10px;
 }
-
 .UserAddForm >tbody >tr >td >.submit,
 .UserEditForm >tbody >tr >td >.submit {
     margin-top: 10px;
     margin-left: 131px;
 }
-
 .UserLoginForm >tbody >tr >td >.submit {
     margin-top: 10px;
     margin-bottom: 10px;
