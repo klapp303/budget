@@ -11,7 +11,7 @@ class UsersController extends AppController {
     $this->layout = 'budget_login';
     //$this->Income->Behaviors->disable('SoftDelete'); //SoftDeleteのデータも取得する
     // ユーザ自身による登録とログアウトを許可する
-    $this->Auth->allow(/*'add', */'logout');
+    $this->Auth->allow('add', 'logout');
   }
 
   public function login() {
@@ -33,6 +33,10 @@ class UsersController extends AppController {
   }
 
   public function add() {
+    if ($this->Auth->user('id') != $this->admin_id) {
+      $this->redirect('/');
+    }
+  
     if ($this->request->is('post')) {
       $this->User->set($this->request->data); //postデータがあればModelに渡してvalidate
       if ($this->User->validates()) { //validate成功の処理
