@@ -8,7 +8,7 @@
   <?php } else { ?>
   <table class="fl cf">
     <tr><td>現在の残高</td><td class="tbl-num"><?php echo $past_income - $past_expenditure; ?>円</td></tr>
-    <tr><td>次回給料日までの出費</td><td class="tbl-num"><?php echo $recent_expenditure; ?>円</td></tr>
+    <tr><td>次回給与日までの<br>支出予定合計</td><td class="tbl-num"><?php echo $recent_expenditure; ?>円</td></tr>
   </table>
   <?php } ?>
 
@@ -37,7 +37,7 @@
   <?php } ?>
 <?php } ?>
 
-<h3>直近の支出予定</h3>
+<h3>今後の支出予定<span class="txt-n txt-min">（～<?php echo date('Y年m月d日', strtotime('+1 month')); ?>）</span></h3>
 
   <table class="detail-list">
     <tr><th>日付</th><th>支出名</th><th class="tbl-num">金額</th><th class="tbl-ico">種類</th><th class="tbl-ico">状態</th></tr>

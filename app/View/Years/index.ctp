@@ -33,7 +33,7 @@
     </div>
   <?php } ?>
 
-<h3>年間収支グラフ</h3>
+<h3>年間収支グラフ<span class="txt-n txt-min">（確定のみ）</span></h3>
 
 <div id="year_graph" class="graph"></div>
 <script>
@@ -105,7 +105,7 @@
   })(document.getElementById('year_graph'));
 </script>
 
-<h3>支出内訳グラフ</h3>
+<h3>支出内訳グラフ<span class="txt-n txt-min">（確定のみ）</span></h3>
 
 <div id="genre_graph" class="graph"></div>
 <script>
