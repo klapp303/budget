@@ -40,12 +40,36 @@
   (function basic(container) {
       var d1 = [
           <?php foreach ($income_year_data AS $key => $value) {
-            echo '['.$key.', '.$value.'],';
+            if ($year_id < 2015) {
+              continue;
+            } elseif ($year_id == 2015) {
+              if ($key > 9) {
+                echo '['.$key.', '.$value.'],';
+              }
+            } elseif ($year_id < date('Y')) {
+              echo '['.$key.', '.$value.'],';
+            } elseif ($year_id == date('Y')) {
+              if ($key <= date('m')) {
+                echo '['.$key.', '.$value.'],';
+              }
+            }
           } ?>
       ],
           d2 = [
           <?php foreach ($expenditure_year_data AS $key => $value) {
-            echo '['.$key.', '.$value.'],';
+            if ($year_id < 2015) {
+              continue;
+            } elseif ($year_id == 2015) {
+              if ($key > 9) {
+                echo '['.$key.', '.$value.'],';
+              }
+            } elseif ($year_id < date('Y')) {
+              echo '['.$key.', '.$value.'],';
+            } elseif ($year_id == date('Y')) {
+              if ($key <= date('m')) {
+                echo '['.$key.', '.$value.'],';
+              }
+            }
           } ?>
       ],
       data = [{
@@ -63,14 +87,14 @@
       }
       graph = Flotr.draw(container, data, {
           legend: {
-              position: 'ne',
+              position: 'nw',
               labelFormatter: labelFn,
               backgroundColor: '#D2E8FF'
           },
           xaxis: {
-              ticks: [[1,'1月'], [2,'2月'], [3,'3月'], [4,'4月'], [5,'5月'], [6,'6月'], [7,'7月'], [8,'8月'], [9,'9月'], [10,'10月'], [11,'11月'], [12,'12月']],
+              ticks: [[1, '12月'], [2,'1月'], [3,'2月'], [4,'3月'], [5,'4月'], [6,'5月'], [7,'6月'], [8,'7月'], [9,'8月'], [10,'9月'], [11,'10月'], [12,'11月'], [13,'12月']],
               min: 1,
-              max: 12
+              max: 13
           },
           yaxis: {
               min: 0,
@@ -90,7 +114,19 @@
       <?php foreach ($expenditure_genres AS $genre_id => $genre_title) { ?>
           d<?php echo $genre_id; ?> = [
           <?php foreach (${'expenditure_genre_data_'.$genre_id} AS $key => $value) {
-            echo '['.$key.', '.$value.'],';
+            if ($year_id < 2015) {
+              continue;
+            } elseif ($year_id == 2015) {
+              if ($key > 9) {
+                echo '['.$key.', '.$value.'],';
+              }
+            } elseif ($year_id < date('Y')) {
+              echo '['.$key.', '.$value.'],';
+            } elseif ($year_id == date('Y')) {
+              if ($key <= date('m')) {
+                echo '['.$key.', '.$value.'],';
+              }
+            }
           } ?>
       ],
       <?php } ?>
@@ -117,14 +153,14 @@
       }
       graph = Flotr.draw(container, data, {
           legend: {
-              position: 'ne',
+              position: 'nw',
               labelFormatter: labelFn,
               backgroundColor: '#D2E8FF'
           },
           xaxis: {
-              ticks: [[1,'1月'], [2,'2月'], [3,'3月'], [4,'4月'], [5,'5月'], [6,'6月'], [7,'7月'], [8,'8月'], [9,'9月'], [10,'10月'], [11,'11月'], [12,'12月']],
+              ticks: [[1, '12月'], [2,'1月'], [3,'2月'], [4,'3月'], [5,'4月'], [6,'5月'], [7,'6月'], [8,'7月'], [9,'8月'], [10,'9月'], [11,'10月'], [12,'11月'], [13,'12月']],
               min: 1,
-              max: 12
+              max: 13
           },
           yaxis: {
               min: 0,

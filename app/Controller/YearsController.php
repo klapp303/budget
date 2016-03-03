@@ -91,10 +91,7 @@ class YearsController extends AppController {
           ),
           'fields' => 'Income.amount'
       ));
-      if (!$income_month_lists) {
-        continue;
-      }
-      $income_year_data += [$i => array_sum($income_month_lists)];
+      $income_year_data += [$i + 1 => array_sum($income_month_lists)]; //昨年末からなので+1しておく
     }
     $expenditure_year_data = array();
     for ($i = 1; $i <= 12; $i++) {
@@ -107,11 +104,30 @@ class YearsController extends AppController {
           ),
           'fields' => 'Expenditure.amount'
       ));
-      if (!$expenditure_month_lists) {
-        continue;
-      }
-      $expenditure_year_data += [$i => array_sum($expenditure_month_lists)];
+      $expenditure_year_data += [$i + 1 => array_sum($expenditure_month_lists)]; //昨年末からなので+1しておく
     }
+    /* 昨年末との比較のために前年12月の情報を取得ここから */
+    $income_pre_lists = $this->Income->find('list', array(
+        'conditions' => array(
+            'Income.date >=' => date($year_pre_id.'-12-01'),
+            'Income.date <=' => date($year_pre_id.'-12-31'),
+            'Income.status' => 1,
+            'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
+        ),
+        'fields' => 'Income.amount'
+    ));
+    $income_year_data = [1 => array_sum($income_pre_lists)] + $income_year_data;
+    $expenditure_pre_lists = $this->Expenditure->find('list', array(
+        'conditions' => array(
+            'Expenditure.date >=' => date($year_pre_id.'-12-01'),
+            'Expenditure.date <=' => date($year_pre_id.'-12-31'),
+            'Expenditure.status' => 1,
+            'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
+        ),
+        'fields' => 'Expenditure.amount'
+    ));
+    $expenditure_year_data = [1 => array_sum($expenditure_pre_lists)] + $expenditure_year_data;
+    /* 昨年末との比較のために前年12月の情報を取得ここまで */
     $this->set(compact('income_year_data', 'expenditure_year_data'));
   
     //支出内訳グラフ
@@ -129,11 +145,24 @@ class YearsController extends AppController {
             ),
             'fields' => 'Expenditure.amount'
         ));
-        if (!$expenditure_month_lists) {
-          continue;
-        }
-        ${'expenditure_genre_data_'.$genre_id} += [$i => array_sum($expenditure_month_lists)];
+        ${'expenditure_genre_data_'.$genre_id} += [$i +1 => array_sum($expenditure_month_lists)]; //昨年末からなので+1しておく
       }
+      //$this->set('expenditure_genre_data_'.$genre_id, ${'expenditure_genre_data_'.$genre_id});
+    }
+    /* 昨年末との比較のために前年12月の情報を取得ここから */
+    foreach ($expenditure_genres AS $genre_id => $genre_title) {
+      $expenditure_pre_lists = $this->Expenditure->find('list', array(
+          'conditions' => array(
+              'Expenditure.date >=' => date($year_pre_id.'-12-01'),
+              'Expenditure.date <=' => date($year_pre_id.'-12-31'),
+              'Expenditure.status' => 1,
+              'Expenditure.genre_id' => $genre_id,
+              'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
+          ),
+          'fields' => 'Expenditure.amount'
+      ));
+      ${'expenditure_genre_data_'.$genre_id} = [1 => array_sum($expenditure_pre_lists)] + ${'expenditure_genre_data_'.$genre_id};
+      /* 昨年末との比較のために前年12月の情報を取得ここまで */
       $this->set('expenditure_genre_data_'.$genre_id, ${'expenditure_genre_data_'.$genre_id});
     }
     $this->set('expenditure_genres', $expenditure_genres);

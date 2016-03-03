@@ -1,6 +1,13 @@
 @charset "utf-8";
 .graph {
     width: 700px;
-    height: 300px;
     margin: 0 0 50px 20px;
+}
+
+#year_graph {
+    height: 300px;
+}
+
+#genre_graph {
+    height: 400px;
 }
