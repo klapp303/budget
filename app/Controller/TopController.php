@@ -38,7 +38,8 @@ class TopController extends AppController {
       $this->set('past_expenditure', array_sum($expenditure_past_lists));
   
       //次回給料日までの出費
-      $pay_date = 25;
+      $user_data = $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id'))));
+      $pay_date = $user_data['User']['payday'];
       if(date('d') < $pay_date) { //今月の給料日がまだの場合
         $expenditure_recent_lists = $this->Expenditure->find('list', array(
             'conditions' => array(
