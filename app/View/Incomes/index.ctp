@@ -1,4 +1,8 @@
+<?php if (preg_match('#/incomes/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
+<h3>収入の修正</h3>
+<?php } else { //登録用 ?>
 <h3>収入の登録</h3>
+<?php } ?>
 
   <?php if (preg_match('#/incomes/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
     <?php echo $this->Form->create('Income', array( //使用するModel

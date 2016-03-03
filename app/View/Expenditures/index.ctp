@@ -1,4 +1,8 @@
+<?php if (preg_match('#/expenditures/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
+<h3>支出の修正</h3>
+<?php } else { //登録用 ?>
 <h3>支出の登録</h3>
+<?php } ?>
 
   <?php if (preg_match('#/expenditures/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
     <?php echo $this->Form->create('Expenditure', array( //使用するModel
