@@ -1,5 +1,5 @@
 <?php if (preg_match('#/incomes/fix_edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
-<h3>収入の修正</h3>
+<h3>確定待ちの収入の修正</h3>
 
   <?php echo $this->Form->create('Income', array( //使用するModel
       'type' => 'put', //変更はput
@@ -20,7 +20,7 @@
   <?php echo $this->Form->end(); ?><!-- form end -->
 <?php } ?>
 
-<h3>確定待ち収入一覧</h3>
+<h3>確定待ちの収入一覧</h3>
 
   <?php if ($income_unfixed_counts == 0) { ?>
     <div class="msg_fix">

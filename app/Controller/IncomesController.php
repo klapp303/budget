@@ -123,16 +123,15 @@ class IncomesController extends AppController {
       //管理者画面のためにユーザID一覧を取得しておく
       $array_users = $this->User->find('list', array('fields' => 'User.id'));
   
-      $income_unfixed_lists = $this->Income->find('all', array(
+      $this->Paginator->settings = array(
           'conditions' => array(
             'Income.status' => 0,
             'Income.date <=' => date('Y-m-d'),
             'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
           'order' => array('Income.date' => 'asc')
-      ));
-//      $this->Paginator->settings = $this->paginate;
-//      $income_unfixed_lists = $this->Paginator->paginate('Income');
+      );
+      $income_unfixed_lists = $this->Paginator->paginate('Income');
       $income_unfixed_counts = count($income_unfixed_lists);
       $this->set(compact('income_unfixed_lists', 'income_unfixed_counts'));
   }
@@ -141,16 +140,15 @@ class IncomesController extends AppController {
       //管理者画面のためにユーザID一覧を取得しておく
       $array_users = $this->User->find('list', array('fields' => 'User.id'));
   
-      $income_unfixed_lists = $this->Income->find('all', array(
+      $this->Paginator->settings = array(
           'conditions' => array(
             'Income.status' => 0,
             'Income.date <=' => date('Y-m-d'),
             'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
           'order' => array('Income.date' => 'asc')
-      ));
-//      $this->Paginator->settings = $this->paginate;
-//      $income_unfixed_lists = $this->Paginator->paginate('Income');
+      );
+      $income_unfixed_lists = $this->Paginator->paginate('Income');
       $income_unfixed_counts = count($income_unfixed_lists);
       $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
       $login_id = $this->Auth->user('id');

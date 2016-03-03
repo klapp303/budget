@@ -1,5 +1,5 @@
 <?php if (preg_match('#/expenditures/fix_edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
-<h3>支出の修正</h3>
+<h3>確定待ちの支出の修正</h3>
 
   <?php echo $this->Form->create('Expenditure', array( //使用するModel
       'type' => 'put', //変更はput
@@ -20,7 +20,7 @@
   <?php echo $this->Form->end(); ?><!-- form end -->
 <?php } ?>
 
-<h3>確定待ち支出一覧</h3>
+<h3>確定待ちの支出一覧</h3>
 
   <?php if ($expenditure_unfixed_counts == 0) { ?>
     <div class="msg_fix">
