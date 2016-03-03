@@ -3,7 +3,7 @@
   <?php if ($userData) { ?>
     <div class="head-msg fr">
       <span class="head-welcome">ようこそ</span>
-      <span class="head-handlename"><?php echo $this->Html->link(($userData['handlename'])? $userData['handlename']: 'ログインユーザ', '/users/'.$userData['id']); ?></span>
+      <span class="head-handlename"><?php echo $this->Html->link(($userData['handlename'])? $userData['handlename']: 'ログインユーザ', '/users/'); ?></span>
       <span class="head-welcome">さん</span>
     </div>
   <?php } ?>

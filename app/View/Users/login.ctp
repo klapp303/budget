@@ -9,7 +9,7 @@
         )
     ); ?><!-- form start -->
     <tr>
-      <td><label>ユーザ名</label></td>
+      <td><label>ログイン名</label></td>
       <td><?php echo $this->Form->input('username', array('type' => 'text', 'label' => false)); ?></td>
     </tr>
     <tr>
