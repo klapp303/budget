@@ -6,7 +6,7 @@ class PagesController extends AppController {
 
 	public $uses = array(); //使用するModel
 
-	public function display() {
+	/*public function display() {
 		$path = func_get_args();
   
 		$count = count($path);
@@ -34,5 +34,5 @@ class PagesController extends AppController {
 			}
 			throw new NotFoundException();
 		}
-	}
+	}*/
 }
