@@ -232,3 +232,9 @@
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
 }
+
+/* テンプレタイトル挿入 */
+.word-insert {
+    float: right;
+    margin-right: 50px;
+}

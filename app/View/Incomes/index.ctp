@@ -1,9 +1,22 @@
+<?php echo $this->Html->script('jquery-insert', array('inline' => FALSE)); ?>
+<?php
+  $word_lists = array(
+      '' => '',
+      '給与'.date('n', strtotime('+2 month')).'月分' => '給与',
+      '特別収入' => '特別収入'
+  );
+?>
 <?php if (preg_match('#/incomes/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
 <h3>収入の修正</h3>
 <?php } else { //登録用 ?>
 <h3>収入の登録</h3>
 <?php } ?>
 
+  <div class="word-insert">
+    <?php echo $this->Form->input('word', array('type' => 'select', 'label' => false,'options' => $word_lists, 'class' => 'js-insert_data')); ?>
+    <button class="js-insert">挿入する</button>
+  </div>
+  
   <?php if (preg_match('#/incomes/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
     <?php echo $this->Form->create('Income', array( //使用するModel
         'type' => 'put', //変更はput
@@ -22,7 +35,7 @@
   <?php } ?><!-- form start -->
   
   <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $login_id)); ?>
-  <?php echo $this->Form->input('title', array('type' => 'text', 'label' => '収入名')); ?><br>
+  <?php echo $this->Form->input('title', array('type' => 'text', 'label' => '収入名', 'class' => 'js-insert_area')); ?><br>
   <?php echo $this->Form->input('date', array('type' => 'date', 'label' => '日付', 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?><br>
   <?php echo $this->Form->input('amount', array('type' => 'text', 'label' => '金額')); ?>円<br>
   <?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => '種類', 'options' => $income_genres)); ?>

@@ -1,9 +1,29 @@
+<?php echo $this->Html->script('jquery-insert', array('inline' => FALSE)); ?>
+<?php
+  $word_lists = array(
+      '' => '',
+      'コンビニ(会社)' => 'コンビニ(会社)',
+      '交通費(Suica)' => '交通費(Suica)',
+      '家賃'.date('n', strtotime('+3 month')).'月分' => '家賃',
+      '電気料金'.date('n').'月分' => '電気料金',
+      'ガス料金'.date('n', strtotime('+1 month')).'月分' => 'ガス料金',
+      '水道料金'.date('n').','.date('n', strtotime('+1 month')).'月分' => '水道料金',
+      'ネット料金'.date('n', strtotime('+1 month')).'月分' => 'ネット料金',
+      '電話料金'.date('n').'月分' => '電話料金',
+      'スマホ料金'.date('n').'月分' => 'スマホ料金'
+  );
+?>
 <?php if (preg_match('#/expenditures/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
 <h3>支出の修正</h3>
 <?php } else { //登録用 ?>
 <h3>支出の登録</h3>
 <?php } ?>
 
+  <div class="word-insert">
+    <?php echo $this->Form->input('word', array('type' => 'select', 'label' => false,'options' => $word_lists, 'class' => 'js-insert_data')); ?>
+    <button class="js-insert">挿入する</button>
+  </div>
+  
   <?php if (preg_match('#/expenditures/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
     <?php echo $this->Form->create('Expenditure', array( //使用するModel
         'type' => 'put', //変更はput
@@ -22,7 +42,7 @@
   <?php } ?><!-- form start -->
   
   <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $login_id)); ?>
-  <?php echo $this->Form->input('title', array('type' => 'text', 'label' => '支出名')); ?><br>
+  <?php echo $this->Form->input('title', array('type' => 'text', 'label' => '支出名', 'class' => 'js-insert_area')); ?><br>
   <?php echo $this->Form->input('date', array('type' => 'date', 'label' => '日付', 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?><br>
   <?php echo $this->Form->input('amount', array('type' => 'text', 'label' => '金額')); ?>円<br>
   <?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => '種類', 'options' => $expenditure_genres)); ?>

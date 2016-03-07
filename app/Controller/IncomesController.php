@@ -30,6 +30,10 @@ class IncomesController extends AppController {
       //管理者画面のためにユーザID一覧を取得しておく
       $array_users = $this->User->find('list', array('fields' => 'User.id'));
   
+      //テンプレタイトルの一覧を取得
+      //$word_lists = array('' => '');
+      //$this->set('word_lists', $word_lists);
+  
       $this->Paginator->settings = array(
           'conditions' => array(
               'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
@@ -63,6 +67,10 @@ class IncomesController extends AppController {
   public function edit($id = null) {
       //管理者画面のためにユーザID一覧を取得しておく
       $array_users = $this->User->find('list', array('fields' => 'User.id'));
+  
+      //テンプレタイトルの一覧を取得
+      //$word_lists = array('' => '');
+      //$this->set('word_lists', $word_lists);
   
       $this->Paginator->settings = array(
           'conditions' => array(
