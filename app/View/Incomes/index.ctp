@@ -1,11 +1,4 @@
 <?php echo $this->Html->script('jquery-insert', array('inline' => FALSE)); ?>
-<?php
-  $word_lists = array(
-      '' => '',
-      '給与'.date('n', strtotime('+2 month')).'月分' => '給与',
-      '特別収入' => '特別収入'
-  );
-?>
 <?php if (preg_match('#/incomes/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
 <h3>収入の修正</h3>
 <?php } else { //登録用 ?>

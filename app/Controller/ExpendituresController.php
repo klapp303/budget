@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 
 class ExpendituresController extends AppController {
 
-	public $uses = array('Expenditure', 'ExpendituresGenre', 'User'); //使用するModel
+	public $uses = array('Expenditure', 'ExpendituresGenre', 'User', 'Word'); //使用するModel
 
   public $components = array(
       'Paginator',
@@ -31,8 +31,7 @@ class ExpendituresController extends AppController {
       $array_users = $this->User->find('list', array('fields' => 'User.id'));
   
       //テンプレタイトルの一覧を取得
-      //$word_lists = array('' => '');
-      //$this->set('word_lists', $word_lists);
+      $this->set('word_lists', $this->Word->getExpenditureWords($this->Auth->user('id')));
   
       $this->Paginator->settings = array(
           'conditions' => array(
@@ -69,8 +68,7 @@ class ExpendituresController extends AppController {
       $array_users = $this->User->find('list', array('fields' => 'User.id'));
   
       //テンプレタイトルの一覧を取得
-      //$word_lists = array('' => '');
-      //$this->set('word_lists', $word_lists);
+      $this->set('word_lists', $this->Word->getExpenditureWords($this->Auth->user('id')));
   
       $this->Paginator->settings = array(
           'conditions' => array(
