@@ -9,11 +9,11 @@
         )
     ); ?><!-- form start -->
     <tr>
-      <td><label>ログイン名</label></td>
+      <td class="label">ログイン名</td>
       <td><?php echo $this->Form->input('username', array('type' => 'text', 'label' => false, 'placeholder' => 'ログイン時に使用します')); ?><span class="txt-alt txt-b">*</span></td>
     </tr>
     <tr>
-      <td><label>パスワード</label></td>
+      <td class="label">パスワード</td>
       <td><?php echo $this->Form->input('password', array('type' => 'text', 'label' => false, 'placeholder' => 'ログイン時に使用します')); ?><span class="txt-alt txt-b">*</span><span class="txt-min">（半角英数のみ）</span></td>
     </tr>
   

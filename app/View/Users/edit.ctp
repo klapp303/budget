@@ -10,15 +10,15 @@
     ); ?><!-- form start -->
     <?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $userData['id'])); ?>
     <tr>
-      <td><label>ログイン名</label></td>
+      <td class="label">ログイン名</td>
       <td><?php echo $this->Form->input('username', array('type' => 'text', 'label' => false, 'placeholder' => 'ログイン時に使用します')); ?><span class="txt-alt txt-b">*</span></td>
     </tr>
     <tr>
-      <td><label>ユーザ名</label></td>
+      <td class="label">ユーザ名</td>
       <td><?php echo $this->Form->input('handlename', array('type' => 'text', 'label' => false)); ?></td>
     </tr>
     <tr>
-      <td><label>給与日</label></td>
+      <td class="label">給与日</td>
       <?php //日付選択肢用
         $day_options = array();
         for ($i = 1; $i <= 31; $i++) {
