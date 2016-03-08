@@ -1,3 +1,4 @@
+<?php echo $this->Html->script('jquery-insert', array('inline' => FALSE)); ?>
 <?php if (preg_match('#/incomes/fix_edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
 <h3>確定待ちの収入の修正</h3>
 
@@ -10,13 +11,24 @@
   
   <?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $id)); ?>
   <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $login_id)); ?>
-  <?php echo $this->Form->input('title', array('type' => 'text', 'label' => '収入名')); ?><br>
-  <?php echo $this->Form->input('date', array('type' => 'date', 'label' => '日付', 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?><br>
-  <?php echo $this->Form->input('amount', array('type' => 'text', 'label' => '金額')); ?>円<br>
-  <?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => '種類', 'options' => $income_genres)); ?>
-  <?php echo $this->Form->input('status', array('type' => 'select', 'label' => '状態', 'options' => array(0 => '未定', 1 => '確定'))); ?><br>
   
-  <?php echo $this->Form->submit('修正する'); ?>
+  <table>
+    <tr><td class="label">収入名</td>
+        <td><?php echo $this->Form->input('title', array('type' => 'text', 'label' => false, 'size' => 20, 'class' => 'js-insert_area')); ?></td>
+        <td><button type="button" class="js-insert"><<</button>
+            <?php echo $this->Form->input('word', array('type' => 'select', 'label' => false, 'options' => $word_lists, 'class' => 'js-insert_data')); ?></td></tr>
+    <tr><td class="label">日付</td>
+        <td><?php echo $this->Form->input('date', array('type' => 'date', 'label' => false, 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?></td></tr>
+    <tr><td class="label">金額</td>
+        <td><?php echo $this->Form->input('amount', array('type' => 'text', 'label' => false, 'size' => 18)); ?>円</td></tr>
+    <tr><td class="label">種類</td>
+        <td><?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => false, 'options' => $income_genres)); ?></td></tr>
+    <tr><td class="label">状態</td>
+        <td><?php echo $this->Form->input('status', array('type' => 'select', 'label' => false, 'options' => array(0 => '未定', 1 => '確定'))); ?></td></tr>
+    
+    <tr><td></td>
+        <td class="label"><?php echo $this->Form->submit('修正する'); ?></td></tr>
+  </table>
   <?php echo $this->Form->end(); ?><!-- form end -->
 <?php } ?>
 

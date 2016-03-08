@@ -233,8 +233,12 @@
     -webkit-border-radius: 8px;
 }
 
+/* 登録フォーム用 */
+table >tbody> tr> .label {
+    text-align: right;
+}
+
 /* テンプレタイトル挿入 */
-.word-insert {
-    float: right;
-    margin-right: 50px;
+.js-insert {
+    margin: 0 5px;
 }

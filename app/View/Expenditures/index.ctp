@@ -5,11 +5,6 @@
 <h3>支出の登録</h3>
 <?php } ?>
 
-  <div class="word-insert">
-    <?php echo $this->Form->input('word', array('type' => 'select', 'label' => false,'options' => $word_lists, 'class' => 'js-insert_data')); ?>
-    <button class="js-insert">挿入する</button>
-  </div>
-  
   <?php if (preg_match('#/expenditures/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
     <?php echo $this->Form->create('Expenditure', array( //使用するModel
         'type' => 'put', //変更はput
@@ -28,17 +23,29 @@
   <?php } ?><!-- form start -->
   
   <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $login_id)); ?>
-  <?php echo $this->Form->input('title', array('type' => 'text', 'label' => '支出名', 'class' => 'js-insert_area')); ?><br>
-  <?php echo $this->Form->input('date', array('type' => 'date', 'label' => '日付', 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?><br>
-  <?php echo $this->Form->input('amount', array('type' => 'text', 'label' => '金額')); ?>円<br>
-  <?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => '種類', 'options' => $expenditure_genres)); ?>
-  <?php echo $this->Form->input('status', array('type' => 'select', 'label' => '状態', 'options' => array(0 => '未定', 1 => '確定'))); ?><br>
   
-  <?php if (preg_match('#/expenditures/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
-    <?php echo $this->Form->submit('修正する'); ?>
-  <?php } else { //登録用 ?>
-    <?php echo $this->Form->submit('登録する'); ?>
-  <?php } ?>
+  <table>
+    <tr><td class="label">支出名</td>
+        <td><?php echo $this->Form->input('title', array('type' => 'text', 'label' => false, 'size' => 20, 'class' => 'js-insert_area')); ?></td>
+        <td><button type="button" class="js-insert"><<</button>
+            <?php echo $this->Form->input('word', array('type' => 'select', 'label' => false, 'options' => $word_lists, 'class' => 'js-insert_data')); ?></td></tr>
+    <tr><td class="label">日付</td>
+        <td><?php echo $this->Form->input('date', array('type' => 'date', 'label' => false, 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?></td></tr>
+    <tr><td class="label">金額</td>
+        <td><?php echo $this->Form->input('amount', array('type' => 'text', 'label' => false, 'size' => 18)); ?>円</td></tr>
+    <tr><td class="label">種類</td>
+        <td><?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => false, 'options' => $expenditure_genres)); ?></td></tr>
+    <tr><td class="label">状態</td>
+        <td><?php echo $this->Form->input('status', array('type' => 'select', 'label' => false, 'options' => array(0 => '未定', 1 => '確定'))); ?></td></tr>
+  
+    <?php if (preg_match('#/expenditures/edit/#', $_SERVER['REQUEST_URI'])) { //編集用 ?>
+    <tr><td></td>
+        <td class="label"><?php echo $this->Form->submit('修正する'); ?></td></tr>
+    <?php } else { //登録用 ?>
+    <tr><td></td>
+        <td class="label"><?php echo $this->Form->submit('登録する'); ?></td></tr>
+    <?php } ?>
+  </table>
   <?php echo $this->Form->end(); ?><!-- form end -->
 
 <h3>支出一覧</h3>

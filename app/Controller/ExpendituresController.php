@@ -146,6 +146,9 @@ class ExpendituresController extends AppController {
       //管理者画面のためにユーザID一覧を取得しておく
       $array_users = $this->User->find('list', array('fields' => 'User.id'));
   
+      //テンプレタイトルの一覧を取得
+      $this->set('word_lists', $this->Word->getExpenditureWords($this->Auth->user('id')));
+  
       $this->Paginator->settings = array(
           'conditions' => array(
             'Expenditure.status' => 0,
