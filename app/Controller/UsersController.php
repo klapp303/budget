@@ -1,6 +1,8 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('File', 'Utility'); //ファイルAPI用
+App::uses('Folder', 'Utility'); //フォルダAPI用
 
 class UsersController extends AppController {
 
@@ -19,6 +21,32 @@ class UsersController extends AppController {
   
       if ($this->request->is('post')) {
         if ($this->Auth->login()) {
+          /* ログイン時に定期バックアップを判定して作成ここから */
+          /*$file_name = 'budget_backup';
+          $backup_flg = 1;
+          $folder = new Folder('backup');
+          $lists = $folder->read();
+          foreach ($lists[1] AS $list) { //ファイル名から日付を取得
+            $name = str_replace(
+                    array($file_name.'_', '.txt'),
+                    '',
+                    $list
+            );
+            if (date('Ymd', strtotime('-7 day')) < date($name)) { //直近のファイルがあればflgを消去
+              $backup_flg = 0;
+              break;
+            }
+          }
+          
+          if ($backup_flg == 1) { //flgがあればバックアップを作成
+            $file = new File('backup/'.$file_name.'_'.date('Ymd').'.txt', true);
+            $file->write('backupの内容を記述');
+            $file->close();
+            //echo'backup 1';exit;
+          }
+          //echo'backup 0';exit;*/
+          /* ログイン時に定期バックアップを判定して作成ここまで */
+          
           $this->redirect($this->Auth->redirect());
         } else {
           $this->Flash->error(__('ユーザ名かパスワードが間違っています。'));
