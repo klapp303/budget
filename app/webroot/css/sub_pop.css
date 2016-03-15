@@ -18,3 +18,15 @@
 .pop-list {
     width: 450px;
 }
+
+.tbl-date_subpop {
+    width: 50px;
+}
+.tbl-num_subpop {
+    width: 60px;
+    text-align: right;
+}
+.tbl-ico_subpop {
+    width: 60px;
+    text-align: center;
+}
