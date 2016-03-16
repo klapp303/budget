@@ -6,7 +6,10 @@ App::uses('Folder', 'Utility'); //フォルダAPI用
 
 class UsersController extends AppController {
 
-	public $uses = array('User'); //使用するModel
+	public $uses = array(
+      'User',
+      'Expenditure', 'ExpendituresGenre', 'Income', 'IncomesGenre', 'Word'
+   ); //使用するModel
 
   public function beforeFilter() {
       parent::beforeFilter();
@@ -22,9 +25,11 @@ class UsersController extends AppController {
       if ($this->request->is('post')) {
         if ($this->Auth->login()) {
           /* ログイン時に定期バックアップを判定して作成ここから */
-          /*$file_name = 'budget_backup';
+          $file_pass = '../backup';
+          $file_name = 'budget_backup';
           $backup_flg = 1;
-          $folder = new Folder('backup');
+          
+          $folder = new Folder($file_pass);
           $lists = $folder->read();
           foreach ($lists[1] AS $list) { //ファイル名から日付を取得
             $name = str_replace(
@@ -39,12 +44,48 @@ class UsersController extends AppController {
           }
           
           if ($backup_flg == 1) { //flgがあればバックアップを作成
-            $file = new File('backup/'.$file_name.'_'.date('Ymd').'.txt', true);
-            $file->write('backupの内容を記述');
-            $file->close();
-            //echo'backup 1';exit;
+            //モデルからDB接続情報を取得する
+            /*$db = $this->User->getDbConfig();
+            $dbHost = $db->config['host'];
+            $dbUser = $db->config['login'];
+            $dbPass = $db->config['password'];
+            $dbName = $db->config['database'];
+            
+            $command = 'mysqldump '.$dbName.' -h '.$dbHost.' -u ='.$dbUser.'@'.$dbHost.' -p'.$dbPass.' > '.$file_name.'.sql';
+            system($command);*/
+            
+            //DBデータを取得する
+            $array_model = array('User', 'Expenditure', 'ExpendituresGenre', 'Income', 'IncomesGenre', 'Word');
+            foreach ($array_model AS $model) {
+              $this->$model->Behaviors->disable('SoftDelete');
+              $datas = $this->$model->find('all', array('order' => $model.'.id', 'recursive' => -1));
+              $this->set($model.'_datas', $datas);
+              $this->set($model.'_tbl', $this->$model->useTable);
+            }
+            $this->set('array_model', $array_model);
+            
+            $this->layout = false;
+            $sql = $this->render('sql_backup');
+            $file = new File($file_pass.'/'.$file_name.'_'.date('Ymd').'.sql', true);
+            if ($file->write($sql)) { //バックアップ成功時の処理
+              $file->close();
+              foreach ($lists[1] AS $list) {
+                $file = new File($file_pass.'/'.$list);
+                $file->delete();
+                $file->close();
+              }
+            } else { //バックアップ失敗時の処理
+              $file->close();
+              $email = new CakeEmail('gmail');
+              $email->to('klapp303@gmail.com')
+                    ->subject('【収支管理システム】バックアップエラー通知')
+                    ->template('backup_error', 'budget_mail')
+                    ->viewVars(array(
+                        'name' => '管理者'
+                    )); //mailに渡す変数
+              $email->send();
+            }
           }
-          //echo'backup 0';exit;*/
           /* ログイン時に定期バックアップを判定して作成ここまで */
           
           $this->redirect($this->Auth->redirect());

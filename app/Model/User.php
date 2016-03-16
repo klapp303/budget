@@ -32,4 +32,8 @@ class User extends AppModel {
   }
 
 //  public $filtetArgs = ['' => ['' => '', '' => '']];
+
+  /*public function getDbConfig() { //DBバックアップ作成のため
+      return ConnectionManager::getDataSource($this->useDbConfig);
+  }*/
 }

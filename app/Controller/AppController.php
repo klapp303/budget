@@ -1,6 +1,7 @@
 <?php
 
 App::uses('Controller', 'Controller');
+App::uses('CakeEmail', 'Network/Email'); //CakeEmaiilの利用
 
 class AppController extends Controller {
 

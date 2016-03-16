@@ -7,6 +7,7 @@
 /app/Config/database_sakura.php
 
 /app/tmp
+/app/backup
 
 /lib/Cake/Console/Templates/skel/tmp/
 
