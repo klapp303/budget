@@ -211,6 +211,9 @@ class IncomesController extends AppController {
       //管理者画面のためにユーザID一覧を取得しておく
       $array_users = $this->User->find('list', array('fields' => 'User.id'));
   
+      //テンプレタイトルの一覧を取得
+      $this->set('word_lists', $this->Word->getIncomeWords($this->Auth->user('id')));
+  
       $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
       $login_id = $this->Auth->user('id');
       $this->set(compact('income_genres', 'login_id'));
