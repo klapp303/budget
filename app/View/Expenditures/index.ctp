@@ -58,21 +58,21 @@
   )); ?>
 
 <table class="detail-list">
-  <tr><th>日付<?php echo $this->Paginator->sort('Expenditure.date', '▼'); ?></th>
+  <tr><th class="tbl-date">日付<?php echo $this->Paginator->sort('Expenditure.date', '▼'); ?></th>
       <th>支出名<?php echo $this->Paginator->sort('Expenditure.title', '▼'); ?></th>
       <th class="tbl-num">金額<?php echo $this->Paginator->sort('Expenditure.amount', '▼'); ?></th>
-      <th class="tbl-ico">種類<?php echo $this->Paginator->sort('Expenditure.genre_id', '▼'); ?></th>
+      <th class="tbl-genre">種類<?php echo $this->Paginator->sort('Expenditure.genre_id', '▼'); ?></th>
       <th class="tbl-ico">状態<?php echo $this->Paginator->sort('Expenditure.status', '▼'); ?></th>
-      <th>action</th></tr>
+      <th class="tbl-act">action</th></tr>
     <?php foreach($expenditure_lists AS $expenditure_list){ ?>
-    <tr><td><?php echo $expenditure_list['Expenditure']['date']; ?></td>
+    <tr><td class="tbl-date"><?php echo $expenditure_list['Expenditure']['date']; ?></td>
         <td><?php echo $expenditure_list['Expenditure']['title']; ?></td>
         <td class="tbl-num"><?php echo $expenditure_list['Expenditure']['amount']; ?>円</td>
-        <td class="tbl-ico"><span class="icon-genre col-e_<?php echo $expenditure_list['Expenditure']['genre_id']; ?>"><?php echo $expenditure_list['ExpendituresGenre']['title']; ?></span></td>
+        <td class="tbl-genre"><span class="icon-genre col-e_<?php echo $expenditure_list['Expenditure']['genre_id']; ?>"><?php echo $expenditure_list['ExpendituresGenre']['title']; ?></span></td>
         <td class="tbl-ico"><?php if ($expenditure_list['Expenditure']['status'] == 0) {echo '<span class="icon-false">未定</span>';}
                               elseif ($expenditure_list['Expenditure']['status'] == 1) {echo '<span class="icon-true">確定</span>';} ?></td>
-        <td><?php echo $this->Html->link('修正', array('action' => 'edit', $expenditure_list['Expenditure']['id'])); ?>
-            <?php echo $this->Form->postLink('削除', array('action' => 'deleted', $expenditure_list['Expenditure']['id']), null, $expenditure_list['Expenditure']['title'].'を削除しますか'); ?></td></tr>
+        <td class="tbl-act"><?php echo $this->Html->link('修正', array('action' => 'edit', $expenditure_list['Expenditure']['id'])); ?>
+                            <?php echo $this->Form->postLink('削除', array('action' => 'deleted', $expenditure_list['Expenditure']['id']), null, $expenditure_list['Expenditure']['title'].'を削除しますか'); ?></td></tr>
     <?php } ?>
   </table>
 

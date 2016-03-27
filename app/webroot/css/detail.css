@@ -71,11 +71,22 @@
     width: 740px;
 }
 
+.tbl-date {
+    width: 85px;
+}
 .tbl-num {
     text-align: right;
 }
-.tbl-ico {
+.tbl-genre {
+    width: 90px;
     text-align: center;
+}
+.tbl-ico {
+    width: 70px;
+    text-align: center;
+}
+.tbl-act {
+    width: 90px;
 }
 
 /* ページリンク */

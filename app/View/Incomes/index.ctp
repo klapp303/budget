@@ -58,21 +58,21 @@
   )); ?>
 
   <table class="detail-list">
-    <tr><th>日付<?php echo $this->Paginator->sort('Income.date', '▼'); ?></th>
+    <tr><th class="tbl-date">日付<?php echo $this->Paginator->sort('Income.date', '▼'); ?></th>
         <th>収入名<?php echo $this->Paginator->sort('Income.title', '▼'); ?></th>
         <th class="tbl-num">金額<?php echo $this->Paginator->sort('Income.amount', '▼'); ?></th>
-        <th class="tbl-ico">種類<?php echo $this->Paginator->sort('Income.genre_id', '▼'); ?></th>
+        <th class="tbl-genre">種類<?php echo $this->Paginator->sort('Income.genre_id', '▼'); ?></th>
         <th class="tbl-ico">状態<?php echo $this->Paginator->sort('Income.status', '▼'); ?></th>
-        <th>action</th></tr>
+        <th class="tbl-act">action</th></tr>
     <?php foreach($income_lists AS $income_list){ ?>
-    <tr><td><?php echo $income_list['Income']['date']; ?></td>
+    <tr><td class="tbl-date"><?php echo $income_list['Income']['date']; ?></td>
         <td><?php echo $income_list['Income']['title']; ?></td>
         <td class="tbl-num"><?php echo $income_list['Income']['amount']; ?>円</td>
-        <td class="tbl-ico"><span class="icon-genre col-i_<?php echo $income_list['Income']['genre_id']; ?>"><?php echo $income_list['IncomesGenre']['title']; ?></span></td>
+        <td class="tbl-genre"><span class="icon-genre col-i_<?php echo $income_list['Income']['genre_id']; ?>"><?php echo $income_list['IncomesGenre']['title']; ?></span></td>
         <td class="tbl-ico"><?php if ($income_list['Income']['status'] == 0) {echo '<span class="icon-false">未定</span>';}
                               elseif ($income_list['Income']['status'] == 1) {echo '<span class="icon-true">確定</span>';} ?></td>
-        <td><?php echo $this->Html->link('修正', array('action' => 'edit', $income_list['Income']['id'])); ?>
-            <?php echo $this->Form->postLink('削除', array('action' => 'deleted', $income_list['Income']['id']), null, $income_list['Income']['title'].'を削除しますか'); ?></td></tr>
+        <td class="tbl-act"><?php echo $this->Html->link('修正', array('action' => 'edit', $income_list['Income']['id'])); ?>
+                            <?php echo $this->Form->postLink('削除', array('action' => 'deleted', $income_list['Income']['id']), null, $income_list['Income']['title'].'を削除しますか'); ?></td></tr>
     <?php } ?>
   </table>
 

@@ -22,12 +22,16 @@
 
   <?php if ($expenditure_now_lists) { ?>
     <table class="detail-list">
-      <tr><th>日付</th><th>支出名</th><th class="tbl-num">金額</th><th class="tbl-ico">種類</th><th class="tbl-ico">状態</th></tr>
+      <tr><th class="tbl-date">日付</th>
+          <th>支出名</th>
+          <th class="tbl-num">金額</th>
+          <th class="tbl-genre">種類</th>
+          <th class="tbl-ico">状態</th></tr>
       <?php foreach ($expenditure_now_lists AS $expenditure_now_list){ ?>
-      <tr><td><?php echo $expenditure_now_list['Expenditure']['date']; ?></td>
+      <tr><td class="tbl-date"><?php echo $expenditure_now_list['Expenditure']['date']; ?></td>
           <td><?php echo $expenditure_now_list['Expenditure']['title']; ?></td>
           <td class="tbl-num"><?php echo $expenditure_now_list['Expenditure']['amount']; ?>円</td>
-          <td class="tbl-ico"><span class="icon-genre col-e_<?php echo $expenditure_now_list['Expenditure']['genre_id']; ?>"><?php echo $expenditure_now_list['ExpendituresGenre']['title']; ?></span></td>
+          <td class="tbl-genre"><span class="icon-genre col-e_<?php echo $expenditure_now_list['Expenditure']['genre_id']; ?>"><?php echo $expenditure_now_list['ExpendituresGenre']['title']; ?></span></td>
           <td class="tbl-ico"><?php if ($expenditure_now_list['Expenditure']['status'] == 0) {echo '<span class="icon-false">未定</span>';}
                                 elseif ($expenditure_now_list['Expenditure']['status'] == 1) {echo '<span class="icon-true">確定</span>';} ?></td></tr>
       <?php } ?>
@@ -40,12 +44,16 @@
 <h3>今後の支出予定<span class="txt-n txt-min">（～<?php echo date('Y年m月d日', strtotime('+1 month')); ?>）</span></h3>
 
   <table class="detail-list">
-    <tr><th>日付</th><th>支出名</th><th class="tbl-num">金額</th><th class="tbl-ico">種類</th><th class="tbl-ico">状態</th></tr>
+    <tr><th class="tbl-date">日付</th>
+        <th>支出名</th>
+        <th class="tbl-num">金額</th>
+        <th class="tbl-genre">種類</th>
+        <th class="tbl-ico">状態</th></tr>
     <?php foreach($expenditure_month_lists AS $expenditure_month_list){ ?>
-    <tr><td><?php echo $expenditure_month_list['Expenditure']['date']; ?></td>
+    <tr><td class="tbl-date"><?php echo $expenditure_month_list['Expenditure']['date']; ?></td>
         <td><?php echo $expenditure_month_list['Expenditure']['title']; ?></td>
         <td class="tbl-num"><?php echo $expenditure_month_list['Expenditure']['amount']; ?>円</td>
-        <td class="tbl-ico"><span class="icon-genre col-e_<?php echo $expenditure_month_list['Expenditure']['genre_id']; ?>"><?php echo $expenditure_month_list['ExpendituresGenre']['title']; ?></span></td>
+        <td class="tbl-genre"><span class="icon-genre col-e_<?php echo $expenditure_month_list['Expenditure']['genre_id']; ?>"><?php echo $expenditure_month_list['ExpendituresGenre']['title']; ?></span></td>
         <td class="tbl-ico"><?php if ($expenditure_month_list['Expenditure']['status'] == 0) {echo '<span class="icon-false">未定</span>';}
                               elseif ($expenditure_month_list['Expenditure']['status'] == 1) {echo '<span class="icon-true">確定</span>';} ?></td></tr>
     <?php } ?>
