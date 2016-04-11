@@ -23,7 +23,7 @@ class MonthsController extends AppController {
   
       if (empty($this->request->params['year_id'])) { //パラメータがない場合は今月の値を取得
         $year_id = date('Y');
-        $month_id = date('m');
+        $month_id = date('n');
       } elseif ($this->request->params['year_id'] < 2015) { //2014年までのパラメータの場合
         $this->Session->setFlash('存在しないデータです。', 'flashMessage');
         $this->redirect('/months/');
