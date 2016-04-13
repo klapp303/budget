@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 
 class TopController extends AppController {
 
-	public $uses = array('Income', 'Expenditure', 'User'); //使用するModel
+  public $uses = array('Income', 'Expenditure', 'User'); //使用するModel
 
   public function beforeFilter() {
       parent::beforeFilter();
@@ -106,5 +106,5 @@ class TopController extends AppController {
           'order' => array('User.id' => 'asc')
       ));
       $this->set('user_lists', $user_lists);
-    }
+  }
 }

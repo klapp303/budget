@@ -6,7 +6,7 @@ App::uses('Folder', 'Utility'); //フォルダAPI用
 
 class UsersController extends AppController {
 
-	public $uses = array(
+  public $uses = array(
       'User',
       'Expenditure', 'ExpendituresGenre', 'Income', 'IncomesGenre', 'Word'
    ); //使用するModel

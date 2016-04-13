@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 
 class ExpendituresController extends AppController {
 
-	public $uses = array('Expenditure', 'ExpendituresGenre', 'User', 'Word'); //使用するModel
+  public $uses = array('Expenditure', 'ExpendituresGenre', 'User', 'Word'); //使用するModel
 
   public $components = array(
       'Paginator',

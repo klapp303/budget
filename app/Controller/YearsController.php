@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 
 class YearsController extends AppController {
 
-	public $uses = array('Income', 'Expenditure', 'ExpendituresGenre', 'User'); //使用するModel
+  public $uses = array('Income', 'Expenditure', 'ExpendituresGenre', 'User'); //使用するModel
 
   public $components = array('Paginator');
   public $paginate = array(
@@ -166,5 +166,5 @@ class YearsController extends AppController {
         $this->set('expenditure_genre_data_'.$genre_id, ${'expenditure_genre_data_'.$genre_id});
       }
       $this->set('expenditure_genres', $expenditure_genres);
-    }
+  }
 }

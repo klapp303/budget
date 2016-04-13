@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 
 class MonthsController extends AppController {
 
-	public $uses = array('Income', 'Expenditure', 'ExpendituresGenre', 'User'); //使用するModel
+  public $uses = array('Income', 'Expenditure', 'ExpendituresGenre', 'User'); //使用するModel
 
   public $components = array('Paginator');
   public $paginate = array(
@@ -185,5 +185,5 @@ class MonthsController extends AppController {
           'order' => array('date' => 'asc')
       );
       $this->set('expenditure_lists', $this->Expenditure->find('all', $array_option));
-    }
+  }
 }

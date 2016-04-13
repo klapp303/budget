@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 
 class IncomesController extends AppController {
 
-	public $uses = array('Income', 'IncomesGenre', 'User', 'Word'); //使用するModel
+  public $uses = array('Income', 'IncomesGenre', 'User', 'Word'); //使用するModel
 
   public $components = array(
       'Paginator',
@@ -238,5 +238,5 @@ class IncomesController extends AppController {
       }
   
       $this->render('index');  
-    }
+  }
 }
