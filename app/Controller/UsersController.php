@@ -139,6 +139,10 @@ class UsersController extends AppController {
           $this->User->save($this->request->data); //validate成功でsave
           if ($this->User->save($id)) {
             $this->Session->setFlash('変更しました。', 'flashMessage');
+            //セッションのuser情報を更新する
+            $user = $this->User->find('first', array('conditions' => array('User.id' => $id)));
+            unset($user['User']['password']);
+            $this->Session->write('Auth', $user);
           } else {
             $this->Session->setFlash('変更できませんでした。', 'flashMessage');
           }
