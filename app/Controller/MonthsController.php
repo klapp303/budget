@@ -144,7 +144,7 @@ class MonthsController extends AppController {
               'Expenditure.date <=' => date($year_id.'-'.$month_id.'-31'),
               'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
       );
       $this->set('expenditure_lists', $this->Paginator->paginate('Expenditure'));
   }
@@ -182,7 +182,7 @@ class MonthsController extends AppController {
               'Expenditure.genre_id' => $genre_id,
               'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
       );
       $this->set('expenditure_lists', $this->Expenditure->find('all', $array_option));
   }

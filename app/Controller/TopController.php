@@ -68,7 +68,7 @@ class TopController extends AppController {
               'Income.date <=' => date('Y-m-d'),
               'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Income.date' => 'asc')
+          'order' => array('Income.date' => 'asc', 'Income.title' => 'asc')
       ));
       $expenditure_unfixed_count = $this->Expenditure->find('count', array(
           'conditions' => array(
@@ -76,7 +76,7 @@ class TopController extends AppController {
               'Expenditure.date <=' => date('Y-m-d'),
               'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Expenditure.date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
       ));
       $this->set(compact('income_unfixed_count', 'expenditure_unfixed_count'));
   
@@ -86,7 +86,7 @@ class TopController extends AppController {
               'Expenditure.date' => date('Y-m-d'),
               'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Expenditure.date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
       ));
       $this->set('expenditure_now_lists', $expenditure_now_lists);
   
@@ -97,7 +97,7 @@ class TopController extends AppController {
               'Expenditure.date <=' => date('Y-m-d', strtotime('+1 month')),
               'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Expenditure.date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
       ));
       $this->set('expenditure_month_lists', $expenditure_month_lists);
   

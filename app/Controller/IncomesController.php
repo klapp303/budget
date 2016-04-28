@@ -37,7 +37,7 @@ class IncomesController extends AppController {
           'conditions' => array(
               'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Income.date' => 'desc')
+          'order' => array('Income.date' => 'desc', 'Income.title' => 'asc')
       );
       $income_lists = $this->Paginator->paginate('Income');
       $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
@@ -74,7 +74,7 @@ class IncomesController extends AppController {
           'conditions' => array(
               'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Income.date' => 'desc')
+          'order' => array('Income.date' => 'desc', 'Income.title' => 'asc')
       );
       $income_lists = $this->Paginator->paginate('Income');
       $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
@@ -135,7 +135,7 @@ class IncomesController extends AppController {
             'Income.date <=' => date('Y-m-d'),
             'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Income.date' => 'asc')
+          'order' => array('Income.date' => 'asc', 'Income.title' => 'asc')
       );
       $income_unfixed_lists = $this->Paginator->paginate('Income');
       $income_unfixed_counts = count($income_unfixed_lists);
@@ -155,7 +155,7 @@ class IncomesController extends AppController {
             'Income.date <=' => date('Y-m-d'),
             'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Income.date' => 'asc')
+          'order' => array('Income.date' => 'asc', 'Income.title' => 'asc')
       );
       $income_unfixed_lists = $this->Paginator->paginate('Income');
       $income_unfixed_counts = count($income_unfixed_lists);
@@ -227,7 +227,7 @@ class IncomesController extends AppController {
               $this->Income->parseCriteria($this->passedArgs),
               'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Income.id' => 'desc')
+          'order' => array('Income.id' => 'desc', 'Income.title' => 'asc')
       );
       $income_lists = $this->Paginator->paginate('Income');
       if (!empty($income_lists)) { //データが存在する場合

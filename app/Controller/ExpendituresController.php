@@ -37,7 +37,7 @@ class ExpendituresController extends AppController {
           'conditions' => array(
               'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Expenditure.date' => 'desc')
+          'order' => array('Expenditure.date' => 'desc', 'Expenditure.title' => 'asc')
       );
       $expenditure_lists = $this->Paginator->paginate('Expenditure');
       $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
@@ -74,7 +74,7 @@ class ExpendituresController extends AppController {
           'conditions' => array(
               'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Expenditure.date' => 'desc')
+          'order' => array('Expenditure.date' => 'desc', 'Expenditure.title' => 'asc')
       );
       $expenditure_lists = $this->Paginator->paginate('Expenditure');
       $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
@@ -135,7 +135,7 @@ class ExpendituresController extends AppController {
             'Expenditure.date <=' => date('Y-m-d'),
             'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Expenditure.date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
       );
       $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
       $expenditure_unfixed_counts = count($expenditure_unfixed_lists);
@@ -155,7 +155,7 @@ class ExpendituresController extends AppController {
             'Expenditure.date <=' => date('Y-m-d'),
             'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Expenditure.date' => 'asc')
+          'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
       );
       $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
       $expenditure_unfixed_counts = count($expenditure_unfixed_lists);
@@ -227,7 +227,7 @@ class ExpendituresController extends AppController {
               $this->Expenditure->parseCriteria($this->passedArgs),
               'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
           ),
-          'order' => array('Expenditure.id' => 'desc')
+          'order' => array('Expenditure.id' => 'desc', 'Expenditure.title' => 'asc')
       );
       $expenditure_lists = $this->Paginator->paginate('Expenditure');
       if (!empty($expenditure_lists)) { //データが存在する場合
