@@ -101,7 +101,7 @@
     transition: 0.8s;
 }
 .link-page a:hover {
-    background: #A9BCF5;
+    background: #a9bcf5;
 }
 .link-page a:link,
 .link-page a:visited,
@@ -113,7 +113,7 @@
 /* ボタンアイコン */
 .icon-button {
     font-size: 12px;
-    background: #D8D8D8;
+    background: #d8d8d8;
     border: solid 2px #000000;
     border-radius: 8px;
     -moz-border-radius: 8px;
@@ -132,7 +132,7 @@
 
 .icon-button-min {
     font-size: 10px;
-    background: #D8D8D8;
+    background: #d8d8d8;
     border: solid 2px #000000;
     border-radius: 8px;
     -moz-border-radius: 8px;
@@ -152,7 +152,7 @@
 /* アイコン */
 .icon-true {
     font-size: 12px;
-    background: #01DFA5;
+    background: #01dfa5;
     border: solid 2px #000000;
     border-radius: 8px;
     -moz-border-radius: 8px;
@@ -161,7 +161,7 @@
 }
 .icon-false {
     font-size: 12px;
-    background: #D8D8D8;
+    background: #d8d8d8;
     border: solid 2px #000000;
     border-radius: 8px;
     -moz-border-radius: 8px;
@@ -170,7 +170,7 @@
 }
 .icon-like {
     font-size: 12px;
-    background: #58ACFA;
+    background: #58acfa;
     border: solid 2px #000000;
     border-radius: 8px;
     -moz-border-radius: 8px;
@@ -179,7 +179,7 @@
 }
 .icon-alt {
     font-size: 12px;
-    background: #FE2E64;
+    background: #fe2e64;
     border: solid 2px #000000;
     border-radius: 8px;
     -moz-border-radius: 8px;
@@ -197,47 +197,47 @@
 }
 
 .col-i_1 { /* 給与 */
-    background: #819FF7;
+    background: #819ff7;
 }
 .col-i_2 { /* 買取 */
-    background: #FE2E64;
+    background: #fe2e64;
 }
 
 .col-e_1 { /* 趣味費 */
-    background: #FE2E64;
+    background: #fe2e64;
 }
 .col-e_2 { /* イベント */
-    background: #FE2E9A;
+    background: #fe2e9a;
 }
 .col-e_3 { /* 交通費 */
-    background: #F5A9E1;
+    background: #f5a9e1;
 }
 .col-e_4 { /* 交際費 */
-    background: #FAAC58;
+    background: #faac58;
 }
 .col-e_5 { /* 食費 */
-    background: #FFFF00;
+    background: #ffff00;
 }
 .col-e_6 { /* 家賃 */
-    background: #819FF7;
+    background: #819ff7;
 }
 .col-e_7 { /* 公共料金 */
-    background: #58ACFA;
+    background: #58acfa;
 }
 .col-e_8 { /* 生活費 */
-    background: #58D3F7;
+    background: #58d3f7;
 }
 
 .col-i_3,
 .col-e_9 { /* その他 */
-    background: #D8D8D8;
+    background: #d8d8d8;
 }
 
 /* フラッシュメッセージ */
 .flash-msg {
     margin-right: 200px;
     padding: 10px 20px;
-    background: #CEF6F5;
+    background: #cef6f5;
     border: solid 2px #000000;
     border-radius: 8px;
     -moz-border-radius: 8px;
