@@ -29,5 +29,14 @@ class AppController extends Controller {
   
       $this->admin_id = 1;
       $this->set('userData', $this->Auth->user());
+
+      //paginatorのオプションを定義しておく
+      $paginator_option = array(
+          'modulus' => 4, //現在ページから左右あわせてインクルードする個数
+          'separator' => ' | ', //デフォルト値のセパレーター
+          'first' => '＜', //先頭ページへのリンク
+          'last' => '＞' //最終ページへのリンク
+      );
+      $this->set('paginator_option', $paginator_option);
   }
 }

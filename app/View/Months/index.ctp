@@ -63,13 +63,7 @@
   <?php $this->Paginator->options(array(
       'url' => array('controller' => 'months', 'action' => 'index')
   )); ?>
-  <?php echo $this->Paginator->numbers(array(
-      'modulus' => 4, //現在ページから左右あわせてインクルードする個数
-      'separator' => '|', //デフォルト値のセパレーター
-      'first' => '＜', //先頭ページへのリンク
-      'last' => '＞', //最終ページへのリンク
-      'url' => array('controller' => 'months', $year_id, $month_id)
-  )); ?>
+  <?php echo $this->Paginator->numbers($paginator_option); ?>
 
   <table class="detail-list">
   <tr><th class="tbl-date">日付<?php echo $this->Paginator->sort('Expenditure.date', '▼', array('url' => array($year_id, $month_id))); ?></th>
