@@ -220,7 +220,14 @@
  *
  */
 	Configure::write('Session', array(
-		'defaults' => 'php'
+		'defaults' => 'php',
+    'timeout' => 24*60, //セッションのタイムアウトまでの時間（分）
+    'ini' => array(
+        'session.cookie_lifetime' => 0, //ブラウザ終了後のセッション有効時間（秒）
+        'session.gc_maxlifetime' => 24*60*60, //ブラウザ放置時のセッション有効時間（秒）、≧timeout
+        'session.gc_probability' => 1, //ガベージコレクションを起動する確率分子
+        'session.gc_divisor' => 100, //ガベージコレクションを起動する確率分母
+    )
 	));
 
 /**
