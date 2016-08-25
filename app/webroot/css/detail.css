@@ -77,6 +77,9 @@
 .tbl-num {
     text-align: right;
 }
+.detail-list >tbody> tr> .tbl-num {
+    width: 80px;
+}
 .tbl-genre {
     width: 90px;
     text-align: center;
