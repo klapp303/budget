@@ -2,9 +2,10 @@
 
 App::uses('Shell', 'Console');
 
-class AppShell extends Shell {
-
-  public function startup() {
-      
-  }
+class AppShell extends Shell
+{
+    public function startup()
+    {
+        
+    }
 }
