@@ -53,7 +53,7 @@ class TopController extends AppController {
         $expenditure_recent_lists = $this->Expenditure->find('list', array(
             'conditions' => array(
                 'Expenditure.date >' => date('Y-m-d'),
-                'Expenditure.date <=' => date('Y-m-'.$pay_date, strtotime('+1 month')),
+                'Expenditure.date <=' => date('Y-m-'.$pay_date, strtotime(date('Y-m-01').' +1 month')),
                 'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users: $this->Auth->user('id')
             ),
             'fields' => 'Expenditure.amount'
