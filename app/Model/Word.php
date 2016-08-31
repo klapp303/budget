@@ -58,4 +58,26 @@ class Word extends AppModel {
   
       return $word_lists;
   }
+
+  public function addMonth($date = false, $add_month = 1) {
+      if (!$date) {
+          $date = date('Y-m-d');
+      }
+      
+      //年月
+      $date_1st = date('Y-m-01', strtotime($date));
+      $new_Ym = date('Y-m', strtotime($date_1st.' '.$add_month.' month'));
+      
+      //日
+      $day = date('d', strtotime($date));
+      $max_day = date('t', strtotime($new_Ym));
+      //末日をオーバーする場合のみその月の末日を返す
+      if ($day <= $max_day) {
+          $new_d = $day;
+      } else {
+          $new_d = $max_day;
+      }
+      
+      return $new_Ym.'-'.$new_d;
+  }
 }
