@@ -18,16 +18,36 @@ class Word extends AppModel {
       ));
       $word_lists = array();
       foreach ($datas AS $data) {
-        $MM = $data['Word']['strtotime'] + 1;
-        $word_lists += array(
-            str_replace(
-                    array('%M%', '%MM%'),
-                    array(
-                        date('n', strtotime($data['Word']['strtotime'].' month')),
-                        date('n', strtotime($data['Word']['strtotime'].' month')).','.date('n', strtotime($MM.' month'))
-                    ),
-                    $data['Word']['data']
-            ) => $data['Word']['title']);
+        //登録されているデータを取得
+        $title = $data['Word']['title'];
+        $value = $data['Word']['value'];
+        $strtotime = $data['Word']['strtotime'];
+        
+        //データの整形
+        $value_format = '';
+        $value_array = explode('%', $value);
+        //月表示がなければそのまま
+        if ($value_array[0] == $value) {
+            $value_format = $value;
+        //月表示があれば整形
+        } else {
+            $month_count = substr_count($value_array[1], 'M');
+            $month = date('n', strtotime(date('Y-m-01 ') . $strtotime .' month'));
+            //単月の場合
+            if ($month_count == 1) {
+                $value_format = $value_array[0] . $month . $value_array[2];
+            //複数月の場合
+            } elseif ($month_count > 1) {
+                if ($month + $month_count -1 <= 12) {
+                    $month_period = $month + $month_count -1;
+                } else {
+                    $month_period = $month + $month_count -1 -12;
+                }
+                $value_format = $value_array[0] . $month . '～' . $month_period . $value_array[2];
+            }
+        }
+        
+        $word_lists += array($value_format => $title);
       }
       $word_lists = array('' => ($word_lists)? '選択してください': '登録してください') + $word_lists;
   
@@ -43,16 +63,36 @@ class Word extends AppModel {
       ));
       $word_lists = array();
       foreach ($datas AS $data) {
-        $MM = $data['Word']['strtotime'] + 1;
-        $word_lists += array(
-            str_replace(
-                    array('%M%', '%MM%'),
-                    array(
-                        date('n', strtotime($data['Word']['strtotime'].' month')),
-                        date('n', strtotime($data['Word']['strtotime'].' month')).','.date('n', strtotime($MM.' month'))
-                    ),
-                    $data['Word']['data']
-            ) => $data['Word']['title']);
+        //登録されているデータを取得
+        $title = $data['Word']['title'];
+        $value = $data['Word']['value'];
+        $strtotime = $data['Word']['strtotime'];
+        
+        //データの整形
+        $value_format = '';
+        $value_array = explode('%', $value);
+        //月表示がなければそのまま
+        if ($value_array[0] == $value) {
+            $value_format = $value;
+        //月表示があれば整形
+        } else {
+            $month_count = substr_count($value_array[1], 'M');
+            $month = date('n', strtotime(date('Y-m-01 ') . $strtotime .' month'));
+            //単月の場合
+            if ($month_count == 1) {
+                $value_format = $value_array[0] . $month . $value_array[2];
+            //複数月の場合
+            } elseif ($month_count > 1) {
+                if ($month + $month_count -1 <= 12) {
+                    $month_period = $month + $month_count -1;
+                } else {
+                    $month_period = $month + $month_count -1 -12;
+                }
+                $value_format = $value_array[0] . $month . '～' . $month_period . $value_array[2];
+            }
+        }
+        
+        $word_lists += array($value_format => $title);
       }
       $word_lists = array('' => ($word_lists)? '選択してください': '登録してください') + $word_lists;
   
