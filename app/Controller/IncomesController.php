@@ -149,8 +149,7 @@ class IncomesController extends AppController
             'order' => array('Income.date' => 'asc', 'Income.title' => 'asc')
         );
         $income_unfixed_lists = $this->Paginator->paginate('Income');
-        $income_unfixed_counts = count($income_unfixed_lists);
-        $this->set(compact('income_unfixed_lists', 'income_unfixed_counts'));
+        $this->set(compact('income_unfixed_lists'));
     }
     
     public function fix_edit($id = null)
@@ -170,10 +169,9 @@ class IncomesController extends AppController
             'order' => array('Income.date' => 'asc', 'Income.title' => 'asc')
         );
         $income_unfixed_lists = $this->Paginator->paginate('Income');
-        $income_unfixed_counts = count($income_unfixed_lists);
         $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
         $login_id = $this->Auth->user('id');
-        $this->set(compact('income_unfixed_lists', 'income_unfixed_counts', 'income_genres', 'login_id'));
+        $this->set(compact('income_unfixed_lists', 'income_genres', 'login_id'));
         
         if (empty($this->request->data)) {
             $this->request->data = $this->Income->findById($id); //postデータがなければ$idからデータを取得

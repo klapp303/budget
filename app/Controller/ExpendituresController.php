@@ -149,8 +149,7 @@ class ExpendituresController extends AppController
             'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
         );
         $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
-        $expenditure_unfixed_counts = count($expenditure_unfixed_lists);
-        $this->set(compact('expenditure_unfixed_lists', 'expenditure_unfixed_counts'));
+        $this->set(compact('expenditure_unfixed_lists'));
     }
     
     public function fix_edit($id = null)
@@ -170,10 +169,9 @@ class ExpendituresController extends AppController
             'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
         );
         $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
-        $expenditure_unfixed_counts = count($expenditure_unfixed_lists);
         $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));
         $login_id = $this->Auth->user('id');
-        $this->set(compact('expenditure_unfixed_lists', 'expenditure_unfixed_counts', 'expenditure_genres', 'login_id'));
+        $this->set(compact('expenditure_unfixed_lists', 'expenditure_genres', 'login_id'));
         
         if (empty($this->request->data)) {
             $this->request->data = $this->Expenditure->findById($id); //postデータがなければ$idからデータを取得
