@@ -4,8 +4,7 @@
       'type' => 'post', //デフォルトはpost送信
       'url' => array('controller' => 'samples', 'action' => 'search'), //Controllerのactionを指定
       'inputDefaults' => array('div' => '')
-      )
-  ); ?>
+  ) ); ?>
   
   <?php echo $this->Form->input('title', array('type' => 'text', 'label' => 'タイトル検索')); ?>
   

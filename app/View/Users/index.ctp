@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('users', array('inline' => FALSE)); ?>
+<?php echo $this->Html->css('users', array('inline' => false)); ?>
 <h3>ユーザ情報</h3>
 
   <table class="UserAddForm">
@@ -12,7 +12,7 @@
     </tr>
     <tr>
       <td><label>給与日<span class="txt-min">（次回給与日までの支出予定を算出します）</span></label></td>
-      <td><?php echo $user_data['User']['payday'].'日'; ?></td>
+      <td><?php echo $user_data['User']['payday'] . '日'; ?></td>
     </tr>
   </table>
 
