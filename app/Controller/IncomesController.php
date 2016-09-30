@@ -143,7 +143,7 @@ class IncomesController extends AppController
         $this->Paginator->settings = array(
             'conditions' => array(
                 'Income.status' => 0,
-                'Income.date <=' => date('Y-m-d'),
+                'Income.date <' => date('Y-m-d'),
                 'Income.user_id' => ($this->Auth->user('id') == $this->admin_id) ? $array_users : $this->Auth->user('id')
             ),
             'order' => array('Income.date' => 'asc', 'Income.title' => 'asc')
@@ -163,7 +163,7 @@ class IncomesController extends AppController
         $this->Paginator->settings = array(
             'conditions' => array(
                 'Income.status' => 0,
-                'Income.date <=' => date('Y-m-d'),
+                'Income.date <' => date('Y-m-d'),
                 'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
             ),
             'order' => array('Income.date' => 'asc', 'Income.title' => 'asc')

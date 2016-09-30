@@ -67,7 +67,7 @@ class TopController extends AppController
         $income_unfixed_count = $this->Income->find('count', array(
             'conditions' => array(
                 'Income.status' => 0,
-                'Income.date <=' => date('Y-m-d'),
+                'Income.date <' => date('Y-m-d'),
                 'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
             ),
             'order' => array('Income.date' => 'asc', 'Income.title' => 'asc')
@@ -75,7 +75,7 @@ class TopController extends AppController
         $expenditure_unfixed_count = $this->Expenditure->find('count', array(
             'conditions' => array(
                 'Expenditure.status' => 0,
-                'Expenditure.date <=' => date('Y-m-d'),
+                'Expenditure.date <' => date('Y-m-d'),
                 'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
             ),
             'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')

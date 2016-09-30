@@ -143,7 +143,7 @@ class ExpendituresController extends AppController
         $this->Paginator->settings = array(
             'conditions' => array(
                 'Expenditure.status' => 0,
-                'Expenditure.date <=' => date('Y-m-d'),
+                'Expenditure.date <' => date('Y-m-d'),
                 'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
             ),
             'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
@@ -163,7 +163,7 @@ class ExpendituresController extends AppController
         $this->Paginator->settings = array(
             'conditions' => array(
                 'Expenditure.status' => 0,
-                'Expenditure.date <=' => date('Y-m-d'),
+                'Expenditure.date <' => date('Y-m-d'),
                 'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
             ),
             'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
