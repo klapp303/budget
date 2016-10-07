@@ -7,7 +7,8 @@
 /app/Config/myconfig.php
 
 /app/tmp
-/app/backup
+
+/backup
 
 /lib/Cake/Console/Templates/skel/tmp/
 

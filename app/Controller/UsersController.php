@@ -27,7 +27,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 /* ログイン時に定期バックアップを判定して作成ここから */
-                $file_pass = '../backup';
+                $file_pass = '../../backup';
                 $file_name = 'budget_backup';
                 $backup_flg = 1;
                 
