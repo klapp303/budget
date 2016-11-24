@@ -33,7 +33,7 @@
 
 <h3>確定待ちの収入一覧</h3>
 
-  <?php if ($income_unfixed_counts == 0) { ?>
+  <?php if (count($income_unfixed_lists) == 0) { ?>
     <div class="msg_fix">
       <?php echo '確定待ちの収入はありません。'; ?>
     </div>

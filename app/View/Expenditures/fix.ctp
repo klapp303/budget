@@ -33,7 +33,7 @@
 
 <h3>確定待ちの支出一覧</h3>
 
-  <?php if ($expenditure_unfixed_counts == 0) { ?>
+  <?php if (count($expenditure_unfixed_lists) == 0) { ?>
     <div class="msg_fix">
       <?php echo '確定待ちの支出はありません。'; ?>
     </div>
