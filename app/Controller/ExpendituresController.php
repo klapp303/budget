@@ -234,6 +234,12 @@ class ExpendituresController extends AppController
         $login_id = $this->Auth->user('id');
         $this->set(compact('expenditure_genres', 'login_id'));
         
+        /* search wordを整形ここから */
+        $search_query = @$this->request->query['search'];
+        $search_word = str_replace('　', ' ', $search_query); //and検索用
+        $search_word = str_replace(' OR ', '|', $search_word); //or検索用
+        $this->request->query['search'] = $search_word;
+        /* search wordを整形ここまで */
         $this->Expenditure->recursive = 0;
         $this->Prg->commonProcess('Expenditure');
 //        $this->Prg->parsedParams();
@@ -246,6 +252,7 @@ class ExpendituresController extends AppController
             'order' => array('Expenditure.id' => 'desc', 'Expenditure.title' => 'asc')
         );
         $expenditure_lists = $this->Paginator->paginate('Expenditure');
+        $this->request->query['search'] = $search_query; //search wordを戻しておく
         if (!empty($expenditure_lists)) { //データが存在する場合
             $this->set('expenditure_lists', $expenditure_lists);
             

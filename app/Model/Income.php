@@ -28,6 +28,11 @@ class Income extends AppModel
     );
     
     public $filterArgs = array(
-        'search' => array('type' => 'like', 'field' => 'Income.title')
+        'search' => array(
+            'type' => 'like',
+            'field' => 'Income.title',
+            'connectorAnd' => ' ',
+            'connectorOr' => '|'
+        )
     );
 }
