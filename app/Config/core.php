@@ -248,7 +248,7 @@ Configure::write('Security.cipherSeed', '66613638125495436886104074900');
  * Set to `true` to apply timestamps when debug > 0. Set to 'force' to always enable
  * timestamping regardless of debug value.
  */
-//Configure::write('Asset.timestamp', true);
+Configure::write('Asset.timestamp', false);
 
 /**
  * Compress CSS output by removing comments, whitespace, repeating tags, etc.
