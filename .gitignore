@@ -4,6 +4,7 @@
 
 
 /app/Config/database.php
+/app/Config/email.php
 /app/Config/myconfig.php
 
 /app/tmp
