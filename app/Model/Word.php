@@ -101,7 +101,7 @@ class Word extends AppModel
         return $word_lists;
     }
     
-    public function addMonth($date = false, $add_month = 1)
+    public function addMonth($date = null, $add_month = 1)
     {
         if (!$date) {
             $date = date('Y-m-d');

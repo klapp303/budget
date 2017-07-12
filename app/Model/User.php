@@ -21,7 +21,7 @@ class User extends AppModel
         )
     );
     
-    public function beforeSave($options = array())
+    public function beforeSave($options = [])
     {
         //パスワードのハッシュ化のため
         if (isset($this->data[$this->alias]['password'])) {
