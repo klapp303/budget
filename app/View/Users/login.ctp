@@ -13,7 +13,7 @@
     </tr>
     <tr>
       <td class="label">パスワード</td>
-      <td><?php echo $this->Form->input('password', array('type' => 'text', 'label' => false)); ?></td>
+      <td><?php echo $this->Form->input('password', array('type' => 'password', 'label' => false)); ?></td>
     </tr>
     
     <tr>

@@ -10,7 +10,7 @@
     <?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $userData['id'])); ?>
     <tr>
       <td class="label">パスワード</td>
-      <td><?php echo $this->Form->input('password', array('type' => 'text', 'label' => false, 'placeholder' => '新しいパスワードを入力')); ?><span class="txt-alt txt-b">*</span><span class="txt-min">（半角英数のみ）</span></td>
+      <td><?php echo $this->Form->input('password', array('type' => 'password', 'label' => false, 'placeholder' => '新しいパスワードを入力')); ?><span class="txt-alt txt-b">*</span><span class="txt-min">（半角英数のみ）</span></td>
     </tr>
     
     <tr>
