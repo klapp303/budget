@@ -13,15 +13,19 @@
     
     <table>
       <tr><td class="label">支出名</td>
-          <td><?php echo $this->Form->input('title', array('type' => 'text', 'label' => false, 'size' => 20, 'class' => 'js-insert_area')); ?></td>
+          <td><?php echo $this->Form->input('title', array('type' => 'text', 'label' => false, 'size' => 20, 'class' => 'js-insert_value')); ?></td>
           <td><button type="button" class="js-insert"><<</button>
-              <?php echo $this->Form->input('word', array('type' => 'select', 'label' => false, 'options' => $word_lists, 'class' => 'js-insert_data')); ?></td></tr>
+              <select class="js-insert_data">
+                <?php foreach ($word_lists as $word): ?>
+                <option value="<?php echo $word['value'] . ':' . $word['amount'] . ':' . $word['genre_id']; ?>"><?php echo $word['title']; ?></option>
+                <?php endforeach; ?>
+              </select></td></tr>
       <tr><td class="label">日付</td>
           <td><?php echo $this->Form->input('date', array('type' => 'date', 'label' => false, 'dateFormat' => 'YMD', 'monthNames' => false, 'separator' => '/', 'maxYear' => date('Y')+1, 'minYear' => 2015)); ?></td></tr>
       <tr><td class="label">金額</td>
-          <td><?php echo $this->Form->input('amount', array('type' => 'text', 'label' => false, 'size' => 18)); ?>円</td></tr>
+          <td><?php echo $this->Form->input('amount', array('type' => 'text', 'label' => false, 'size' => 18, 'class' => 'js-insert_amount')); ?>円</td></tr>
       <tr><td class="label">種類</td>
-          <td><?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => false, 'options' => $expenditure_genres)); ?></td></tr>
+          <td><?php echo $this->Form->input('genre_id', array('type' => 'select', 'label' => false, 'options' => $expenditure_genres, 'class' => 'js-insert_genre')); ?></td></tr>
       <tr><td class="label">状態</td>
           <td><?php echo $this->Form->input('status', array('type' => 'select', 'label' => false, 'options' => array(0 => '未定', 1 => '確定'))); ?></td></tr>
       

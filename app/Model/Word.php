@@ -9,19 +9,27 @@ class Word extends AppModel
     
 //    public $filtetArgs = ['' => ['' => '', '' => '']];
     
-    public function getIncomeWords($user_id = null)
+    public function getWordLists($user_id = null, $category = null)
     {
         $datas = $this->find('all', array(
             'conditions' => array(
                 'Word.user_id' => $user_id,
-                'Word.category' => 'income'
+                'Word.category' => $category
             )
         ));
         $word_lists = array();
+        $word_lists[] = array(
+            'title' => '選択してください',
+            'value' => '',
+            'amount' => null,
+            'genre_id' => null
+        );
         foreach ($datas as $data) {
             //登録されているデータを取得
             $title = $data['Word']['title'];
             $value = $data['Word']['value'];
+            $amount = $data['Word']['amount'];
+            $genre_id = $data['Word']['genre_id'];
             $strtotime = $data['Word']['strtotime'];
             
             //データの整形
@@ -48,55 +56,13 @@ class Word extends AppModel
                 }
             }
             
-            $word_lists += array($value_format => $title);
+            $word_lists[] = array(
+                'title' => $title,
+                'value' => $value_format,
+                'amount' => $amount,
+                'genre_id' => $genre_id
+            );
         }
-        $word_lists = array('' => ($word_lists)? '選択してください' : '登録してください') + $word_lists;
-        
-        return $word_lists;
-    }
-    
-    public function getExpenditureWords($user_id = null)
-    {
-        $datas = $this->find('all', array(
-            'conditions' => array(
-                'Word.user_id' => $user_id,
-                'Word.category' => 'expenditure'
-            )
-        ));
-        $word_lists = array();
-        foreach ($datas as $data) {
-            //登録されているデータを取得
-            $title = $data['Word']['title'];
-            $value = $data['Word']['value'];
-            $strtotime = $data['Word']['strtotime'];
-            
-            //データの整形
-            $value_format = '';
-            $value_array = explode('%', $value);
-            //月表示がなければそのまま
-            if ($value_array[0] == $value) {
-                $value_format = $value;
-                //月表示があれば整形
-            } else {
-                $month_count = substr_count($value_array[1], 'M');
-                $month = date('n', strtotime(date('Y-m-01 ') . $strtotime . ' month'));
-                //単月の場合
-                if ($month_count == 1) {
-                    $value_format = $value_array[0] . $month . $value_array[2];
-                    //複数月の場合
-                } elseif ($month_count > 1) {
-                    if ($month + $month_count - 1 <= 12) {
-                        $month_period = $month + $month_count -1;
-                    } else {
-                        $month_period = $month + $month_count -1 -12;
-                    }
-                    $value_format = $value_array[0] . $month . '～' . $month_period . $value_array[2];
-                }
-            }
-            
-            $word_lists += array($value_format => $title);
-        }
-        $word_lists = array('' => ($word_lists)? '選択してください' : '登録してください') + $word_lists;
         
         return $word_lists;
     }

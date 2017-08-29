@@ -21,10 +21,23 @@ jQuery(function($) {
     $('.js-insert').click(function() {
 //        var word = $(this).attr('data');
         var word = $('.js-insert_data').val();
-        if (!word) {
-            alert('タイトルを選んでください');
+        var word_lists = word.split(':');
+        var value = word_lists[0];
+        var amount = word_lists[1];
+        var genre = word_lists[2];
+        if (!value) {
+            alert('収支名を選んでください');
             return false;
         }
-        $('.js-insert_area').insertAtCaret(word);
+        //タイトル
+        $('.js-insert_value').insertAtCaret(value);
+        //金額
+        if (amount) {
+          $('.js-insert_amount').insertAtCaret(amount);
+        }
+        //種類
+        if (genre) {
+          $('.js-insert_genre').val(genre);
+        }
     });
 });
