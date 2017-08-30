@@ -89,4 +89,26 @@ class Word extends AppModel
         
         return $new_Ym . '-' . $new_d;
     }
+    
+    public function searchWordTOConditions($search_word = null, $controller = null)
+    {
+        if ($controller) {
+            $controller = $controller . '.';
+        }
+        
+        //全角スペースは半角スペースに変換しておく
+        $search_word = str_replace('　', ' ', $search_word);
+        
+        //and検索
+        $array_word = explode(' ', $search_word);
+        
+        $search_conditions = [];
+        foreach ($array_word as $val) {
+            $search_conditions[] = array(
+                $controller . 'title LIKE' => '%' . $val . '%'
+            );
+        }
+        
+        return $search_conditions;
+    }
 }

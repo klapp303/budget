@@ -77,17 +77,6 @@
     <?php } ?>
   </table>
 
-<div>
-  <?php echo $this->Form->create('Income', array( //使用するModel
-      'type' => 'post', //デフォルトはpost送信
-      'url' => array('controller' => 'incomes', 'action' => 'search'), //Controllerのactionを指定
-      'inputDefaults' => array('div' => '')
-  )); ?>
-  <table>
-    <tr>
-      <td><?php echo $this->Form->input('search', array('type' => 'text', 'label' => '収入の検索')); ?></td>
-      <td><?php echo $this->Form->submit('検索する'); ?></td>
-    </tr>
-  </table>
-  <?php echo $this->Form->end(); ?>
-</div>
+<?php echo $this->element('searchbox', array(
+    'controller' => 'incomes'
+)); ?>
