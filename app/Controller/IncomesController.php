@@ -236,26 +236,39 @@ class IncomesController extends AppController
         
         $search_word = @$this->request->query['search_word'];
         $this->set('search_word', $search_word);
+        $search_date = @$this->request->query['search_date'];
+        if (@$search_date['year']) {
+            $search_date = $search_date['year'] . '-' . $search_date['month'] . '-' . $search_date['day'];
+        } else {
+            $search_date = null;
+        }
+        $this->set('search_date', $search_date);
         
         //search_wordを整形する
         $search_conditions  =$this->Word->searchWordToConditions($search_word, 'Income');
-        
+        //search_dateを整形する
+        if ($search_date) {
+            $search_date_conditions = array('Income.date' => $search_date);
+        } else {
+            $search_date_conditions = array();
+        }
         
         $this->Paginator->settings = array(
             'limit' => 20,
             'conditions' => array(
                 array('and' => $search_conditions),
+                $search_date_conditions,
                 'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
             ),
             'order' => array('Income.id' => 'desc', 'Income.title' => 'asc')
         );
         $income_lists = $this->Paginator->paginate('Income');
+        $this->set('income_lists', $income_lists);
         if (!empty($income_lists)) { //データが存在する場合
-            $this->set('income_lists', $income_lists);
             
         } else { //データが存在しない場合
             $this->Session->setFlash('データが見つかりませんでした。', 'flashMessage');
-            $this->redirect('/incomes/');
+//            $this->redirect('/incomes/');
         }
         
         $this->render('index');
