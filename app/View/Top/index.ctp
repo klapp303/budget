@@ -1,4 +1,4 @@
-<h3><?php echo date('Y年m月d日'); ?>現在の収支情報テスト</h3>
+<h3><?php echo date('Y年m月d日'); ?>現在の収支情報</h3>
 
   <?php if ($login_user['id'] == $admin_id) { //管理者アカウントの場合 ?>
     <table class="fl cf">
