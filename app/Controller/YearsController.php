@@ -15,7 +15,7 @@ class YearsController extends AppController
     public function beforeFilter()
     {
         parent::beforeFilter();
-        $this->layout = 'budget_fullwidth';
+        $this->layout = 'budget_normal';
     }
     
     public function index()

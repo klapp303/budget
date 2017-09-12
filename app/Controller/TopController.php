@@ -9,7 +9,7 @@ class TopController extends AppController
     public function beforeFilter()
     {
         parent::beforeFilter();
-        $this->layout = 'budget_fullwidth';
+        $this->layout = 'budget_normal';
         $this->set('admin_id', $this->admin_id);
         $this->set('login_user', $this->Auth->user());
     }

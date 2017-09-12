@@ -15,7 +15,7 @@ class MonthsController extends AppController
     public function beforeFilter()
     {
         parent::beforeFilter();
-        $this->layout = 'budget_fullwidth';
+        $this->layout = 'budget_normal';
     }
     
     public function index()
@@ -159,7 +159,7 @@ class MonthsController extends AppController
     
     public function genre()
     {
-        $this->layout = 'budget_sub_pop';
+        $this->layout = 'budget_pop';
         
         //管理者画面のためにユーザID一覧を取得しておく
         $array_users = $this->User->find('list', array('fields' => 'User.id'));

@@ -14,7 +14,7 @@ class UsersController extends AppController
     public function beforeFilter()
     {
         parent::beforeFilter();
-        $this->layout = 'budget_fullwidth';
+        $this->layout = 'budget_normal';
 //        $this->Income->Behaviors->disable('SoftDelete'); //SoftDeleteのデータも取得する
         // ユーザ自身による登録とログアウトを許可する
         $this->Auth->allow('add', 'logout');
@@ -22,7 +22,7 @@ class UsersController extends AppController
     
     public function login()
     {
-        $this->layout = 'budget_login';
+        $this->layout = 'budget_simple';
         
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
