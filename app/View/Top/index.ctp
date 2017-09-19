@@ -9,6 +9,7 @@
     <table class="fl cf">
       <tr><td>現在の残高</td><td class="tbl-num"><?php echo $past_income - $past_expenditure; ?>円</td></tr>
       <tr><td>次回給与日までの<br>支出予定合計</td><td class="tbl-num"><?php echo $recent_expenditure; ?>円</td></tr>
+      <tr><td>来月の支出予定合計</td><td class="tbl-num"><?php echo $next_expenditure; ?>円</td></tr>
     </table>
   <?php } ?>
   
@@ -54,14 +55,14 @@
         <th class="tbl-genre">種類</th>
         <th class="tbl-ico">状態</th></tr>
     
-    <?php foreach($expenditure_month_lists as $expenditure_month_list){ ?>
-      <tr><td class="tbl-date"><?php echo $expenditure_month_list['Expenditure']['date']; ?></td>
-          <td><?php echo $expenditure_month_list['Expenditure']['title']; ?></td>
-          <td class="tbl-num"><?php echo $expenditure_month_list['Expenditure']['amount']; ?>円</td>
-          <td class="tbl-genre"><span class="icon-genre col-e_<?php echo $expenditure_month_list['Expenditure']['genre_id']; ?>"><?php echo $expenditure_month_list['ExpendituresGenre']['title']; ?></span></td>
-          <td class="tbl-ico"><?php if ($expenditure_month_list['Expenditure']['status'] == 0) {
+    <?php foreach($expenditure_next_lists as $expenditure_next_list){ ?>
+      <tr><td class="tbl-date"><?php echo $expenditure_next_list['Expenditure']['date']; ?></td>
+          <td><?php echo $expenditure_next_list['Expenditure']['title']; ?></td>
+          <td class="tbl-num"><?php echo $expenditure_next_list['Expenditure']['amount']; ?>円</td>
+          <td class="tbl-genre"><span class="icon-genre col-e_<?php echo $expenditure_next_list['Expenditure']['genre_id']; ?>"><?php echo $expenditure_next_list['ExpendituresGenre']['title']; ?></span></td>
+          <td class="tbl-ico"><?php if ($expenditure_next_list['Expenditure']['status'] == 0) {
                                   echo '<span class="icon-false">未定</span>';
-                              } elseif ($expenditure_month_list['Expenditure']['status'] == 1) {
+                              } elseif ($expenditure_next_list['Expenditure']['status'] == 1) {
                                   echo '<span class="icon-true">確定</span>';
                               } ?></td></tr>
     <?php } ?>

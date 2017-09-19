@@ -39,29 +39,48 @@ class TopController extends AppController
         $this->set('past_income', array_sum($income_past_lists));
         $this->set('past_expenditure', array_sum($expenditure_past_lists));
         
-        //次回給与日までの支出予定合計
+        //今後の支出予定、先に算出しておく
         $user_data = $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id'))));
         $pay_date = $user_data['User']['payday'];
+        $expenditure_next_lists = $this->Expenditure->find('all', array(
+            'conditions' => array(
+                'Expenditure.date >' => date('Y-m-d'),
+                'Expenditure.date <=' => date('Y-m-' . ($pay_date -1), strtotime('+1 month')),
+                'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
+            ),
+            'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
+        ));
+        $this->set('expenditure_next_lists', $expenditure_next_lists);
+        //今後の支出予定合計
+        $next_expenditure = 0;
+        foreach ($expenditure_next_lists as $val) {
+            $next_expenditure += $val['Expenditure']['amount'];
+        }
+        
+        //次回給与日までの支出予定合計、来月の支出予定合計
         if (date('d') < $pay_date) { //今月の給与日がまだの場合
             $expenditure_recent_lists = $this->Expenditure->find('list', array(
                 'conditions' => array(
                     'Expenditure.date >' => date('Y-m-d'),
-                    'Expenditure.date <=' => date('Y-m-' . $pay_date),
+                    'Expenditure.date <=' => date('Y-m-' . ($pay_date -1)),
                     'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
                 ),
                 'fields' => 'Expenditure.amount'
             ));
+            $recent_expenditure = array_sum($expenditure_recent_lists);
+            $next_expenditure = $next_expenditure - $recent_expenditure;
         } else { //今月の給与日を過ぎた場合
             $expenditure_recent_lists = $this->Expenditure->find('list', array(
                 'conditions' => array(
                     'Expenditure.date >' => date('Y-m-d'),
-                    'Expenditure.date <=' => date('Y-m-' . $pay_date, strtotime(date('Y-m-01') . ' +1 month')),
+                    'Expenditure.date <=' => date('Y-m-' . ($pay_date -1), strtotime(date('Y-m-01') . ' +1 month')),
                     'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
                 ),
                 'fields' => 'Expenditure.amount'
             ));
+            $recent_expenditure = array_sum($expenditure_recent_lists);
         }
-        $this->set('recent_expenditure', array_sum($expenditure_recent_lists));
+        $this->set(compact('recent_expenditure', 'next_expenditure'));
         
         //確定待ちの収入と支出
         $income_unfixed_count = $this->Income->find('count', array(
@@ -91,17 +110,6 @@ class TopController extends AppController
             'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
         ));
         $this->set('expenditure_now_lists', $expenditure_now_lists);
-        
-        //今後の支出予定
-        $expenditure_month_lists = $this->Expenditure->find('all', array(
-            'conditions' => array(
-                'Expenditure.date >' => date('Y-m-d'),
-                'Expenditure.date <=' => date('Y-m-d', strtotime('+1 month')),
-                'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
-            ),
-            'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
-        ));
-        $this->set('expenditure_month_lists', $expenditure_month_lists);
         
         //ユーザ一覧
         $user_lists = $this->User->find('all', array(
