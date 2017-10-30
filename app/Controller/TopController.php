@@ -40,12 +40,10 @@ class TopController extends AppController
         $this->set('past_expenditure', array_sum($expenditure_past_lists));
         
         //今後の支出予定、先に算出しておく
-        $user_data = $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id'))));
-        $pay_date = $user_data['User']['payday'];
         $expenditure_next_lists = $this->Expenditure->find('all', array(
             'conditions' => array(
                 'Expenditure.date >' => date('Y-m-d'),
-                'Expenditure.date <=' => date('Y-m-' . ($pay_date -1), strtotime('+1 month')),
+                'Expenditure.date <' => date('Y-m-01', strtotime('+2 month')),
                 'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
             ),
             'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
@@ -58,6 +56,8 @@ class TopController extends AppController
         }
         
         //次回給与日までの支出予定合計、来月の支出予定合計
+        $user_data = $this->User->find('first', array('conditions' => array('User.id' => $this->Auth->user('id'))));
+        $pay_date = $user_data['User']['payday'];
         if (date('d') < $pay_date) { //今月の給与日がまだの場合
             $expenditure_recent_lists = $this->Expenditure->find('list', array(
                 'conditions' => array(

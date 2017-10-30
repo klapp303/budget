@@ -46,7 +46,7 @@
     <?php } ?>
 <?php } ?>
 
-<h3>今後の支出予定<span class="txt-n txt-min">（～<?php echo date('Y年m月d日', strtotime('+1 month')); ?>）</span></h3>
+<h3>今後の支出予定<span class="txt-n txt-min">（～<?php echo date('Y年m月t日', strtotime('+1 month')); ?>）</span></h3>
 
   <table class="detail-list">
     <tr><th class="tbl-date">日付</th>
