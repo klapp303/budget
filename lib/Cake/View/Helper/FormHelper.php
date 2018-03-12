@@ -2901,7 +2901,7 @@ class FormHelper extends AppHelper {
 				break;
 			case 'day':
 				for ($i = 1; $i <= 31; $i++) {
-					$data[sprintf('%02d', $i)] = $i;
+					$data[sprintf('%02d', $i)] = sprintf('%02d', $i);
 				}
 				break;
 			case 'month':
