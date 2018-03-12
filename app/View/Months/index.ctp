@@ -64,16 +64,16 @@
 
 <h3>支出一覧</h3>
   <?php $this->Paginator->options(array(
-      'url' => array('controller' => 'months', 'action' => 'index')
+      'url' => array('controller' => 'months', 'action' => 'index', $year_id, $month_id)
   )); ?>
   <?php echo $this->Paginator->numbers($paginator_option); ?>
   
   <table class="detail-list">
-    <tr><th class="tbl-date">日付<?php echo $this->Paginator->sort('Expenditure.date', '▼', array('url' => array($year_id, $month_id))); ?></th>
-        <th>支出名<?php echo $this->Paginator->sort('Expenditure.title', '▼', array('url' => array($year_id, $month_id))); ?></th>
-        <th class="tbl-num">金額<?php echo $this->Paginator->sort('Expenditure.amount', '▼', array('url' => array($year_id, $month_id))); ?></th>
-        <th class="tbl-genre">種類<?php echo $this->Paginator->sort('Expenditure.genre_id', '▼', array('url' => array($year_id, $month_id))); ?></th>
-        <th class="tbl-ico">状態<?php echo $this->Paginator->sort('Expenditure.status', '▼', array('url' => array($year_id, $month_id))); ?></th></tr>
+    <tr><th class="tbl-date">日付<?php echo $this->Paginator->sort('Expenditure.date', '▼'); ?></th>
+        <th>支出名<?php echo $this->Paginator->sort('Expenditure.title', '▼'); ?></th>
+        <th class="tbl-num">金額<?php echo $this->Paginator->sort('Expenditure.amount', '▼'); ?></th>
+        <th class="tbl-genre">種類<?php echo $this->Paginator->sort('Expenditure.genre_id', '▼'); ?></th>
+        <th class="tbl-ico">状態<?php echo $this->Paginator->sort('Expenditure.status', '▼'); ?></th></tr>
     
     <?php foreach($expenditure_lists as $expenditure_list){ ?>
       <tr><td class="tbl-date"><?php echo $expenditure_list['Expenditure']['date']; ?></td>
