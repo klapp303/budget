@@ -1,1 +1,1 @@
-<p class="foot-txt">copyright(c) 2015-2018 budget制作委員会</p>
+<p class="foot-txt">copyright(c) 2015-2019 budget制作委員会</p>
