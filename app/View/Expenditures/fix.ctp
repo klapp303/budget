@@ -42,6 +42,8 @@
       <?php echo '確定待ちの支出はありません。'; ?>
     </div>
   <?php } else { ?>
+    <?php echo $this->Paginator->numbers($paginator_option); ?>
+    
     <table class="tbl_fix">
       <tr><th class="tbl-date">日付<?php echo $this->Paginator->sort('Expenditure.date', '▼'); ?></th>
           <th>支出名<?php echo $this->Paginator->sort('Expenditure.title', '▼'); ?></th>
