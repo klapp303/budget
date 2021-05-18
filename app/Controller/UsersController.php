@@ -122,7 +122,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $this->User->set($this->request->data); //postデータがあればModelに渡してvalidate
             if ($this->User->validates()) { //validate成功の処理
-                $this->User->save($this->request->data); //validate成功でsave
+                //validate成功でsave
                 if ($this->User->save($this->request->data)) {
                     $this->Session->setFlash('登録しました。', 'flashMessage');
                 } else {
@@ -145,7 +145,7 @@ class UsersController extends AppController
         } else {
             $this->User->set($this->request->data); //postデータがあればModelに渡してvalidate
             if ($this->User->validates()) { //validate成功の処理
-                $this->User->save($this->request->data); //validate成功でsave
+                //validate成功でsave
                 if ($this->User->save($id)) {
                     $this->Session->setFlash('変更しました。', 'flashMessage');
                     //セッションのuser情報を更新する
@@ -171,7 +171,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $this->User->set($this->request->data); //postデータがあればModelに渡してvalidate
             if ($this->User->validates()) { //validate成功の処理
-                $this->User->save($this->request->data); //validate成功でsave
+                //validate成功でsave
                 if ($this->User->save($id)) {
                     $this->Session->setFlash('変更しました。', 'flashMessage');
                 } else {

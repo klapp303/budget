@@ -52,7 +52,7 @@ class IncomesController extends AppController
         if ($this->request->is('post')) {
             $this->Income->set($this->request->data); //postデータがあればModelに渡してvalidate
             if ($this->Income->validates()) { //validate成功の処理
-                $this->Income->save($this->request->data); //validate成功でsave
+                //validate成功でsave
                 if ($this->Income->save($this->request->data)) {
                     $this->Session->setFlash('登録しました。', 'flashMessage');
                 } else {
@@ -99,7 +99,7 @@ class IncomesController extends AppController
         } else {
             $this->Income->set($this->request->data); //postデータがあればModelに渡してvalidate
             if ($this->Income->validates()) { //validate成功の処理
-                $this->Income->save($this->request->data); //validate成功でsave
+                //validate成功でsave
                 if ($this->Income->save($id)) {
                     $this->Session->setFlash('修正しました。', 'flashMessage');
                 } else {
@@ -186,7 +186,7 @@ class IncomesController extends AppController
         } else {
             $this->Income->set($this->request->data); //postデータがあればModelに渡してvalidate
             if ($this->Income->validates()) { //validate成功の処理
-                $this->Income->save($this->request->data); //validate成功でsave
+                //validate成功でsave
                 if ($this->Income->save($id)) {
                     $this->Session->setFlash('修正しました。', 'flashMessage');
                 } else {

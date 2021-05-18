@@ -52,7 +52,7 @@ class ExpendituresController extends AppController
         if ($this->request->is('post')) {
             $this->Expenditure->set($this->request->data); //postデータがあればModelに渡してvalidate
             if ($this->Expenditure->validates()) { //validate成功の処理
-                $this->Expenditure->save($this->request->data); //validate成功でsave
+                //validate成功でsave
                 if ($this->Expenditure->save($this->request->data)) {
                     $this->Session->setFlash('登録しました。', 'flashMessage');
                 } else {
@@ -99,7 +99,7 @@ class ExpendituresController extends AppController
         } else {
             $this->Expenditure->set($this->request->data); //postデータがあればModelに渡してvalidate
             if ($this->Expenditure->validates()) { //validate成功の処理
-                $this->Expenditure->save($this->request->data); //validate成功でsave
+                //validate成功でsave
                 if ($this->Expenditure->save($id)) {
                     $this->Session->setFlash('修正しました。', 'flashMessage');
                 } else {
@@ -186,7 +186,7 @@ class ExpendituresController extends AppController
         } else {
             $this->Expenditure->set($this->request->data); //postデータがあればModelに渡してvalidate
             if ($this->Expenditure->validates()) { //validate成功の処理
-                $this->Expenditure->save($this->request->data); //validate成功でsave
+                //validate成功でsave
                 if ($this->Expenditure->save($id)) {
                     $this->Session->setFlash('修正しました。', 'flashMessage');
                 } else {
