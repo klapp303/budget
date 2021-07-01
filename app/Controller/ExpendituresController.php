@@ -146,7 +146,7 @@ class ExpendituresController extends AppController
                 'Expenditure.date <' => date('Y-m-d'),
                 'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
             ),
-            'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
+            'order' => array('Expenditure.date' => 'desc', 'Expenditure.title' => 'asc')
         );
         $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
         $this->set(compact('expenditure_unfixed_lists'));
@@ -166,7 +166,7 @@ class ExpendituresController extends AppController
                 'Expenditure.date <' => date('Y-m-d'),
                 'Expenditure.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
             ),
-            'order' => array('Expenditure.date' => 'asc', 'Expenditure.title' => 'asc')
+            'order' => array('Expenditure.date' => 'desc', 'Expenditure.title' => 'asc')
         );
         $expenditure_unfixed_lists = $this->Paginator->paginate('Expenditure');
         $expenditure_genres = $this->ExpendituresGenre->find('list', array('fields' => array('id', 'title')));

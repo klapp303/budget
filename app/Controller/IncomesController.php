@@ -146,7 +146,7 @@ class IncomesController extends AppController
                 'Income.date <' => date('Y-m-d'),
                 'Income.user_id' => ($this->Auth->user('id') == $this->admin_id) ? $array_users : $this->Auth->user('id')
             ),
-            'order' => array('Income.date' => 'asc', 'Income.title' => 'asc')
+            'order' => array('Income.date' => 'desc', 'Income.title' => 'asc')
         );
         $income_unfixed_lists = $this->Paginator->paginate('Income');
         $this->set(compact('income_unfixed_lists'));
@@ -166,7 +166,7 @@ class IncomesController extends AppController
                 'Income.date <' => date('Y-m-d'),
                 'Income.user_id' => ($this->Auth->user('id') == $this->admin_id)? $array_users : $this->Auth->user('id')
             ),
-            'order' => array('Income.date' => 'asc', 'Income.title' => 'asc')
+            'order' => array('Income.date' => 'desc', 'Income.title' => 'asc')
         );
         $income_unfixed_lists = $this->Paginator->paginate('Income');
         $income_genres = $this->IncomesGenre->find('list', array('fields' => array('id', 'title')));
